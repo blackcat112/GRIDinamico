@@ -176,6 +176,8 @@ pub fn recompute(
                     "id": cell.id,
                     "delay_factor": (df*100.0).round()/100.0,
                     "blocked": false,
+                    "incidencias": incs_c.len(),
+                    "carga_near_count": count, 
                     "style": {"fill": true, "fill-color": color, "fill-opacity": 0.75, "stroke": color, "stroke-opacity": 1.0, "stroke-width": 1}
                 }
             });
