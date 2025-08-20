@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Madrid Grid Dinámico</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; margin: 0; }
+    #map { height: calc(100vh - 140px); }
+    .legend {
+      position:absolute; right:14px; bottom:14px;
+      background:rgba(255,255,255,.9); padding:10px 14px;
+      border:1px solid #d1d5db; border-radius:12px;
+    }
+    .kpis { display:flex; gap:16px; padding:12px; }
+    .kpis .box { flex:1; background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; text-align:center; }
+    .kpis .v { font-size:28px; font-weight:800; }
+    .kpis .l { color:#6b7280; }
+
+    /* HUD detalle */
+    .hud {
+      position: fixed;
+      left: 14px;
+      bottom: 14px;
+      z-index: 1000;
+      background: rgba(255,255,255,.95);
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 10px 14px;
+      min-width: 220px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.08);
+      font-size: 13px;
+      color: #374151;
+    }
+    .hud .h { font-weight: 700; margin-bottom: 6px; }
+    .hud .row { display:flex; justify-content:space-between; gap:12px; margin:4px 0; }
+    .hud .key { color:#6b7280; }
+    .hud .val { font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="kpis">
+    <div class="box"><div class="v" id="k_carga">–</div><div class="l">Zonas carga/descarga</div></div>
+    <div class="box"><div class="v" id="k_inc">–</div><div class="l">Incidencias</div></div>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="legend">
+    <div style="font-weight:600;margin-bottom:6px">Nivel de impacto</div>
+    <div style="height:12px;border-radius:999px; background:linear-gradient(90deg,#e9f7ef,#d4f2e3,#bfeacc,#a9e3b6,#fff3b0,#ffe08a,#ffc266,#ff9f58,#ff7a55,#f5544f,#d73a49)"></div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280"><span>Bajo</span><span>Alto</span></div>
+  </div>
+
+  <!-- HUD de detalle -->
+  <div id="hud" class="hud" style="display:none">
+    <div class="h">Detalle hexágono</div>
+    <div class="row"><span class="key">Delay factor</span><span class="val" id="hud_df">–</span></div>
+    <div class="row"><span class="key">Incidencias</span><span class="val" id="hud_inc">–</span></div>
+    <div class="row"><span class="key">Zonas carga cerca</span><span class="val" id="hud_cz">–</span></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  const map = L.map('map').setView([40.4168, -3.7038], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+
+  // Adaptador de estilo: acepta camelCase y kebab-case desde el backend
+  function styleFromProperties(f) {
+    const s = (f && f.properties && f.properties.style) ? f.properties.style : {};
+    return {
+      color:       s.color ?? s.stroke ?? s['stroke'] ?? '#e0e0e0',
+      weight:      s.weight ?? s['stroke-width'] ?? 1,
+      opacity:     s.opacity ?? s['stroke-opacity'] ?? 1,
+      fill:        (typeof s.fill === 'boolean') ? s.fill : true,
+      fillColor:   s.fillColor ?? s['fill-color'] ?? s.color ?? '#e0e0e0',
+      fillOpacity: s.fillOpacity ?? s['fill-opacity'] ?? 0.75,
+    };
+  }
+
+  function showHUD(p) {
+    document.getElementById('hud_df').textContent = (p.delay_factor ?? '–');
+    document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
+    document.getElementById('hud_cz').textContent = (p.carga_near_count ?? '–');
+    document.getElementById('hud').style.display = 'block';
+  }
+  function hideHUD() {
+    // Si quieres ocultarlo al salir con el ratón, descomenta:
+    // document.getElementById('hud').style.display = 'none';
+  }
+
+  let selectedLayer = null;
+
+  let layerHex = L.geoJSON({type:'FeatureCollection',features:[]}, {
+    style: styleFromProperties,
+    onEachFeature: (feature, layer) => {
+      const p = feature.properties || {};
+
+      // Hover: muestra HUD y resalta borde
+      layer.on('mouseover', () => {
+        showHUD(p);
+        const base = styleFromProperties(feature);
+        layer.setStyle({weight: (base.weight || 1) + 1});
+      });
+
+      layer.on('mouseout', () => {
+        if (selectedLayer !== layer) {
+          const base = styleFromProperties(feature);
+          layer.setStyle({weight: base.weight || 1});
+        }
+        // hideHUD();
+      });
+
+      // Click: fija selección y mantiene borde más grueso
+      layer.on('click', () => {
+        if (selectedLayer && selectedLayer !== layer) {
+          const prev = selectedLayer.feature;
+          selectedLayer.setStyle({weight: styleFromProperties(prev).weight || 1});
+        }
+        selectedLayer = layer;
+        showHUD(p);
+        const base = styleFromProperties(feature);
+        layer.setStyle({weight: (base.weight || 1) + 2});
+      });
+    }
+  }).addTo(map);
+
+  async function refresh() {
+    try {
+      const [kres, mres] = await Promise.all([
+        fetch('/kpis'),
+        fetch('/map/hex')
+      ]);
+      const k = await kres.json();
+      document.getElementById('k_carga').textContent = k.carga ?? 0;
+      document.getElementById('k_inc').textContent = k.inc ?? 0;
+
+      const gj = await mres.json();
+      layerHex.clearLayers();
+      layerHex.addData(gj);
+      // Si quieres centrar el mapa a los hex con datos:
+      // const b = layerHex.getBounds(); if (b.isValid()) map.fitBounds(b, {maxZoom: 15});
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  refresh();
+  setInterval(refresh, 15000);
+  </script>
+</body>
+</html>
