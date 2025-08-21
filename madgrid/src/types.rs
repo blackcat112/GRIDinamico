@@ -130,4 +130,7 @@ pub struct DataState {
     pub kpis: Kpis,
     /// FeatureCollection pre‑generado en texto para servir rápido
     pub hex_geojson_str: String,
+    pub cells_out: Vec<CellOut>,
+    pub snapshot_ts_utc: String,
+    pub delay_cfg: DelayCfg,   // último resultado tabular de recompute
 }
