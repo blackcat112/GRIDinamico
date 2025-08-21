@@ -1,6 +1,6 @@
 use anyhow::Result;
 use reqwest::{Client, StatusCode};
-use bytes::Bytes; // ⬅️ añade esto
+
 
 #[derive(Default, Clone)]
 pub struct CacheCtl { pub etag: Option<String>, pub last_mod: Option<String> }

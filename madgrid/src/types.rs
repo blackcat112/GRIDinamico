@@ -112,6 +112,7 @@ impl Default for AppCfg {
 }
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 pub struct CellOut {
     pub id: u32,
     pub delay_factor: Option<f32>,
@@ -131,6 +132,5 @@ pub struct DataState {
     /// FeatureCollection pre‑generado en texto para servir rápido
     pub hex_geojson_str: String,
     pub cells_out: Vec<CellOut>,
-    pub snapshot_ts_utc: String,
-    pub delay_cfg: DelayCfg,   // último resultado tabular de recompute
+    pub delay_cfg: DelayCfg,   
 }

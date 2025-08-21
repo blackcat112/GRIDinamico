@@ -144,7 +144,7 @@ async fn recompute_all(grid: Arc<grid::GridIndex>, data: &Arc<RwLock<DataState>>
     let (outs, fc) = grid::recompute(&grid, &cargas, &incs, &traf, &cfg);
 
     let mut d = data.write().await;
-    d.cells_out = outs; // <- lo necesita /export/hex-df.json
+    d.cells_out = outs; 
     d.hex_geojson_str = serde_json::to_string(&fc)
         .unwrap_or_else(|_| "{\"type\":\"FeatureCollection\",\"features\":[]}".into());
 }

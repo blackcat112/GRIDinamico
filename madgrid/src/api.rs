@@ -3,9 +3,9 @@ use std::sync::Arc;
 use tokio::sync::RwLock;
 use tower_http::{compression::CompressionLayer, cors::CorsLayer, services::ServeDir};
 
-use geo::CoordsIter;           // para .coords()
+
 use serde::Serialize;          // para serializar structs
-use std::collections::HashMap; // id -> delay_factor
+
 
 use crate::types::{DataState, Kpis};
 
@@ -20,7 +20,7 @@ pub fn router(state: ApiState) -> Router {
         .route("/health", get(|| async { "ok" }))
         .route("/kpis", get(kpis))
         .route("/map/hex", get(map_hex))
-        .route("/export/hex-df.json", get(export_hex_df)) // <-- NUEVO
+        .route("/export/hex-df.json", get(export_hex_df)) 
         .fallback_service(ServeDir::new("web"))
         .with_state(state)
         .layer(CorsLayer::permissive())

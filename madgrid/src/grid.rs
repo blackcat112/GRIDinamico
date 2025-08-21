@@ -3,7 +3,7 @@ use geo::{algorithm::centroid::Centroid, Contains, Polygon, BoundingRect};
 use geojson::{GeoJson, Geometry, Value};
 use rstar::{RTree, RTreeObject, AABB};
 use serde_json::json;
-use geo::CoordsIter; // para poly.exterior().coords()
+
 
 use crate::types::{CellOut, DelayCfg, Incidencia, ParkingZone, SensorTr};
 
@@ -242,7 +242,7 @@ pub fn recompute(
             blocked,
             incidencias: incs_c.len(),
             carga_near_count: count,
-            carga_min_dist_m: (park_min * 100.0).round() / 100.0, // aquí guardas park_min (nómbralo si quieres)
+            carga_min_dist_m: (park_min * 100.0).round() / 100.0, // aquí guardas park_min 
             parking_score01: ((parking_score * 100.0).round() / 100.0),
         });
     }
