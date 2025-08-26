@@ -1,0 +1,6 @@
+# res=7
+ttfb=0.003512 total=0.003555
+# res=9
+ttfb=0.003218 total=0.003253
+# res=10
+ttfb=0.003170 total=0.003212

@@ -80,11 +80,25 @@
   }
 
   function showHUD(p) {
-    document.getElementById('hud_df').textContent = (p.delay_factor ?? '–');
-    document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
-    document.getElementById('hud_cz').textContent = (p.carga_near_count ?? '–');
-    document.getElementById('hud').style.display = 'block';
+  document.getElementById('hud_df').textContent = (p.delay_factor ?? '–');
+  document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
+  document.getElementById('hud_cz').textContent = (p.carga_near_count ?? '–');
+
+  // Nuevo: muestra el índice H3
+  if (p.h3) {
+    let row = document.getElementById('hud_h3');
+    if (!row) {
+      const hud = document.getElementById('hud');
+      row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = `<span class="key">H3 id</span><span class="val" id="hud_h3"></span>`;
+      hud.appendChild(row);
+    }
+    document.getElementById('hud_h3').textContent = p.h3;
   }
+  document.getElementById('hud').style.display = 'block';
+}
+
   function hideHUD() {
     // Si quieres ocultarlo al salir con el ratón, descomenta:
     // document.getElementById('hud').style.display = 'none';
