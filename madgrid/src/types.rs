@@ -1,3 +1,7 @@
+//! types.rs
+//! Modelos de datos compartidos por el servicio: entradas (sensores/incidencias),
+//! configuración del cálculo, KPIs y salidas (GeoJSON cacheado y export ligero de routing).
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -37,7 +41,7 @@ pub struct SensorTr {
 #[derive(Clone, Debug, Default, Serialize)]
 pub struct Kpis { pub carga: usize, pub inc: usize }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize)]
 pub struct DelayCfg {
     pub w_carga: f32,
     pub w_nivel: f32,
@@ -87,7 +91,7 @@ impl Default for DelayCfg {
 #[derive(Clone, Debug)]
 pub struct AppCfg {
     pub bind: String,
-    pub grid_path: String,
+    pub grid_path: String,   // ya no es imprescindible con H3, pero lo conservamos para la UI si lo usabas
     pub url_carga: String,
     pub url_incid: String,
     pub url_trafico: String,
@@ -104,35 +108,36 @@ impl Default for AppCfg {
             url_carga: "https://datos.madrid.es/egobfiles/MANUAL/208072/carga_descarga_2025.csv".into(),
             url_incid: "https://informo.madrid.es/informo/tmadrid/incid_aytomadrid.xml".into(),
             url_trafico: "https://informo.madrid.es/informo/tmadrid/pm.xml".into(),
-            t_carga_s: 600,
+            t_carga_s: 3600,
             t_incid_s: 300,
             t_trafico_s: 300,
         }
     }
 }
 
+/// DTO mínimo para ruteo (export ligero)
 #[derive(Clone, Debug, Serialize)]
-pub struct CellOut {
-    pub id: u32,
-    pub delay_factor: Option<f32>,
-    pub blocked: bool,
-    pub incidencias: usize,
-    pub carga_near_count: usize,
-    pub carga_min_dist_m: f32,
-    pub parking_score01: f32,
+pub struct RoutingCell {
+    pub h3: String,  // Index H3 en string (base-16 compacta)
+    pub delay: f32,  // 999.0 si bloqueado
 }
 
-
-
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, Serialize)]
 pub struct DataState {
     pub cargas: Vec<ParkingZone>,
     pub incs: Vec<Incidencia>,
     pub traf: Vec<SensorTr>,
     pub kpis: Kpis,
-    /// FeatureCollection pre‑generado en texto para servir rápido
+
+    /// GeoJSON de “mapa calor” pre-generado (pintamos solo celdas con delay>1+eps)
     pub hex_geojson_str: String,
-    pub cells_out: Vec<CellOut>,
-    pub delay_cfg: DelayCfg,   
-    pub route_cells_str: String,
+
+    /// Export ligero para ruteo pre-generado (último snapshot)
+    pub routing_cells: Vec<RoutingCell>,
+
+    /// Última config usada (útil para debug)
+    pub delay_cfg: DelayCfg,
+
+    /// Marca de tiempo del snapshot (ISO 8601)
+    pub snapshot_ts_utc: String,
 }

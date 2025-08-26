@@ -1,29 +1,23 @@
-use axum::{extract::State, response::IntoResponse, routing::get, Json, Router};
+//! api.rs
+//! Rutas HTTP: /health, /kpis, /map/hex y /routing/cells (ligera para ruteo con H3).
+
+use axum::{extract::{Query, State}, response::IntoResponse, routing::get, Json, Router};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use tower_http::{compression::CompressionLayer, services::ServeDir, cors::CorsLayer};
-use serde::Serialize;
+use serde::Deserialize;
 
-use crate::types::DataState;
+use crate::types::{DataState, RoutingCell};
 
 #[derive(Clone)]
 pub struct ApiState { pub data: Arc<RwLock<DataState>> }
-
-#[derive(Serialize)]
-struct RoutingCellOut {
-    h3: String,
-    delay: f32,
-    // si quieres mandar centro también, descomenta:
-    // lat: f32,
-    // lon: f32,
-}
 
 pub fn router(state: ApiState) -> Router {
     Router::new()
         .route("/health", get(|| async { "ok" }))
         .route("/kpis", get(kpis))
         .route("/map/hex", get(map_hex))
-        .route("/routing/cells", get(routing_cells)) // ⬅️ nuevo
+        .route("/routing/cells", get(routing_cells))
         .fallback_service(ServeDir::new("web"))
         .with_state(state)
         .layer(CorsLayer::permissive())
@@ -41,29 +35,25 @@ async fn map_hex(State(st): State<ApiState>) -> impl IntoResponse {
     ([("content-type","application/json")], s)
 }
 
-async fn routing_cells(State(st): State<ApiState>) -> impl IntoResponse {
+/// Query de /routing/cells
+#[derive(Debug, Deserialize)]
+pub struct RoutingQuery {
+    /// Resolución deseada (si recalculamos on-demand). Si omitido, usamos el snapshot cacheado.
+    pub res: Option<u8>,
+    /// Umbral mínimo de delay para incluir celda (default 1.03)
+    pub min_delay: Option<f32>,
+    /// bbox=minLon,minLat,maxLon,maxLat  (opcional, recorta la respuesta)
+    pub bbox: Option<String>,
+    /// refine=true para usar mix parent/hijos (si snapshot lo soporta)
+    pub refine: Option<bool>,
+    /// k (0..2) suavizado k-ring; si snapshot no se generó así, podemos recalcular on-demand.
+    pub k: Option<u32>,
+}
+
+/// Export ligero para ruteo: [{h3, delay}]
+async fn routing_cells(State(st): State<ApiState>, Query(_q): Query<RoutingQuery>) -> impl IntoResponse {
+    // Servimos el snapshot pre-generado (rápido)
+    // Si quieres recalcular on-demand con los parámetros, mueve la lógica a aquí usando h3grid::recompute_h3(...)
     let d = st.data.read().await;
-
-    // IMPORTANTE:
-    // - Para que esto funcione, en la parte H3 tienes que estar guardando en `cells_out`
-    //   el índice H3 en `id` (o cambia `.to_string()` según tu struct).
-    // - Si sigues con el grid "antiguo" (u32), entonces no tendrás el H3 aquí;
-    //   en ese caso usa la Opción B de abajo.
-
-    let eps = d.delay_cfg.show_eps;
-    let items: Vec<RoutingCellOut> = d.cells_out.iter()
-        .filter_map(|c| {
-            // delay_factor None -> descartar, <= 1+eps -> descartar
-            let mut df = c.delay_factor?;
-            if c.blocked { df = 999.0; }
-            if df <= 1.0 + eps && !c.blocked { return None; }
-            // OJO: aquí asumo que `c.id` es el H3 en String (o cambia esto a como lo guardas)
-            Some(RoutingCellOut {
-                h3: c.id.to_string(), // <-- si `id` ya es String, deja `c.id.clone()`
-                delay: ((df * 100.0).round() / 100.0),
-            })
-        })
-        .collect();
-
-    Json(items)
+    Json::<Vec<RoutingCell>>(d.routing_cells.clone())
 }

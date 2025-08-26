@@ -1,5 +1,15 @@
-mod types; mod utm; mod fetch; mod carga; mod incid; mod trafico; mod grid; mod api;
-// Si tienes h3grid.rs, su mod aquí: mod h3grid;
+//! main.rs
+//! Arranque, loops de fetch, recompute H3, API y cache de salidas.
+
+mod types;
+mod utm;        // <-- este debe existir si carga/trafico usan UTM->WGS84
+mod fetch;
+mod carga;
+mod incid;
+mod trafico;
+mod api;
+mod h3grid;
+
 
 use anyhow::Result;
 use reqwest::Client;
@@ -10,43 +20,35 @@ use once_cell::sync::Lazy;
 
 use types::{AppCfg, DataState, DelayCfg};
 
-static CFG: Lazy<types::DelayCfg> = Lazy::new(|| types::DelayCfg::default());
+static CFG: Lazy<DelayCfg> = Lazy::new(|| DelayCfg::default());
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // Logs
     tracing_subscriber::fmt().with_env_filter("info").with_max_level(Level::INFO).init();
 
-    // ⚙️ Config desde env (OJO: renombrado a app_cfg para no chocar con macro `cfg`)
-    let app_cfg = app_cfg_from_env();
-    let _delay_cfg = DelayCfg::default();
-
-    // Carga grid clásico (si sigues usando grid.rs para algo)
-    info!("Cargando grid: {}", app_cfg.grid_path);
-    let _grid = grid::GridIndex::from_geojson(&app_cfg.grid_path)?;
-    let data = Arc::new(RwLock::new(DataState::default()));
+    let cfg = app_cfg_from_env();
+    let data = Arc::new(RwLock::new(DataState {
+        delay_cfg: DelayCfg::default(),
+        ..Default::default()
+    }));
 
     // HTTP client con compresión
     let client = Client::builder().brotli(true).gzip(true).deflate(true).build()?;
 
     // Lanzar fetchers
-    {
-        let data_c = data.clone(); let client_c = client.clone(); let cfg_c = app_cfg.clone();
-        tokio::spawn(async move { fetch_loop_carga(client_c, data_c, cfg_c).await; });
-    }
-    {
-        let data_i = data.clone(); let client_i = client.clone(); let cfg_i = app_cfg.clone();
-        tokio::spawn(async move { fetch_loop_incid(client_i, data_i, cfg_i).await; });
-    }
-    {
-        let data_t = data.clone(); let client_t = client.clone(); let cfg_t = app_cfg.clone();
-        tokio::spawn(async move { fetch_loop_trafico(client_t, data_t, cfg_t).await; });
-    }
+    let data_c = data.clone(); let client_c = client.clone(); let cfg_c = cfg.clone();
+    tokio::spawn(async move { fetch_loop_carga(client_c, data_c, cfg_c).await; });
+
+    let data_i = data.clone(); let client_i = client.clone(); let cfg_i = cfg.clone();
+    tokio::spawn(async move { fetch_loop_incid(client_i, data_i, cfg_i).await; });
+
+    let data_t = data.clone(); let client_t = client.clone(); let cfg_t = cfg.clone();
+    tokio::spawn(async move { fetch_loop_trafico(client_t, data_t, cfg_t).await; });
 
     // API
     let app = api::router(api::ApiState { data: data.clone() });
-    info!("Escuchando en http://{}", app_cfg.bind);
-    let listener = tokio::net::TcpListener::bind(&app_cfg.bind).await?;
+    info!("Escuchando en http://{}", cfg.bind);
+    let listener = tokio::net::TcpListener::bind(&cfg.bind).await?;
     let serve = axum::serve(listener, app);
     tokio::select! {
         r = serve => { r?; },
@@ -59,7 +61,7 @@ async fn main() -> Result<()> {
 fn app_cfg_from_env() -> AppCfg {
     let mut c = AppCfg::default();
     if let Ok(v) = env::var("BIND") { c.bind = v; }
-    if let Ok(v) = env::var("HEX_GRID_PATH") { c.grid_path = v; }
+    if let Ok(v) = env::var("HEX_GRID_PATH") { c.grid_path = v; } // opcional con H3
     if let Ok(v) = env::var("URL_CARGA") { c.url_carga = v; }
     if let Ok(v) = env::var("URL_INCID") { c.url_incid = v; }
     if let Ok(v) = env::var("URL_TRAFICO") { c.url_trafico = v; }
@@ -69,6 +71,9 @@ fn app_cfg_from_env() -> AppCfg {
     c
 }
 
+// ------------------------
+// Fetch loops + recompute
+// ------------------------
 async fn fetch_loop_carga(client: Client, data: Arc<RwLock<DataState>>, cfg: AppCfg) {
     let mut cache = fetch::CacheCtl::default();
     loop {
@@ -121,30 +126,22 @@ async fn fetch_loop_trafico(client: Client, data: Arc<RwLock<DataState>>, cfg: A
     }
 }
 
-// Recalcula usando lo que tengas debajo (grid clásico o H3 dentro de recompute_all)
 async fn recompute_all(data: &Arc<RwLock<DataState>>) {
-    let (cargas, incs, traf) = {
+    let (cargas, incs, traf, cfg) = {
         let d = data.read().await;
-        (d.cargas.clone(), d.incs.clone(), d.traf.clone())
+        (d.cargas.clone(), d.incs.clone(), d.traf.clone(), d.delay_cfg.clone())
     };
 
-    // Si usas H3: llama a tu recompute_h3 aquí y rellena d.hex_geojson_str y d.cells_out
-    // Ejemplo:
-    // let (_cells, fc) = h3grid::recompute_h3(&cargas, &incs, &traf, &CFG, base_res, refine);
-    // let mut d = data.write().await;
-    // d.cells_out = _cells;
-    // d.hex_geojson_str = serde_json::to_string(&fc).unwrap_or("{\"type\":\"FeatureCollection\",\"features\":[]}".into());
+    // Parámetros por defecto del snapshot (puedes exponerlos por env si quieres)
+    let base_res: u8 = 9;
+    let refine = Some((7, 1.15));   // parent res=7 y refinamos hijos cuando delay>1.15 o blocked
+    let k_smooth = 1;               // suavizado ligero k=1
+    let min_delay_export = 1.03;    // corte para export de ruteo
 
-    // Si mientras tanto sigues con el grid clásico:
-    let (_outs, fc) = grid::recompute(&GRID, &cargas, &incs, &traf, &CFG);
+    let out = h3grid::recompute_h3(&cargas, &incs, &traf, &cfg, base_res, refine, k_smooth, min_delay_export);
+
     let mut d = data.write().await;
-    d.cells_out = _outs;
-    d.hex_geojson_str = serde_json::to_string(&fc).unwrap_or("{\"type\":\"FeatureCollection\",\"features\":[]}".into());
+    d.hex_geojson_str = out.geojson;
+    d.routing_cells = out.routing;
+    d.snapshot_ts_utc = out.ts_utc;
 }
-
-// Si sigues usando GRID estático (para grid clásico). Si no, elimina esto.
-use once_cell::sync::Lazy as _;
-static GRID: Lazy<grid::GridIndex> = Lazy::new(|| {
-    let p = std::env::var("HEX_GRID_PATH").unwrap_or_else(|_| "data/hex_grid_madrid_300m.geojson".into());
-    grid::GridIndex::from_geojson(&p).expect("Cargar grid")
-});
