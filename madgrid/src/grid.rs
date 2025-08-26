@@ -1,3 +1,19 @@
+//! grid.rs
+//!
+//! Maneja el grid hexagonal y los cálculos asociados.
+//!
+//! Funcionalidad principal:
+//! - Cargar un GeoJSON con las celdas hexagonales.
+//! - Construir un índice espacial (`RTree`) para localizar rápidamente celdas por coordenadas.
+//! - Implementar `cell_for()` para encontrar en qué hexágono cae un punto.
+//! - Calcular indicadores de tráfico, incidencias y proximidad de aparcamientos.
+//! - Generar `delay_factor` por celda y un GeoJSON coloreado.
+//!
+//! Este módulo concentra la "lógica de negocio" del proyecto,
+//! donde se transforma la información en métricas útiles.
+
+
+
 use anyhow::Result;
 use geo::{algorithm::centroid::Centroid, Contains, Polygon, BoundingRect};
 use geojson::{GeoJson, Geometry, Value};

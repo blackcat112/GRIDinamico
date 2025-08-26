@@ -111,8 +111,7 @@ impl Default for AppCfg {
     }
 }
 
-#[derive(Clone, Debug)]
-#[allow(dead_code)]
+#[derive(Clone, Debug, Serialize)]
 pub struct CellOut {
     pub id: u32,
     pub delay_factor: Option<f32>,
@@ -122,6 +121,8 @@ pub struct CellOut {
     pub carga_min_dist_m: f32,
     pub parking_score01: f32,
 }
+
+
 
 #[derive(Clone, Debug, Default)]
 pub struct DataState {
@@ -133,4 +134,5 @@ pub struct DataState {
     pub hex_geojson_str: String,
     pub cells_out: Vec<CellOut>,
     pub delay_cfg: DelayCfg,   
+    pub route_cells_str: String,
 }

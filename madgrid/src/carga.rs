@@ -1,3 +1,14 @@
+//! carga.rs
+//!
+//! Parser de las zonas de carga y descarga (CSV del Ayuntamiento de Madrid).
+//!
+//! - Convierte el CSV oficial en una lista de `ParkingZone`.
+//! - Cada zona incluye lat/lon, calle, distrito, barrio y estado.
+//!
+//! Estos datos alimentan el cálculo de proximidad a aparcamientos
+//! dentro de cada hexágono.
+
+
 use crate::types::ParkingZone;
 use crate::utm::utm30_to_wgs84;
 

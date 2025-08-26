@@ -1,3 +1,15 @@
+//! utm.rs
+//!
+//! Conversión de coordenadas UTM 30N ↔ WGS84 (lat/lon).
+//!
+//! - Necesario porque los datos del Ayuntamiento de Madrid
+//!   suelen venir en EPSG:25830 (UTM huso 30N).
+//! - Aquí se implementan funciones de transformación a EPSG:4326.
+//!
+//! Permite unificar todas las fuentes de datos a coordenadas
+//! compatibles con Leaflet y GeoJSON.
+
+
 pub fn utm30_to_wgs84(x: f64, y: f64) -> (f64, f64) {
     let a = 6378137.0_f64;
     let e = 0.08181919084262149_f64;

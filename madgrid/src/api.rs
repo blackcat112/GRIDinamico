@@ -1,18 +1,21 @@
 use axum::{extract::State, response::IntoResponse, routing::get, Json, Router};
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use tower_http::{compression::CompressionLayer, cors::CorsLayer, services::ServeDir};
+use tower_http::{compression::CompressionLayer, services::ServeDir, cors::CorsLayer};
+use serde::Serialize;
 
-
-use serde::Serialize;          // para serializar structs
-
-
-use crate::types::{DataState, Kpis};
+use crate::types::DataState;
 
 #[derive(Clone)]
-pub struct ApiState {
-    pub data: Arc<RwLock<DataState>>,
-    pub grid: Arc<crate::grid::GridIndex>,
+pub struct ApiState { pub data: Arc<RwLock<DataState>> }
+
+#[derive(Serialize)]
+struct RoutingCellOut {
+    h3: String,
+    delay: f32,
+    // si quieres mandar centro también, descomenta:
+    // lat: f32,
+    // lon: f32,
 }
 
 pub fn router(state: ApiState) -> Router {
@@ -20,7 +23,7 @@ pub fn router(state: ApiState) -> Router {
         .route("/health", get(|| async { "ok" }))
         .route("/kpis", get(kpis))
         .route("/map/hex", get(map_hex))
-        .route("/export/hex-df.json", get(export_hex_df)) 
+        .route("/routing/cells", get(routing_cells)) // ⬅️ nuevo
         .fallback_service(ServeDir::new("web"))
         .with_state(state)
         .layer(CorsLayer::permissive())
@@ -35,50 +38,32 @@ async fn kpis(State(st): State<ApiState>) -> impl IntoResponse {
 async fn map_hex(State(st): State<ApiState>) -> impl IntoResponse {
     let d = st.data.read().await;
     let s = d.hex_geojson_str.clone();
-    ([("content-type", "application/json")], s)
+    ([("content-type","application/json")], s)
 }
 
-#[derive(Serialize)]
-struct HexDf {
-    hex_id: u32,
-    delay_factor: f32,          // 999.0 si bloqueado/sin dato
-    coordinates: Vec<[f64; 2]>, // anillo exterior (lon, lat) WGS84
-}
-
-// GET /export/hex-df.json  -> JSON minimalista para optimizador de rutas
-// GET /export/hex-df.json  -> SOLO los que se pintan en el mapa
-async fn export_hex_df(State(st): State<ApiState>) -> impl IntoResponse {
+async fn routing_cells(State(st): State<ApiState>) -> impl IntoResponse {
     let d = st.data.read().await;
 
-    // Umbral igual que el mapa
+    // IMPORTANTE:
+    // - Para que esto funcione, en la parte H3 tienes que estar guardando en `cells_out`
+    //   el índice H3 en `id` (o cambia `.to_string()` según tu struct).
+    // - Si sigues con el grid "antiguo" (u32), entonces no tendrás el H3 aquí;
+    //   en ese caso usa la Opción B de abajo.
+
     let eps = d.delay_cfg.show_eps;
+    let items: Vec<RoutingCellOut> = d.cells_out.iter()
+        .filter_map(|c| {
+            // delay_factor None -> descartar, <= 1+eps -> descartar
+            let mut df = c.delay_factor?;
+            if c.blocked { df = 999.0; }
+            if df <= 1.0 + eps && !c.blocked { return None; }
+            // OJO: aquí asumo que `c.id` es el H3 en String (o cambia esto a como lo guardas)
+            Some(RoutingCellOut {
+                h3: c.id.to_string(), // <-- si `id` ya es String, deja `c.id.clone()`
+                delay: ((df * 100.0).round() / 100.0),
+            })
+        })
+        .collect();
 
-    // id -> delay_factor, filtrando SOLO df > 1 + eps
-    let mut df_by_id: std::collections::HashMap<u32, f32> =
-        std::collections::HashMap::with_capacity(d.cells_out.len());
-
-    for c in &d.cells_out {
-        let df = c.delay_factor.unwrap_or(999.0);
-        if df > 1.0 + eps {
-            df_by_id.insert(c.id, (df * 100.0).round() / 100.0);
-        }
-    }
-
-    // Construye salida SOLO para ids filtrados
-    let mut out: Vec<HexDf> = Vec::with_capacity(df_by_id.len());
-    for cell in &st.grid.cells {
-        if let Some(df) = df_by_id.get(&cell.id) {
-            let exterior: Vec<[f64; 2]> =
-                cell.poly.exterior().coords().map(|c| [c.x, c.y]).collect();
-            out.push(HexDf {
-                hex_id: cell.id,
-                delay_factor: *df,
-                coordinates: exterior,
-            });
-        }
-    }
-
-    let body = serde_json::to_string(&out).unwrap_or_else(|_| "[]".into());
-    ([("content-type", "application/json")], body)
+    Json(items)
 }
-

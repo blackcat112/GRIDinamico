@@ -1,3 +1,15 @@
+//! trafico.rs
+//!
+//! Parser de sensores de tráfico (XML `pm.xml` de informo.madrid.es).
+//!
+//! - Convierte cada sensor en un `SensorTr` con intensidad, ocupación,
+//!   carga, nivel, velocidad media y timestamp.
+//! - Los datos agregados por celda sirven para calcular
+//!   el componente de tráfico en el `delay_factor`.
+//!
+//! Este módulo conecta directamente con la red de sensores urbanos.
+
+
 use crate::types::SensorTr;
 use quick_xml::events::Event;
 use quick_xml::Reader;
