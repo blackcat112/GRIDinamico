@@ -1,12 +1,12 @@
 //! fetch.rs
 //!
-//! Cliente HTTP con caché ligera para evitar descargas innecesarias.
+//! Cliente HTTP con caché ligera para evitar descargas innecesarias
+//
+//! - Usa `reqwest` para hacer peticiones con soporte de compresion (gzip, br, deflate)
+//! - Implementa un control de caché sencillo con `ETag` y `If-Modified-Since`
+//! - Expone `get_with_cache()` que devuelve los bytes nuevos solo si el recurso cambio
 //!
-//! - Usa `reqwest` para hacer peticiones con soporte de compresión (gzip, br, deflate).
-//! - Implementa un control de caché sencillo con `ETag` y `If-Modified-Since`.
-//! - Expone `get_with_cache()` que devuelve los bytes nuevos solo si el recurso cambió.
-//!
-//! Esto reduce consumo de red y evita recargar datos sin cambios.
+//! Esto reduce consumo de red y evita recargar datos sin cambios
 
 
 use anyhow::Result;

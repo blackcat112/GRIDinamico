@@ -2,7 +2,7 @@
 //! Arranque, loops de fetch, recompute H3, API y cache de salidas.
 
 mod types;
-mod utm;        // <-- este debe existir si carga/trafico usan UTM->WGS84
+mod utm;       
 mod fetch;
 mod carga;
 mod incid;
@@ -19,7 +19,7 @@ use tracing::{info, Level};
 use once_cell::sync::Lazy;
 
 use types::{AppCfg, DataState, DelayCfg};
-
+#[allow(dead_code)]
 static CFG: Lazy<DelayCfg> = Lazy::new(|| DelayCfg::default());
 
 #[tokio::main]
@@ -61,7 +61,7 @@ async fn main() -> Result<()> {
 fn app_cfg_from_env() -> AppCfg {
     let mut c = AppCfg::default();
     if let Ok(v) = env::var("BIND") { c.bind = v; }
-    if let Ok(v) = env::var("HEX_GRID_PATH") { c.grid_path = v; } // opcional con H3
+    if let Ok(v) = env::var("HEX_GRID_PATH") { c.grid_path = v; } 
     if let Ok(v) = env::var("URL_CARGA") { c.url_carga = v; }
     if let Ok(v) = env::var("URL_INCID") { c.url_incid = v; }
     if let Ok(v) = env::var("URL_TRAFICO") { c.url_trafico = v; }
@@ -131,12 +131,10 @@ async fn recompute_all(data: &Arc<RwLock<DataState>>) {
         let d = data.read().await;
         (d.cargas.clone(), d.incs.clone(), d.traf.clone(), d.delay_cfg.clone())
     };
-
-    // Parámetros por defecto del snapshot (puedes exponerlos por env si quieres)
     let base_res: u8 = 9;
     let refine = Some((7, 1.15));   // parent res=7 y refinamos hijos cuando delay>1.15 o blocked
-    let k_smooth = 1;               // suavizado ligero k=1
-    let min_delay_export = 1.03;    // corte para export de ruteo
+    let k_smooth = 1;               
+    let min_delay_export = 1.03;    
 
     let out = h3grid::recompute_h3(&cargas, &incs, &traf, &cfg, base_res, refine, k_smooth, min_delay_export);
 

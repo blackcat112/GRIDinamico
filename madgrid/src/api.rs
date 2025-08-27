@@ -37,23 +37,22 @@ async fn map_hex(State(st): State<ApiState>) -> impl IntoResponse {
 
 /// Query de /routing/cells
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct RoutingQuery {
-    /// Resolución deseada (si recalculamos on-demand). Si omitido, usamos el snapshot cacheado.
+    /// Resolución deseada 
     pub res: Option<u8>,
-    /// Umbral mínimo de delay para incluir celda (default 1.03)
+    /// Umbral  de delay para incluir celda (default 1.03)
     pub min_delay: Option<f32>,
-    /// bbox=minLon,minLat,maxLon,maxLat  (opcional, recorta la respuesta)
+    /// bbox=minLon,minLat,maxLon,maxLat  
     pub bbox: Option<String>,
-    /// refine=true para usar mix parent/hijos (si snapshot lo soporta)
+    /// refine=true para usar mix parent/hijos 
     pub refine: Option<bool>,
-    /// k (0..2) suavizado k-ring; si snapshot no se generó así, podemos recalcular on-demand.
+    /// k (0..2) suavizado k-ring; default 1
     pub k: Option<u32>,
 }
 
-/// Export ligero para ruteo: [{h3, delay}]
+/// Export  [{h3, delay}]
 async fn routing_cells(State(st): State<ApiState>, Query(_q): Query<RoutingQuery>) -> impl IntoResponse {
-    // Servimos el snapshot pre-generado (rápido)
-    // Si quieres recalcular on-demand con los parámetros, mueve la lógica a aquí usando h3grid::recompute_h3(...)
     let d = st.data.read().await;
     Json::<Vec<RoutingCell>>(d.routing_cells.clone())
 }

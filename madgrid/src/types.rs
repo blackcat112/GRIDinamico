@@ -1,6 +1,6 @@
 //! types.rs
-//! Modelos de datos compartidos por el servicio: entradas (sensores/incidencias),
-//! configuración del cálculo, KPIs y salidas (GeoJSON cacheado y export ligero de routing).
+//! Modelos de datos compartidos por el servicio: entradas (sensores/incidencias)
+//! configuración del calculo, KPIs y salidas 
 
 use serde::{Deserialize, Serialize};
 
@@ -91,7 +91,7 @@ impl Default for DelayCfg {
 #[derive(Clone, Debug)]
 pub struct AppCfg {
     pub bind: String,
-    pub grid_path: String,   // ya no es imprescindible con H3, pero lo conservamos para la UI si lo usabas
+    pub grid_path: String,   
     pub url_carga: String,
     pub url_incid: String,
     pub url_trafico: String,
@@ -115,10 +115,10 @@ impl Default for AppCfg {
     }
 }
 
-/// DTO mínimo para ruteo (export ligero)
+
 #[derive(Clone, Debug, Serialize)]
 pub struct RoutingCell {
-    pub h3: String,  // Index H3 en string (base-16 compacta)
+    pub h3: String,  
     pub delay: f32,  // 999.0 si bloqueado
 }
 
@@ -129,15 +129,11 @@ pub struct DataState {
     pub traf: Vec<SensorTr>,
     pub kpis: Kpis,
 
-    /// GeoJSON de “mapa calor” pre-generado (pintamos solo celdas con delay>1+eps)
     pub hex_geojson_str: String,
 
-    /// Export ligero para ruteo pre-generado (último snapshot)
     pub routing_cells: Vec<RoutingCell>,
 
-    /// Última config usada (útil para debug)
     pub delay_cfg: DelayCfg,
 
-    /// Marca de tiempo del snapshot (ISO 8601)
     pub snapshot_ts_utc: String,
 }

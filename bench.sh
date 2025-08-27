@@ -5,7 +5,7 @@ set -euo pipefail
 # Config por defecto
 # =========================
 URL="${URL:-http://127.0.0.1:8080}"
-DURATION="${DURATION:-30s}"   # duración test hey
+DURATION="${DURATION:-30s}"   
 CONCURRENCY="${CONCURRENCY:-50}"
 RESOLUTIONS=(7 9 10)          # resoluciones H3 a probar
 REFINE_THR="1.15"

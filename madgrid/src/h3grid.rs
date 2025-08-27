@@ -1,6 +1,6 @@
 //! h3grid.rs
-//! Agregación y export sobre celdas H3: multi-res, refinado por hotspots,
-//! suavizado k-ring, y construcción de GeoJSON de hexágonos coloreados.
+//! Agregacion y export sobre celdas H3: multi-res, refinado por hotspots
+//! suavizado k-ring, y construcción de GeoJSON de hexágonos coloreados
 
 use anyhow::Result;
 use chrono::{SecondsFormat, Utc};
@@ -46,7 +46,6 @@ fn color_from_norm(x: f32) -> &'static str {
 
 #[inline]
 fn cell_center_deg(c: CellIndex) -> (f64, f64) {
-    // Cogemos el polígono de la celda y promediamos sus vértices
     let verts: Vec<_> = c.boundary().to_vec();
     let mut sx = 0.0;
     let mut sy = 0.0;
@@ -61,7 +60,7 @@ fn cell_center_deg(c: CellIndex) -> (f64, f64) {
 }
 
 fn cell_polygon_coords(c: CellIndex) -> Vec<[f64; 2]> {
-    let verts: Vec<_> = c.boundary().to_vec(); // convertimos a Vec<LatLng>
+    let verts: Vec<_> = c.boundary().to_vec(); 
     verts.iter()
         .map(|ll| [ll.lng().to_degrees(), ll.lat().to_degrees()])
         .collect()
@@ -73,7 +72,7 @@ fn delay_from_parts(
 ) -> Option<f32> {
     if blocked { return Some(999.0); }
     let velinv = 1.0 - vel01;
-    // incidencias -> penalización simple por conteo (capada)
+    // incidencias -> penalización simple por conteo (capada)f
     let mut pen = (incidencias as f32) * 0.20;
     pen = pen.min(cfg.inc_cap);
 
@@ -93,10 +92,10 @@ fn h3_cell(lat: f32, lon: f32, res: u8) -> Option<CellIndex> {
 
 
 // -------------------------------------------------------
-// 1) Agregación a una resolución base (p.ej. res=9)
+// 1) Agregación a una resolucion base (p.ej. res=9)
 // -------------------------------------------------------
 pub fn aggregate_at_res(
-    cargas: &[ParkingZone],
+    _cargas: &[ParkingZone],
     incs: &[Incidencia],
     traf: &[SensorTr],
     cfg: &DelayCfg,
@@ -214,13 +213,12 @@ pub fn refine_hotspots(
             out.push(p);
         }
     }
-    // garantizamos que los hijos existan (si en base_child no están todos, los omitimos al exportar)
     out.retain(|c| parent.contains_key(c) || base_child.contains_key(c));
     out
 }
 
 // -------------------------------------------------------
-// 4) Suavizado k-ring (opcional)
+// 4) Suavizado k-ring (opcional) no esta en uso
 // -------------------------------------------------------
 pub fn smooth_with_kring(
     metrics: &std::collections::HashMap<CellIndex, Metrics>,
@@ -310,17 +308,17 @@ pub fn recompute_h3(
     incs: &[Incidencia],
     traf: &[SensorTr],
     cfg: &DelayCfg,
-    base_res: u8,             // p.ej. 9
-    refine: Option<(u8,f32)>, // Some((parent_res, delay_thr))
-    k_smooth: u32,            // p.ej. 0..2
-    min_delay_export: f32,    // p.ej. 1.03
+    base_res: u8,             
+    refine: Option<(u8,f32)>, 
+    k_smooth: u32,            
+    min_delay_export: f32,    
 ) -> RecomputeOut {
     let base = aggregate_at_res(cargas, incs, traf, cfg, base_res);
 
-    // por defecto: mostramos base_res en toda la ciudad
+  
     let mut metrics_to_show = base.clone();
 
-    // refinamiento
+
     if let Some((parent_res, thr)) = refine {
         if let Ok(parent_map) = downsample_to_parent(&base, parent_res) {
             let ids = refine_hotspots(&parent_map, &base, base_res, thr);

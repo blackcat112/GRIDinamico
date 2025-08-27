@@ -1,14 +1,13 @@
 //! trafico.rs
 //!
-//! Parser de sensores de tráfico (XML `pm.xml` de informo.madrid.es).
+//! Parser de sensores de trafico (XML `pm.xml` de informo.madrid.es
 //!
-//! - Convierte cada sensor en un `SensorTr` con intensidad, ocupación,
-//!   carga, nivel, velocidad media y timestamp.
+//! - Convierte cada sensor en un `SensorTr` con intensidad ocupacion
+//!   carga, nivel, velocidad media y timestamp
 //! - Los datos agregados por celda sirven para calcular
-//!   el componente de tráfico en el `delay_factor`.
+//!   el componente de tráfico en el `delay_factor`
 //!
-//! Este módulo conecta directamente con la red de sensores urbanos.
-
+//! Este modulo conecta directamente con la red de sensores urbano
 
 use crate::types::SensorTr;
 use quick_xml::events::Event;
@@ -90,7 +89,6 @@ pub fn parse_trafico_xml(xml: &[u8]) -> Vec<SensorTr> {
         buf.clear();
     }
 
-    // dedup por id manteniendo el último (ya vienen en orden)
     use std::collections::HashMap;
     let mut map: HashMap<u32, SensorTr> = HashMap::new();
     for s in out { map.insert(s.id, s); }

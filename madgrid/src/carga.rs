@@ -1,24 +1,22 @@
 //! carga.rs
 //!
-//! Parser de las zonas de carga y descarga (CSV del Ayuntamiento de Madrid).
+//! Parser de las zonas de carga y descarga (CSV del Ayuntamiento de Madrid)
 //!
-//! - Convierte el CSV oficial en una lista de `ParkingZone`.
-//! - Cada zona incluye lat/lon, calle, distrito, barrio y estado.
+//! - Convierte el CSV oficial en una lista de `ParkingZone`
+//! - Cada zona incluye lat/lon, calle, distrito, barrio y estado
 //!
 //! Estos datos alimentan el cálculo de proximidad a aparcamientos
-//! dentro de cada hexágono.
+//! dentro de cada hexágono
 
 
 use crate::types::ParkingZone;
 use crate::utm::utm30_to_wgs84;
 
 pub fn parse_carga_csv(raw: &str) -> Vec<ParkingZone> {
-// El CSV viene con ';' y a veces trae un header con "Gis_X" o similar.
 let mut out = Vec::new();
 for (i, line) in raw.lines().enumerate() {
 let line = line.trim();
 if line.is_empty() { continue; }
-// detectar header por la primera palabra
 if i == 0 && (line.contains("Gis_X") || line.to_lowercase().contains("gis_x")) { continue; }
 let parts: Vec<&str> = line.split(';').collect();
 if parts.len() < 7 { continue; }

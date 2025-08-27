@@ -17,8 +17,6 @@
     .kpis .box { flex:1; background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; text-align:center; }
     .kpis .v { font-size:28px; font-weight:800; }
     .kpis .l { color:#6b7280; }
-
-    /* HUD detalle */
     .hud {
       position: fixed;
       left: 14px;
@@ -59,14 +57,16 @@
     <div class="row"><span class="key">Delay factor</span><span class="val" id="hud_df">–</span></div>
     <div class="row"><span class="key">Incidencias</span><span class="val" id="hud_inc">–</span></div>
     <div class="row"><span class="key">Zonas carga cerca</span><span class="val" id="hud_cz">–</span></div>
+    <div class="row"><span class="key">H3 id</span><span class="val" id="hud_h3">–</span></div>
+    <div class="row"><span class="key">Res H3</span><span class="val" id="hud_res">–</span></div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js"></script>
   <script>
   const map = L.map('map').setView([40.4168, -3.7038], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
 
-  // Adaptador de estilo: acepta camelCase y kebab-case desde el backend
   function styleFromProperties(f) {
     const s = (f && f.properties && f.properties.style) ? f.properties.style : {};
     return {
@@ -80,29 +80,22 @@
   }
 
   function showHUD(p) {
-  document.getElementById('hud_df').textContent = (p.delay_factor ?? '–');
-  document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
-  document.getElementById('hud_cz').textContent = (p.carga_near_count ?? '–');
+    document.getElementById('hud_df').textContent = (p.delay_factor ?? '–');
+    document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
+    document.getElementById('hud_cz').textContent = (p.carga_near_count ?? '–');
+    document.getElementById('hud_h3').textContent = (p.h3 ?? '–');
 
-  // Nuevo: muestra el índice H3
-  if (p.h3) {
-    let row = document.getElementById('hud_h3');
-    if (!row) {
-      const hud = document.getElementById('hud');
-      row = document.createElement('div');
-      row.className = 'row';
-      row.innerHTML = `<span class="key">H3 id</span><span class="val" id="hud_h3"></span>`;
-      hud.appendChild(row);
+    if (p.h3) {
+      try {
+        document.getElementById('hud_res').textContent = h3.getResolution(p.h3);
+      } catch {
+        document.getElementById('hud_res').textContent = '–';
+      }
     }
-    document.getElementById('hud_h3').textContent = p.h3;
+    document.getElementById('hud').style.display = 'block';
   }
-  document.getElementById('hud').style.display = 'block';
-}
 
-  function hideHUD() {
-    // Si quieres ocultarlo al salir con el ratón, descomenta:
-    // document.getElementById('hud').style.display = 'none';
-  }
+  function hideHUD() {}
 
   let selectedLayer = null;
 
@@ -110,23 +103,17 @@
     style: styleFromProperties,
     onEachFeature: (feature, layer) => {
       const p = feature.properties || {};
-
-      // Hover: muestra HUD y resalta borde
       layer.on('mouseover', () => {
         showHUD(p);
         const base = styleFromProperties(feature);
         layer.setStyle({weight: (base.weight || 1) + 1});
       });
-
       layer.on('mouseout', () => {
         if (selectedLayer !== layer) {
           const base = styleFromProperties(feature);
           layer.setStyle({weight: base.weight || 1});
         }
-        // hideHUD();
       });
-
-      // Click: fija selección y mantiene borde más grueso
       layer.on('click', () => {
         if (selectedLayer && selectedLayer !== layer) {
           const prev = selectedLayer.feature;
@@ -153,8 +140,6 @@
       const gj = await mres.json();
       layerHex.clearLayers();
       layerHex.addData(gj);
-      // Si quieres centrar el mapa a los hex con datos:
-      // const b = layerHex.getBounds(); if (b.isValid()) map.fitBounds(b, {maxZoom: 15});
     } catch (e) {
       console.error(e);
     }

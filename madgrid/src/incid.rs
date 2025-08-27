@@ -1,13 +1,13 @@
 //! incid.rs
 //!
-//! Parser de incidencias de tráfico (XML de informo.madrid.es).
+//! Parser de incidencias de trafico (XML de informo.madrid.es)
 //!
 //! - Convierte cada incidencia en un struct `Incidencia` con:
-//!   lat/lon, estado, tipo, descripción, inicio y fin.
-//! - Se usa para marcar hexágonos bloqueados o penalizados.
+//!   lat/lon, estado, tipo, descripción, inicio y fin
+//! - Se usa para marcar hexágonos bloqueados o penalizados
 //!
 //! Las incidencias influyen directamente en el `delay_factor`
-//! (ej. corte total → hex bloqueado; obras → penalización parcial).
+
 
 
 use crate::types::Incidencia;
