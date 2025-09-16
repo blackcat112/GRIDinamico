@@ -90,8 +90,7 @@ impl Default for DelayCfg {
 
 #[derive(Clone, Debug)]
 pub struct AppCfg {
-    pub bind: String,
-    pub grid_path: String,   
+    pub bind: String, 
     pub url_carga: String,
     pub url_incid: String,
     pub url_trafico: String,
@@ -104,7 +103,6 @@ impl Default for AppCfg {
     fn default() -> Self {
         Self {
             bind: "0.0.0.0:8080".into(),
-            grid_path: "data/hex_grid_madrid_300m.geojson".into(),
             url_carga: "https://datos.madrid.es/egobfiles/MANUAL/208072/carga_descarga_2025.csv".into(),
             url_incid: "https://informo.madrid.es/informo/tmadrid/incid_aytomadrid.xml".into(),
             url_trafico: "https://informo.madrid.es/informo/tmadrid/pm.xml".into(),

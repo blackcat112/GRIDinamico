@@ -77,19 +77,40 @@ fn cell_polygon_coords(c: CellIndex) -> Vec<[f64; 2]> {
 
 
 fn delay_from_parts(
-    carga01: f32, nivel01: f32, vel01: f32, occ01: f32,
-    incidencias: usize, blocked: bool, cfg: &DelayCfg, conf: f32,
+    carga01: f32,     // 0-1 normalizado
+    nivel01: f32,     // 0-1 (nivel de servicio, 1 = malo)
+    vel01: f32,       // velocidad actual / velocidad libre (0-1)
+    occ01: f32,       // ocupación 0-1
+    incidencias: usize,
+    blocked: bool,
+    cfg: &DelayCfg,
+    conf: f32,        // confianza (0-1)
 ) -> Option<f32> {
-    if blocked { return Some(999.0); }
+    if blocked { return Some(cfg.delay_max); }
+
+    // Inverso de velocidad respecto a la velocidad libre
     let velinv = 1.0 - vel01;
-    // incidencias -> penalización simple por conteo (capada)f
-    let mut pen = (incidencias as f32) * 0.20;
+
+    // Penalización por incidencias (capada)
+    let mut pen = (incidencias as f32) * 0.5;
     pen = pen.min(cfg.inc_cap);
 
-    let contrib = conf*(cfg.w_carga*carga01 + cfg.w_nivel*nivel01 + cfg.w_velinv*velinv + cfg.w_ocup*occ01);
+    // Cálculo de contribución (ponderación Google/TomTom-style)
+    // Idea: delay es combinación lineal ponderada de factores de congestión
+    let contrib = conf * (
+        cfg.w_carga * carga01 +
+        cfg.w_nivel * nivel01 +
+        cfg.w_velinv * velinv +
+        cfg.w_ocup * occ01
+    );
+
+    // Delay = relación sobre tiempo libre
+    // Se asegura un mínimo >1 para no dar delays negativos
     let d = 1.0 + contrib + pen;
+
     Some(clamp(d, cfg.delay_min, cfg.delay_max))
 }
+
 
 /// Indexa un par lat/lon en H3
 #[inline]

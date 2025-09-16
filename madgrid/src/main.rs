@@ -61,7 +61,6 @@ async fn main() -> Result<()> {
 fn app_cfg_from_env() -> AppCfg {
     let mut c = AppCfg::default();
     if let Ok(v) = env::var("BIND") { c.bind = v; }
-    if let Ok(v) = env::var("HEX_GRID_PATH") { c.grid_path = v; } 
     if let Ok(v) = env::var("URL_CARGA") { c.url_carga = v; }
     if let Ok(v) = env::var("URL_INCID") { c.url_incid = v; }
     if let Ok(v) = env::var("URL_TRAFICO") { c.url_trafico = v; }
