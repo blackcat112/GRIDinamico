@@ -60,11 +60,21 @@ fn cell_center_deg(c: CellIndex) -> (f64, f64) {
 }
 
 fn cell_polygon_coords(c: CellIndex) -> Vec<[f64; 2]> {
-    let verts: Vec<_> = c.boundary().to_vec(); 
-    verts.iter()
-        .map(|ll| [ll.lng().to_degrees(), ll.lat().to_degrees()])
-        .collect()
+    let verts = c.boundary();
+    let mut coords: Vec<[f64; 2]> = verts
+        .iter()
+        .map(|ll| [ll.lng(), ll.lat()]) // ya en grados
+        .collect();
+
+    if let Some(first) = coords.first().cloned() {
+        if coords.last() != Some(&first) {
+            coords.push(first);
+        }
+    }
+    coords
 }
+
+
 
 fn delay_from_parts(
     carga01: f32, nivel01: f32, vel01: f32, occ01: f32,

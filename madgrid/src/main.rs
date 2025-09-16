@@ -139,7 +139,7 @@ async fn recompute_all(data: &Arc<RwLock<DataState>>) {
     let out = h3grid::recompute_h3(&cargas, &incs, &traf, &cfg, base_res, refine, k_smooth, min_delay_export);
 
     let mut d = data.write().await;
-    d.hex_geojson_str = out.geojson;
+    d.hex_geojson = out.geojson;
     d.routing_cells = out.routing;
     d.snapshot_ts_utc = out.ts_utc;
 }

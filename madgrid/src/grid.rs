@@ -12,6 +12,7 @@
 //! Este modulo concentra la "logica de negocio" del proyecto
 //! donde se transforma la informacion en métricas utiles
 
+//EN ESTOS MOMENTOS FUERA DE USO , LA GUARDO EN CASO DE QUE H3 NO NOS CONVENGA.
 
 
 use anyhow::Result;

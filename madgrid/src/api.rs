@@ -1,12 +1,11 @@
 //! api.rs
-//! Rutas HTTP: /health, /kpis, /map/hex y /routing/cells (ligera para ruteo con H3).
+//! Rutas HTTP: /health, /kpis, /map/hex y /routing/cells (ligera para ruteo con H3)
 
-use axum::{extract::{Query, State}, response::IntoResponse, routing::get, Json, Router};
+use axum::{extract::{Query, State}, response::IntoResponse, routing::get, Json, Router, http::header};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use tower_http::{compression::CompressionLayer, services::ServeDir, cors::CorsLayer};
 use serde::Deserialize;
-
 use crate::types::{DataState, RoutingCell};
 
 #[derive(Clone)]
@@ -30,9 +29,11 @@ async fn kpis(State(st): State<ApiState>) -> impl IntoResponse {
 }
 
 async fn map_hex(State(st): State<ApiState>) -> impl IntoResponse {
-    let d = st.data.read().await;
-    let s = d.hex_geojson_str.clone();
-    ([("content-type","application/json")], s)
+    let body = {
+        let d = st.data.read().await;
+        d.hex_geojson.clone()
+    };
+    ([(header::CONTENT_TYPE, "application/geo+json")], body)
 }
 
 /// Query de /routing/cells

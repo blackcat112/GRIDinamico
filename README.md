@@ -57,3 +57,12 @@ cargo build --release
 # 3) Arranca en desarrollo
 cargo run
 # abre http://localhost:8080
+
+from h3 import h3
+
+cell_id = "89390ca36cbffff"
+centroid = h3.h3_to_geo(cell_id)         # (lat, lon)
+boundary = h3.h3_to_geo_boundary(cell_id) # [(lat1, lon1), ...] polygon
+res = h3.h3_get_resolution(cell_id)      # resolución (int)
+parent = h3.h3_to_parent(cell_id, res-1) # padre (id)
+is_pentagon = h3.h3_is_pentagon(cell_id) # bool

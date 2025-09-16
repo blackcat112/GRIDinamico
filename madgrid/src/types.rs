@@ -129,7 +129,7 @@ pub struct DataState {
     pub traf: Vec<SensorTr>,
     pub kpis: Kpis,
 
-    pub hex_geojson_str: String,
+    pub hex_geojson: String,
 
     pub routing_cells: Vec<RoutingCell>,
 
