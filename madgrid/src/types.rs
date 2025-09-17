@@ -117,7 +117,8 @@ impl Default for AppCfg {
 #[derive(Clone, Debug, Serialize)]
 pub struct RoutingCell {
     pub h3: String,  
-    pub delay: f32,  // 999.0 si bloqueado
+    pub delay: f32, 
+    pub coordinates: Vec<[f64; 2]>, 
 }
 
 #[derive(Clone, Debug, Default, Serialize)]

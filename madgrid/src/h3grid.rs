@@ -7,7 +7,7 @@ use chrono::{SecondsFormat, Utc};
 use geojson::GeoJson;
 use h3o::{CellIndex, Resolution, LatLng};
 use serde_json::json;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use crate::types::{DelayCfg, Incidencia, ParkingZone, RoutingCell, SensorTr};
 
@@ -72,6 +72,37 @@ fn cell_polygon_coords(c: CellIndex) -> Vec<[f64; 2]> {
         }
     }
     coords
+}
+
+/// ¿Están presentes *todas* las hijas a `r_base` bajo el padre `p`?
+#[allow(dead_code)]
+fn all_children_present(
+    p: CellIndex,
+    r_base: Resolution,
+    base: &HashMap<CellIndex, Metrics>,
+) -> bool {
+    for ch in p.children(r_base) {
+        if !base.contains_key(&ch) {
+            return false;
+        }
+    }
+    true
+}
+
+fn coverage_ratio(
+    p: CellIndex,
+    r_base: Resolution,
+    base: &HashMap<CellIndex, Metrics>,
+) -> f32 {
+    let mut have = 0usize;
+    let mut total = 0usize;
+    for ch in p.children(r_base) {
+        total += 1;
+        if base.contains_key(&ch) {
+            have += 1;
+        }
+    }
+    if total == 0 { 0.0 } else { have as f32 / total as f32 }
 }
 
 
@@ -189,6 +220,69 @@ pub fn aggregate_at_res(
     map
 }
 
+/// Compacta padres "fríos" (delay bajo y sin bloqueo) a `parent_res`
+/// y mantiene detalle en hotspots (o cuando faltan hijas).
+///
+/// - `base`: métricas a `base_res` (salida de `aggregate_at_res`)
+/// - `parent_map`: métricas agregadas a `parent_res` (salida de `downsample_to_parent`)
+/// - `delay_thr`: umbral; > thr = hotspot
+/// - `require_full_coverage`: si `true`, sólo compacta si están **todas** las hijas de `base_res`
+///
+/// Devuelve un mapa mixto (algunas celdas en `base_res`, otras en `parent_res`).
+pub fn selective_compact_by_delay(
+    base: &HashMap<CellIndex, Metrics>,
+    parent_map: &HashMap<CellIndex, Metrics>,
+    base_res: u8,
+    parent_res: u8,
+    delay_thr: f32,
+    min_coverage: f32, // 0..1 (ej: 0.7 → 5/7 hijas)
+) -> HashMap<CellIndex, Metrics> {
+    let r_base   = Resolution::try_from(base_res).expect("base_res inválida");
+    let _r_parent = Resolution::try_from(parent_res).expect("parent_res inválida");
+
+    let mut compactables = HashSet::new();
+    let mut hotspots     = HashSet::new();
+
+    for (&p, m) in parent_map {
+        if m.blocked || m.delay_prom > delay_thr {
+            hotspots.insert(p);
+        } else {
+            compactables.insert(p);
+        }
+    }
+
+    let mut out: HashMap<CellIndex, Metrics> = HashMap::new();
+
+    // Hotspots: mantener detalle
+    for p in &hotspots {
+        for ch in p.children(r_base) {
+            if let Some(m) = base.get(&ch) {
+                out.insert(ch, m.clone());
+            }
+        }
+    }
+
+    // Zonas frías: compactar si cobertura suficiente, si no dejar detalle
+    for p in &compactables {
+        let cov = coverage_ratio(*p, r_base, base);
+        if cov >= min_coverage {
+            if let Some(m) = parent_map.get(p) {
+                out.insert(*p, m.clone());
+            }
+        } else {
+            for ch in p.children(r_base) {
+                if let Some(m) = base.get(&ch) {
+                    out.insert(ch, m.clone());
+                }
+            }
+        }
+    }
+
+    out
+}
+
+
+
 // -------------------------------------------------------
 // 2) Downsample a parent (hex “grandes”)
 // -------------------------------------------------------
@@ -229,6 +323,7 @@ pub fn downsample_to_parent(
 // -------------------------------------------------------
 // 3) Refinado de hotspots (AMR)
 // -------------------------------------------------------
+#[allow(dead_code)]
 pub fn refine_hotspots(
     parent: &HashMap<CellIndex, Metrics>,
     base_child: &HashMap<CellIndex, Metrics>,
@@ -264,22 +359,30 @@ pub fn smooth_with_kring(
 pub fn export_routing_cells(
     metrics: &HashMap<CellIndex, Metrics>,
     _min_delay: f32,
-    bbox: Option<(f64,f64,f64,f64)>, // (minLon,minLat,maxLon,maxLat)
+    bbox: Option<(f64,f64,f64,f64)>,
 ) -> Vec<RoutingCell> {
     let mut v = Vec::with_capacity(metrics.len());
     for (c, m) in metrics {
         let d = m.delay_prom;
+
         if let Some((minx, miny, maxx, maxy)) = bbox {
             let (lon, lat) = cell_center_deg(*c);
             if lon < minx || lon > maxx || lat < miny || lat > maxy {
                 continue;
             }
         }
-        
-        v.push(RoutingCell { h3: c.to_string(), delay: d });
+
+        let exterior = cell_polygon_coords(*c);
+
+        v.push(RoutingCell {
+            h3: c.to_string(),
+            delay: (d * 100.0).round() / 100.0, // redondeo como en tu json!
+            coordinates: exterior,
+        });
     }
     v
 }
+
 
 // -------------------------------------------------------
 // 6) GeoJSON para UI (pintamos solo delay > 1+eps)
@@ -305,6 +408,7 @@ pub fn to_geojson(
             "properties": {
                 "h3": c.to_string(),
                 "delay_factor": ((d*100.0).round()/100.0),
+                "geometry": { "type":"Polygon", "coordinates": [exterior] },
                 "blocked": (d==999.0),
                 "style": {
                     "fill": true, "fill-color": col, "fill-opacity": 0.75,
@@ -350,17 +454,18 @@ pub fn recompute_h3(
     let mut metrics_to_show = base.clone();
 
 
+    // --- AMR por compacción selectiva ---
     if let Some((parent_res, thr)) = refine {
         if let Ok(parent_map) = downsample_to_parent(&base, parent_res) {
-            let ids = refine_hotspots(&parent_map, &base, base_res, thr);
-            let mut mixed = HashMap::new();
-            for id in ids {
-                if let Some(m) = base.get(&id) {
-                    mixed.insert(id, m.clone());
-                } else if let Some(m) = parent_map.get(&id) {
-                    mixed.insert(id, m.clone());
-                }
-            }
+            // compactamos zonas frías (<= thr), mantenemos detalle en hotspots (> thr o blocked)
+            let mixed = selective_compact_by_delay(
+                &base,
+                &parent_map,
+                base_res,
+                parent_res,
+                thr,
+                0.5,
+            );
             metrics_to_show = mixed;
         }
     }
