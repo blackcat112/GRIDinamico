@@ -1,12 +1,21 @@
 //! api.rs
 //! Rutas HTTP: /health, /kpis, /map/hex y /routing/cells (ligera para ruteo con H3)
 
-use axum::{extract::{Query, State}, response::IntoResponse, routing::get, Json, Router, http::header};
+use axum::{extract::{Query, State}, response::IntoResponse, routing::get, Json, Router};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use tower_http::{compression::CompressionLayer, services::ServeDir, cors::CorsLayer};
 use serde::Deserialize;
 use crate::types::{DataState, RoutingCell};
+use crate::types::Kpis;
+use serde_json::Value;
+
+
+
+#[derive(Deserialize)]
+struct CityQ {
+    city: Option<String>,
+}
 
 #[derive(Clone)]
 pub struct ApiState { pub data: Arc<RwLock<DataState>> }
@@ -23,18 +32,40 @@ pub fn router(state: ApiState) -> Router {
         .layer(CompressionLayer::new())
 }
 
-async fn kpis(State(st): State<ApiState>) -> impl IntoResponse {
+async fn kpis(State(st): State<ApiState>, Query(q): Query<CityQ>) -> impl IntoResponse {
+    if let Some(c) = q.city.as_deref() {
+        if c.eq_ignore_ascii_case("zgz") {
+            // crea un Kpis vacío
+            return Json(Kpis { carga: 0, inc: 0 });
+        }
+    }
     let d = st.data.read().await;
     Json(d.kpis.clone())
 }
 
-async fn map_hex(State(st): State<ApiState>) -> impl IntoResponse {
+
+
+async fn map_hex(State(st): State<ApiState>, Query(q): Query<CityQ>) -> impl IntoResponse {
+    // Zaragoza: SIEMPRE usar H3 (ignoramos grid)
+    if q.city.as_deref().map(|c| c.eq_ignore_ascii_case("zgz")).unwrap_or(false) {
+        let gj_str = crate::h3grid::geojson_zaragoza_mesh(); // <- tu nueva función H3
+        let v: Value = serde_json::from_str(&gj_str).unwrap_or(serde_json::json!({
+            "type":"FeatureCollection","features":[]
+        }));
+        return Json(v);
+    }
+
+    // Madrid (lo que ya tenías)
     let body = {
         let d = st.data.read().await;
         d.hex_geojson.clone()
     };
-    ([(header::CONTENT_TYPE, "application/geo+json")], body)
+    let v: Value = serde_json::from_str(&body).unwrap_or(serde_json::json!({
+        "type":"FeatureCollection","features":[]
+    }));
+    Json(v)
 }
+
 
 /// Query de /routing/cells
 #[derive(Debug, Deserialize)]

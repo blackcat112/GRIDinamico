@@ -9,6 +9,7 @@ mod incid;
 mod trafico;
 mod api;
 mod h3grid;
+//mod s2grid;  
 
 
 use anyhow::Result;

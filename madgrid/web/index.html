@@ -92,11 +92,11 @@
             </div>
           </div>
           <div class="card">
-            <span class="tag soon">Próximamente</span>
+            <span class="tag soon">In progress</span> 
             <h3>ZaragozaClientes</h3>
             <p>Centro ~3km, periferia ~8km.</p>
             <div style="margin-top:auto; display:flex; gap:8px;">
-              <button class="btn" id="btn-zaragoza" disabled>Aún no disponible</button>
+              <button class="btn primary" id="btn-zaragoza">Abrir Zaragoza</button>
             </div>
           </div>
           <div class="card">
@@ -251,6 +251,20 @@
   document.getElementById('btn-logrono').addEventListener('click', () => {
     toast('LogroñoMesh estará disponible en breve.');
   });
+    document.getElementById('btn-zaragoza').addEventListener('click', () => {
+    const url = new URL(location.href);
+    url.searchParams.set('mesh','zaragoza');
+    history.pushState({}, '', url);
+    initMap('zaragoza'); // ya apunta a /kpis?city=zgz y /map/hex?city=zgz
+  });
+
+  // Permitir carga directa con ?mesh=zaragoza
+  window.addEventListener('DOMContentLoaded', () => {
+    const mesh = qsm();
+    if (mesh === 'madrid') initMap('madrid');
+    if (mesh === 'zaragoza') initMap('zaragoza');
+  });
+
 
   // Si viene directo con ?mesh=madrid, abrir mapa; en otro caso mostrar selector.
   window.addEventListener('DOMContentLoaded', () => {
