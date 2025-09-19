@@ -3,79 +3,167 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Madrid Grid Dinámico</title>
+  <title>Selector de Mallado · RustMalladoH3</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    html, body { height: 100%; margin: 0; }
-    #map { height: calc(100vh - 140px); }
+    :root{
+      --bg:#0b1220; --card:#0f172a; --card2:#111827; --muted:#94a3b8; --pri:#60a5fa; --accent:#34d399;
+    }
+    *{box-sizing:border-box}
+    html, body { height:100%; margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background: radial-gradient(1000px 600px at 20% -10%, #1e293b 0%, transparent 60%), radial-gradient(800px 600px at 100% 0%, #0b5ab0 0%, transparent 40%), var(--bg); color:#e5e7eb; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout */
+    .shell { display:flex; flex-direction:column; min-height:100vh; }
+    header { padding:22px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .logo { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px; }
+    .logo .dot { width:10px; height:10px; border-radius:999px; background:linear-gradient(45deg,var(--pri),#22d3ee); box-shadow:0 0 14px rgba(96,165,250,.6); }
+    .subtitle { color: var(--muted); font-size:14px; }
+
+    /* Chooser */
+    .chooser { flex:1; display:grid; place-items:center; padding:32px 16px; }
+    .chooser-card { width:min(980px, 96vw); background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(148,163,184,.25); border-radius:18px; padding:22px; box-shadow:0 30px 80px rgba(0,0,0,.35); }
+    .chooser-h { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; }
+    .chooser-h .title { font-size:22px; font-weight:800; }
+    .chooser-h .hint { font-size:14px; color:var(--muted); }
+
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; margin-top:12px; }
+    .card { background:linear-gradient(180deg, rgba(17,24,39,.8), rgba(2,6,23,.8)); border:1px solid rgba(148,163,184,.25); border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:10px; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+    .card:hover { transform: translateY(-2px); box-shadow:0 12px 26px rgba(0,0,0,.35); border-color: rgba(96,165,250,.6); }
+    .tag { font-size:12px; font-weight:700; padding:4px 8px; border-radius:999px; width:max-content; }
+    .tag.ok { background: rgba(52,211,153,.16); color:#bbf7d0; border:1px solid rgba(52,211,153,.5); }
+    .tag.soon { background: rgba(148,163,184,.12); color:#cbd5e1; border:1px dashed rgba(148,163,184,.45); }
+    .card h3 { margin:0; font-size:18px; }
+    .card p { margin:0; color:var(--muted); font-size:14px; }
+    .btn { appearance:none; border:1px solid rgba(148,163,184,.35); background:linear-gradient(180deg, #1f2937, #0b1220); color:#e5e7eb; font-weight:700; padding:10px 12px; border-radius:12px; cursor:pointer; transition: filter .15s ease, transform .06s ease; }
+    .btn:active { transform: translateY(1px); }
+    .btn.primary { border-color:rgba(96,165,250,.7); box-shadow:0 0 0 4px rgba(96,165,250,.15) inset; }
+    .btn[disabled] { opacity:.5; cursor:not-allowed; }
+
+    /* App (map) */
+    #app { display:none; }
+    .kpis { display:flex; gap:16px; padding:12px; }
+    .kpis .box { flex:1; background:#0b1220; border:1px solid rgba(148,163,184,.3); border-radius:14px; padding:12px; text-align:center; }
+    .kpis .v { font-size:28px; font-weight:800; }
+    .kpis .l { color:#9ca3af; }
+
+    #map { height: calc(100vh - 144px); border-radius:16px; overflow:hidden; margin:0 12px 12px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+
     .legend {
       position:absolute; right:14px; bottom:14px;
-      background:rgba(255,255,255,.9); padding:10px 14px;
-      border:1px solid #d1d5db; border-radius:12px;
+      background:rgba(12,18,32,.95); padding:10px 14px;
+      border:1px solid rgba(148,163,184,.35); border-radius:12px; color:#e5e7eb;
     }
-    .kpis { display:flex; gap:16px; padding:12px; }
-    .kpis .box { flex:1; background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; text-align:center; }
-    .kpis .v { font-size:28px; font-weight:800; }
-    .kpis .l { color:#6b7280; }
+
     .hud {
-      position: fixed;
-      left: 14px;
-      bottom: 14px;
-      z-index: 1000;
-      background: rgba(255,255,255,.95);
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      padding: 10px 14px;
-      min-width: 220px;
-      box-shadow: 0 6px 16px rgba(0,0,0,.08);
-      font-size: 13px;
-      color: #374151;
+      position: fixed; left: 14px; bottom: 14px; z-index: 1000;
+      background: rgba(12,18,32,.95);
+      border: 1px solid rgba(148,163,184,.35);
+      border-radius: 12px; padding: 10px 14px; min-width: 220px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.3); font-size: 13px; color: #e5e7eb;
     }
     .hud .h { font-weight: 700; margin-bottom: 6px; }
     .hud .row { display:flex; justify-content:space-between; gap:12px; margin:4px 0; }
-    .hud .key { color:#6b7280; }
-    .hud .val { font-weight:600; }
+    .hud .key { color:#cbd5e1; }
+    .hud .val { font-weight:700; }
+
+    /* Toast */
+    .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:#0b1220; color:#e5e7eb; border:1px solid rgba(148,163,184,.35); padding:10px 14px; border-radius:12px; display:none; }
   </style>
 </head>
 <body>
-  <div class="kpis">
-    <div class="box"><div class="v" id="k_carga">–</div><div class="l">Zonas carga/descarga</div></div>
-    <div class="box"><div class="v" id="k_inc">–</div><div class="l">Incidencias</div></div>
-  </div>
+  <div class="shell">
+    <header>
+      <div class="logo"><span class="dot"></span> RustMalladoH3 - CAPILLAR IT</div>
+    </header>
 
-  <div id="map"></div>
+    <!-- Selector de mallado -->
+    <main class="chooser" id="chooser">
+      <div class="chooser-card">
+        <div class="chooser-h">
+        </div>
+        <div class="grid">
+          <div class="card">
+            <span class="tag ok">Disponible</span>
+            <h3>MadridTrafico</h3>
+            <p>Malla H3 activa en la visualización actual.</p>
+            <div style="margin-top:auto; display:flex; gap:8px;">
+              <button class="btn primary" id="btn-madrid">Abrir Madrid</button>
+            </div>
+          </div>
+          <div class="card">
+            <span class="tag soon">Próximamente</span>
+            <h3>ZaragozaClientes</h3>
+            <p>Centro ~3km, periferia ~8km.</p>
+            <div style="margin-top:auto; display:flex; gap:8px;">
+              <button class="btn" id="btn-zaragoza" disabled>Aún no disponible</button>
+            </div>
+          </div>
+          <div class="card">
+            <span class="tag soon">Próximamente</span>
+            <h3>LogroñoMesh</h3>
+            <p>Malla H3 prevista.</p>
+            <div style="margin-top:auto; display:flex; gap:8px;">
+              <button class="btn" id="btn-logrono" disabled>Aún no disponible</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
 
-  <div class="legend">
-    <div style="font-weight:600;margin-bottom:6px">Nivel de impacto</div>
-    <div style="height:12px;border-radius:999px; background:linear-gradient(90deg,#e9f7ef,#d4f2e3,#bfeacc,#a9e3b6,#fff3b0,#ffe08a,#ffc266,#ff9f58,#ff7a55,#f5544f,#d73a49)"></div>
-    <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280"><span>Bajo</span><span>Alto</span></div>
-  </div>
+    <!-- App (mapa) -->
+    <div id="app">
+      <div class="kpis">
+        <div class="box"><div class="v" id="k_carga">–</div><div class="l">Zonas carga/descarga</div></div>
+        <div class="box"><div class="v" id="k_inc">–</div><div class="l">Incidencias</div></div>
+      </div>
+      <div id="map"></div>
 
-  <!-- HUD de detalle -->
-  <div id="hud" class="hud" style="display:none">
-    <div class="h">Detalle hexágono</div>
-    <div class="row"><span class="key">Delay factor</span><span class="val" id="hud_df">–</span></div>
-    <div class="row"><span class="key">Incidencias</span><span class="val" id="hud_inc">–</span></div>
-    <div class="row"><span class="key">Zonas carga cerca</span><span class="val" id="hud_cz">–</span></div>
-    <div class="row"><span class="key">H3 id</span><span class="val" id="hud_h3">–</span></div>
-    <div class="row"><span class="key">Res H3</span><span class="val" id="hud_res">–</span></div>
+      <div class="legend">
+        <div style="font-weight:600;margin-bottom:6px">Nivel de impacto</div>
+        <div style="height:12px;border-radius:999px; background:linear-gradient(90deg,#e9f7ef,#d4f2e3,#bfeacc,#a9e3cc,#fff3b0,#ffe08a,#ffc266,#ff9f58,#ff7a55,#f5544f,#d73a49)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:#9ca3af"><span>Bajo</span><span>Alto</span></div>
+      </div>
+
+      <!-- HUD de detalle -->
+      <div id="hud" class="hud" style="display:none">
+        <div class="h">Detalle hexágono</div>
+        <div class="row"><span class="key">Delay factor</span><span class="val" id="hud_df">–</span></div>
+        <div class="row"><span class="key">Incidencias</span><span class="val" id="hud_inc">–</span></div>
+        <div class="row"><span class="key">Zonas carga cerca</span><span class="val" id="hud_cz">–</span></div>
+        <div class="row"><span class="key">H3 id</span><span class="val" id="hud_h3">–</span></div>
+        <div class="row"><span class="key">Res H3</span><span class="val" id="hud_res">–</span></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js"></script>
   <script>
-  const map = L.map('map').setView([40.4168, -3.7038], 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+  // --- util ---
+  const toast = (msg, ms=2200) => { const el = document.getElementById('toast'); el.textContent = msg; el.style.display='block'; setTimeout(()=> el.style.display='none', ms); };
+  const qsm = () => (new URLSearchParams(location.search).get('mesh')||'').toLowerCase();
+
+  // Endpoints por ciudad (extensible). Para Madrid (única disponible) se mantienen las rutas existentes.
+  const ENDPOINTS = {
+    madrid:   { center:[40.4168,-3.7038], kpis:'/kpis',           map:'/map/hex' },
+    zaragoza: { center:[41.6497,-0.8891], kpis:'/kpis?city=zgz',  map:'/map/hex?city=zgz' },
+    logroño:  { center:[42.4667,-2.45],   kpis:'/kpis?city=lg',   map:'/map/hex?city=lg' }
+  };
+
+  let map, layerHex, selectedLayer=null, REFRESH_TIMER=null, CURRENT=null;
 
   function styleFromProperties(f) {
     const s = (f && f.properties && f.properties.style) ? f.properties.style : {};
     return {
-      color:       s.color ?? s.stroke ?? s['stroke'] ?? '#e0e0e0',
+      color:       s.color ?? s.stroke ?? s['stroke'] ?? '#7dd3fc',
       weight:      s.weight ?? s['stroke-width'] ?? 1,
       opacity:     s.opacity ?? s['stroke-opacity'] ?? 1,
       fill:        (typeof s.fill === 'boolean') ? s.fill : true,
-      fillColor:   s.fillColor ?? s['fill-color'] ?? s.color ?? '#e0e0e0',
-      fillOpacity: s.fillOpacity ?? s['fill-opacity'] ?? 0.75,
+      fillColor:   s.fillColor ?? s['fill-color'] ?? s.color ?? '#38bdf8',
+      fillOpacity: s.fillOpacity ?? s['fill-opacity'] ?? 0.55,
     };
   }
 
@@ -84,69 +172,92 @@
     document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
     document.getElementById('hud_cz').textContent = (p.carga_near_count ?? '–');
     document.getElementById('hud_h3').textContent = (p.h3 ?? '–');
-
     if (p.h3) {
-      try {
-        document.getElementById('hud_res').textContent = h3.getResolution(p.h3);
-      } catch {
-        document.getElementById('hud_res').textContent = '–';
-      }
+      try { document.getElementById('hud_res').textContent = h3.getResolution(p.h3); }
+      catch { document.getElementById('hud_res').textContent = '–'; }
     }
     document.getElementById('hud').style.display = 'block';
   }
 
-  function hideHUD() {}
+  function initMap(city='madrid') {
+    if (map) return; // ya inicializado
+    CURRENT = ENDPOINTS[city] || ENDPOINTS.madrid;
 
-  let selectedLayer = null;
+    // UI
+    document.getElementById('chooser').style.display='none';
+    document.getElementById('app').style.display='block';
 
-  let layerHex = L.geoJSON({type:'FeatureCollection',features:[]}, {
-    style: styleFromProperties,
-    onEachFeature: (feature, layer) => {
-      const p = feature.properties || {};
-      layer.on('mouseover', () => {
-        showHUD(p);
-        const base = styleFromProperties(feature);
-        layer.setStyle({weight: (base.weight || 1) + 1});
-      });
-      layer.on('mouseout', () => {
-        if (selectedLayer !== layer) {
+    // Mapa
+    map = L.map('map').setView(CURRENT.center, 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+
+    layerHex = L.geoJSON({type:'FeatureCollection',features:[]}, {
+      style: styleFromProperties,
+      onEachFeature: (feature, layer) => {
+        const p = feature.properties || {};
+        layer.on('mouseover', () => {
+          showHUD(p);
           const base = styleFromProperties(feature);
-          layer.setStyle({weight: base.weight || 1});
-        }
-      });
-      layer.on('click', () => {
-        if (selectedLayer && selectedLayer !== layer) {
-          const prev = selectedLayer.feature;
-          selectedLayer.setStyle({weight: styleFromProperties(prev).weight || 1});
-        }
-        selectedLayer = layer;
-        showHUD(p);
-        const base = styleFromProperties(feature);
-        layer.setStyle({weight: (base.weight || 1) + 2});
-      });
-    }
-  }).addTo(map);
+          layer.setStyle({weight: (base.weight || 1) + 1});
+        });
+        layer.on('mouseout', () => {
+          if (selectedLayer !== layer) {
+            const base = styleFromProperties(feature);
+            layer.setStyle({weight: base.weight || 1});
+          }
+        });
+        layer.on('click', () => {
+          if (selectedLayer && selectedLayer !== layer) {
+            const prev = selectedLayer.feature;
+            selectedLayer.setStyle({weight: styleFromProperties(prev).weight || 1});
+          }
+          selectedLayer = layer;
+          showHUD(p);
+          const base = styleFromProperties(feature);
+          layer.setStyle({weight: (base.weight || 1) + 2});
+        });
+      }
+    }).addTo(map);
 
-  async function refresh() {
-    try {
-      const [kres, mres] = await Promise.all([
-        fetch('/kpis'),
-        fetch('/map/hex')
-      ]);
-      const k = await kres.json();
-      document.getElementById('k_carga').textContent = k.carga ?? 0;
-      document.getElementById('k_inc').textContent = k.inc ?? 0;
+    // Refresco
+    const refresh = async () => {
+      try {
+        const [kres, mres] = await Promise.all([
+          fetch(CURRENT.kpis),
+          fetch(CURRENT.map)
+        ]);
+        const k = await kres.json();
+        document.getElementById('k_carga').textContent = k.carga ?? 0;
+        document.getElementById('k_inc').textContent = k.inc ?? 0;
 
-      const gj = await mres.json();
-      layerHex.clearLayers();
-      layerHex.addData(gj);
-    } catch (e) {
-      console.error(e);
-    }
+        const gj = await mres.json();
+        layerHex.clearLayers();
+        layerHex.addData(gj);
+      } catch (e) { console.error(e); }
+    };
+
+    refresh();
+    REFRESH_TIMER = setInterval(refresh, 15000);
   }
 
-  refresh();
-  setInterval(refresh, 15000);
+  // --- wiring ---
+  document.getElementById('btn-madrid').addEventListener('click', () => {
+    const url = new URL(location.href); url.searchParams.set('mesh','madrid'); history.pushState({}, '', url);
+    initMap('madrid');
+  });
+  document.getElementById('btn-zaragoza').addEventListener('click', () => {
+    toast('ZaragozaMesh estará disponible en breve.');
+  });
+  document.getElementById('btn-logrono').addEventListener('click', () => {
+    toast('LogroñoMesh estará disponible en breve.');
+  });
+
+  // Si viene directo con ?mesh=madrid, abrir mapa; en otro caso mostrar selector.
+  window.addEventListener('DOMContentLoaded', () => {
+    const mesh = qsm();
+    if (mesh === 'madrid') initMap('madrid');
+    // (cuando Zaragoza/Logroño existan, también podremos permitirlos)
+  });
   </script>
 </body>
 </html>
