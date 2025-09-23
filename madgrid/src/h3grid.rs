@@ -493,14 +493,14 @@ pub fn recompute_h3(
     RecomputeOut { routing, geojson, ts_utc: ts }
 }
 pub fn geojson_zaragoza_mesh() -> String {
-    // Punto de referencia: Plaza del Pilar aprox.
+    // Punto de referencia: Centro de logroño
     let lat_c = 41.65606_f64;
     let lon_c = -0.87734_f64;
     let center = LatLng::new(lat_c, lon_c).unwrap();
 
     // resoluciones
-    let r5 = Resolution::try_from(6u8).unwrap(); // ~8 km
-    let r6 = Resolution::try_from(10u8).unwrap(); // ~3 km
+    let r5 = Resolution::try_from(6u8).unwrap(); // 
+    let r6 = Resolution::try_from(8u8).unwrap(); //
 
     // padre r5 que contiene el centro
     let c5_center: CellIndex = center.to_cell(r5);
@@ -595,9 +595,180 @@ pub fn geojson_zaragoza_mesh() -> String {
 
     // estilos
     let inner_style = json!({
-        "fill": true, "fill-color": "#06b6d4", "fill-opacity": 0.55,
-        "stroke": "#22d3ee", "stroke-width": 1.2, "stroke-opacity": 0.9
+        "fill": true, "fill-color": "#3b82f6", // azul intenso
+        "fill-opacity": 0.55,
+        "stroke": "#000000",                   // borde negro
+        "stroke-width": 1.6,
+        "stroke-opacity": 1.0
     });
+    
+    let outer_style = json!({
+        "fill": true, "fill-color": "#8b5cf6", "fill-opacity": 0.45,
+        "stroke": "#a78bfa", "stroke-width": 1.0, "stroke-opacity": 0.85
+    });
+
+    // debug
+    let mut dbg_parents = Vec::new();
+    for p in &expand_parents {
+        let (lon, lat) = cell_center_deg(*p);
+        let d = haversine_km(lat, lon, lat_c, lon_c);
+        dbg_parents.push(format!("{} (d={:.2}km)", p, d));
+    }
+
+    // geojson
+    let mut features = Vec::new();
+
+    // periferia r5
+    for c in outer_r5.drain(..) {
+        let exterior = cell_polygon_coords(c);
+        features.push(json!({
+            "type":"Feature",
+            "geometry": { "type":"Polygon", "coordinates":[exterior] },
+            "properties": {
+                "h3": c.to_string(),
+                "zona": "periphery_r5",
+                "delay_factor": 1.0,
+                "style": outer_style
+            }
+        }));
+    }
+
+    // centro r6 (hijas de los 3 padres seleccionados)
+    for c in inner_r6.drain(..) {
+        let exterior = cell_polygon_coords(c);
+        features.push(json!({
+            "type":"Feature",
+            "geometry": { "type":"Polygon", "coordinates":[exterior] },
+            "properties": {
+                "h3": c.to_string(),
+                "zona": "center_r6",
+                "delay_factor": 1.0,
+                "style": inner_style
+            }
+        }));
+    }
+
+    let gj = json!({
+        "type":"FeatureCollection",
+        "name":"zgz_mesh_center_r5_vertex_triplet_to_r6",
+        "crs": { "type":"name","properties":{"name":"EPSG:4326"} },
+        "features": features
+    });
+    GeoJson::from_json_value(gj).unwrap().to_string()
+}
+
+
+// MESH PARA LOGROÑO 
+pub fn geojson_logrono_mesh() -> String {
+    // Punto de referencia: Plaza del Pilar aprox.
+    let lat_c = 42.4663_f64;
+    let lon_c = -2.4487_f64;
+    let center = LatLng::new(lat_c, lon_c).unwrap();
+
+    // resoluciones
+    let r5 = Resolution::try_from(6u8).unwrap(); // ~8 km
+    let r6 = Resolution::try_from(9u8).unwrap(); // ~3 km
+
+    // padre r5 que contiene el centro
+    let c5_center: CellIndex = center.to_cell(r5);
+
+    // extensión r5 alrededor (solo para pintar periferia)
+    let k_outer: u32 = 8;
+    let mut r5_disk = std::collections::HashSet::new();
+    for k in 0..=k_outer {
+        for c in c5_center.grid_disk::<Vec<CellIndex>>(k) {
+            r5_disk.insert(c);
+        }
+    }
+
+    // --- elegimos los 2 vecinos r5 que COMPARTEN el vértice más cercano al punto ---
+    // 1) vértice de c5_center más cercano a (lat_c, lon_c)
+    let mut best_lon = 0.0f64;
+    let mut best_lat = 0.0f64;
+    let mut best_d   = f64::MAX;
+    let verts = c5_center.boundary();
+    for ll in verts.iter() {
+        let lon = ll.lng(); // en grados
+        let lat = ll.lat();
+        let d = haversine_km(lat, lon, lat_c, lon_c);
+        if d < best_d {
+            best_d = d;
+            best_lon = lon;
+            best_lat = lat;
+        }
+    }
+
+    // 2) vecinos ring=1 (6 vecinos del r5 central)
+    let ring1: Vec<CellIndex> = c5_center
+        .grid_disk::<Vec<CellIndex>>(1)
+        .into_iter()
+        .filter(|c| *c != c5_center)
+        .collect();
+
+    // 3) busca los DOS vecinos que comparten ese vértice (coincidencia por coordenada con tolerancia)
+    let eps = 1e-9_f64;
+    let mut neigh_at_vertex: Vec<CellIndex> = Vec::new();
+    for n in &ring1 {
+        let vb = n.boundary();
+        let shares = vb.iter().any(|ll| (ll.lng() - best_lon).abs() < eps && (ll.lat() - best_lat).abs() < eps);
+        if shares {
+            neigh_at_vertex.push(*n);
+        }
+    }
+
+    // fallback por si algo raro: si no se encuentran 2, cogemos los 2 más cercanos por centro
+    if neigh_at_vertex.len() < 2 {
+        let mut ring1_sorted = ring1.clone();
+        ring1_sorted.sort_by(|&a, &b| {
+            let (lon_a, lat_a) = cell_center_deg(a);
+            let (lon_b, lat_b) = cell_center_deg(b);
+            let da = haversine_km(lat_a, lon_a, lat_c, lon_c);
+            let db = haversine_km(lat_b, lon_b, lat_c, lon_c);
+            da.partial_cmp(&db).unwrap_or(std::cmp::Ordering::Equal)
+        });
+        neigh_at_vertex = ring1_sorted.into_iter().take(2).collect();
+    } else if neigh_at_vertex.len() > 2 {
+        // en teoría no debería pasar; si pasa, ordena por distancia al punto y quédate con 2
+        neigh_at_vertex.sort_by(|&a, &b| {
+            let (lon_a, lat_a) = cell_center_deg(a);
+            let (lon_b, lat_b) = cell_center_deg(b);
+            let da = haversine_km(lat_a, lon_a, lat_c, lon_c);
+            let db = haversine_km(lat_b, lon_b, lat_c, lon_c);
+            da.partial_cmp(&db).unwrap_or(std::cmp::Ordering::Equal)
+        });
+        neigh_at_vertex.truncate(2);
+    }
+
+    // padres a expandir a r6: central + 2 vecinos que tocan el vértice más cercano
+    let mut expand_parents: std::collections::HashSet<CellIndex> = std::collections::HashSet::new();
+    expand_parents.insert(c5_center);
+    for n in neigh_at_vertex.iter() {
+        expand_parents.insert(*n);
+    }
+
+    // periferia r5 = todo el disco menos los 3 padres que expandimos
+    let mut outer_r5: Vec<CellIndex> = r5_disk
+        .into_iter()
+        .filter(|c| !expand_parents.contains(c))
+        .collect();
+
+    // hijas r6 de los 3 padres seleccionados
+    let mut inner_r6: Vec<CellIndex> = Vec::new();
+    for p in &expand_parents {
+        for ch in p.children(r6) {
+            inner_r6.push(ch);
+        }
+    }
+
+    // estilos
+    let inner_style = json!({
+        "fill": true, "fill-color": "#3b82f6", // azul intenso
+        "fill-opacity": 0.55,
+        "stroke": "#000000",                   // borde negro
+        "stroke-width": 1.6,
+        "stroke-opacity": 1.0
+    });
+    
     let outer_style = json!({
         "fill": true, "fill-color": "#8b5cf6", "fill-opacity": 0.45,
         "stroke": "#a78bfa", "stroke-width": 1.0, "stroke-opacity": 0.85

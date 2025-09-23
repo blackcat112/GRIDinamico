@@ -38,6 +38,10 @@ async fn kpis(State(st): State<ApiState>, Query(q): Query<CityQ>) -> impl IntoRe
             // crea un Kpis vacío
             return Json(Kpis { carga: 0, inc: 0 });
         }
+        if c.eq_ignore_ascii_case("lg") {
+            // crea un Kpis vacío
+            return Json(Kpis { carga: 0, inc: 0 });
+        }
     }
     let d = st.data.read().await;
     Json(d.kpis.clone())
@@ -54,6 +58,15 @@ async fn map_hex(State(st): State<ApiState>, Query(q): Query<CityQ>) -> impl Int
         }));
         return Json(v);
     }
+
+    if q.city.as_deref().map(|c| c.eq_ignore_ascii_case("lg")).unwrap_or(false) {
+        let gj_str = crate::h3grid::geojson_logrono_mesh(); // <- tu nueva función H3
+        let v: Value = serde_json::from_str(&gj_str).unwrap_or(serde_json::json!({
+            "type":"FeatureCollection","features":[]
+        }));
+        return Json(v);
+    }
+
 
     // Madrid (lo que ya tenías)
     let body = {

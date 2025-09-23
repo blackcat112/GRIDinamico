@@ -88,11 +88,11 @@
             <h3>MadridTrafico</h3>
             <p>Malla H3 activa en la visualización actual.</p>
             <div style="margin-top:auto; display:flex; gap:8px;">
-              <button class="btn primary" id="btn-madrid">Abrir Madrid</button>
+              <button class="btn primary" id="btn-madrid">Abrir</button>
             </div>
           </div>
           <div class="card">
-            <span class="tag soon">In progress</span> 
+            <span class="tag ok">Disponible</span> 
             <h3>ZaragozaClientes</h3>
             <p>Centro ~3km, periferia ~8km.</p>
             <div style="margin-top:auto; display:flex; gap:8px;">
@@ -100,11 +100,11 @@
             </div>
           </div>
           <div class="card">
-            <span class="tag soon">Próximamente</span>
+            <span class="tag ok">Disponible</span>
             <h3>LogroñoMesh</h3>
             <p>Malla H3 prevista.</p>
             <div style="margin-top:auto; display:flex; gap:8px;">
-              <button class="btn" id="btn-logrono" disabled>Aún no disponible</button>
+              <button class="btn" id="btn-logrono">Abrir</button>
             </div>
           </div>
         </div>
@@ -150,7 +150,7 @@
   const ENDPOINTS = {
     madrid:   { center:[40.4168,-3.7038], kpis:'/kpis',           map:'/map/hex' },
     zaragoza: { center:[41.6497,-0.8891], kpis:'/kpis?city=zgz',  map:'/map/hex?city=zgz' },
-    logroño:  { center:[42.4667,-2.45],   kpis:'/kpis?city=lg',   map:'/map/hex?city=lg' }
+    logrono:  { center:[42.4667,-2.45],   kpis:'/kpis?city=lg',   map:'/map/hex?city=lg' }
   };
 
   let map, layerHex, selectedLayer=null, REFRESH_TIMER=null, CURRENT=null;
@@ -249,7 +249,10 @@
     toast('ZaragozaMesh estará disponible en breve.');
   });
   document.getElementById('btn-logrono').addEventListener('click', () => {
-    toast('LogroñoMesh estará disponible en breve.');
+   const url = new URL(location.href);
+   url.searchParams.set('mesh','logrono');  // O 'logrono' si quieres sin tilde
+   history.pushState({}, '', url);
+  initMap('logrono'); // o 'logrono' según la clave en ENDPOINTS
   });
     document.getElementById('btn-zaragoza').addEventListener('click', () => {
     const url = new URL(location.href);
@@ -263,6 +266,7 @@
     const mesh = qsm();
     if (mesh === 'madrid') initMap('madrid');
     if (mesh === 'zaragoza') initMap('zaragoza');
+    if (mesh === 'logrono') initMap('logrono');
   });
 
 
