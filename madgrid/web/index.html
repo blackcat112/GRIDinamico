@@ -7,67 +7,50 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root{
-      --bg:#0b1220; --card:#0f172a; --card2:#111827; --muted:#94a3b8; --pri:#60a5fa; --accent:#34d399;
+      --bg:#0b1220; --muted:#94a3b8; --pri:#60a5fa; --accent:#34d399;
     }
     *{box-sizing:border-box}
-    html, body { height:100%; margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background: radial-gradient(1000px 600px at 20% -10%, #1e293b 0%, transparent 60%), radial-gradient(800px 600px at 100% 0%, #0b5ab0 0%, transparent 40%), var(--bg); color:#e5e7eb; }
+    html, body { height:100%; margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; background: #0b1220; color:#e5e7eb; }
     a { color: inherit; text-decoration: none; }
+    button { cursor:pointer }
 
-    /* Layout */
     .shell { display:flex; flex-direction:column; min-height:100vh; }
-    header { padding:22px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    header { padding:14px 18px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(148,163,184,.25); }
     .logo { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px; }
     .logo .dot { width:10px; height:10px; border-radius:999px; background:linear-gradient(45deg,var(--pri),#22d3ee); box-shadow:0 0 14px rgba(96,165,250,.6); }
-    .subtitle { color: var(--muted); font-size:14px; }
+    .spacer{flex:1}
+    .back{display:none; border:1px solid rgba(148,163,184,.35); background:transparent; color:#e5e7eb; padding:8px 10px; border-radius:10px;}
 
-    /* Chooser */
-    .chooser { flex:1; display:grid; place-items:center; padding:32px 16px; }
+    /* Choosers */
+    .chooser { flex:1; display:grid; place-items:center; padding:24px 16px; }
     .chooser-card { width:min(980px, 96vw); background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(148,163,184,.25); border-radius:18px; padding:22px; box-shadow:0 30px 80px rgba(0,0,0,.35); }
-    .chooser-h { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; }
-    .chooser-h .title { font-size:22px; font-weight:800; }
-    .chooser-h .hint { font-size:14px; color:var(--muted); }
-
     .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; margin-top:12px; }
     .card { background:linear-gradient(180deg, rgba(17,24,39,.8), rgba(2,6,23,.8)); border:1px solid rgba(148,163,184,.25); border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:10px; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
     .card:hover { transform: translateY(-2px); box-shadow:0 12px 26px rgba(0,0,0,.35); border-color: rgba(96,165,250,.6); }
     .tag { font-size:12px; font-weight:700; padding:4px 8px; border-radius:999px; width:max-content; }
     .tag.ok { background: rgba(52,211,153,.16); color:#bbf7d0; border:1px solid rgba(52,211,153,.5); }
-    .tag.soon { background: rgba(148,163,184,.12); color:#cbd5e1; border:1px dashed rgba(148,163,184,.45); }
-    .card h3 { margin:0; font-size:18px; }
-    .card p { margin:0; color:var(--muted); font-size:14px; }
-    .btn { appearance:none; border:1px solid rgba(148,163,184,.35); background:linear-gradient(180deg, #1f2937, #0b1220); color:#e5e7eb; font-weight:700; padding:10px 12px; border-radius:12px; cursor:pointer; transition: filter .15s ease, transform .06s ease; }
-    .btn:active { transform: translateY(1px); }
-    .btn.primary { border-color:rgba(96,165,250,.7); box-shadow:0 0 0 4px rgba(96,165,250,.15) inset; }
-    .btn[disabled] { opacity:.5; cursor:not-allowed; }
+    .btn { appearance:none; border:1px solid rgba(148,163,184,.35); background:linear-gradient(180deg, #1f2937, #0b1220); color:#e5e7eb; font-weight:700; padding:10px 12px; border-radius:12px; }
+    .btn.primary { border-color:rgba(96,165,250,.6) }
 
-    /* App (map) */
-    #app { display:none; }
-    .kpis { display:flex; gap:16px; padding:12px; }
+    /* App/mapa */
+    #app{display:none}
+    .kpis { display:flex; gap:16px; padding:12px 18px; }
     .kpis .box { flex:1; background:#0b1220; border:1px solid rgba(148,163,184,.3); border-radius:14px; padding:12px; text-align:center; }
     .kpis .v { font-size:28px; font-weight:800; }
     .kpis .l { color:#9ca3af; }
 
-    #map { height: calc(100vh - 144px); border-radius:16px; overflow:hidden; margin:0 12px 12px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+    #map { height: calc(100vh - 180px); width: 100%; }
 
-    .legend {
-      position:absolute; right:14px; bottom:14px;
-      background:rgba(12,18,32,.95); padding:10px 14px;
-      border:1px solid rgba(148,163,184,.35); border-radius:12px; color:#e5e7eb;
-    }
+    .legend { position: fixed; left: 14px; bottom: 18px; z-index:1000; background: rgba(12,18,32,.95); border:1px solid rgba(148,163,184,.35); border-radius:12px; padding: 12px 14px; min-width: 240px; }
+    .hud { position: fixed; right: 14px; bottom: 18px; z-index:1000; background: rgba(12,18,32,.95); border:1px solid rgba(148,163,184,.35); border-radius:12px; padding: 12px 14px; min-width: 240px; display:none; }
+    .hud .h { font-weight: 800; margin-bottom: 8px; }
+    .hud .row { display:flex; align-items:center; gap:8px; margin:6px 0; }
 
-    .hud {
-      position: fixed; left: 14px; bottom: 14px; z-index: 1000;
-      background: rgba(12,18,32,.95);
-      border: 1px solid rgba(148,163,184,.35);
-      border-radius: 12px; padding: 10px 14px; min-width: 220px;
-      box-shadow: 0 6px 16px rgba(0,0,0,.3); font-size: 13px; color: #e5e7eb;
-    }
-    .hud .h { font-weight: 700; margin-bottom: 6px; }
-    .hud .row { display:flex; justify-content:space-between; gap:12px; margin:4px 0; }
-    .hud .key { color:#cbd5e1; }
-    .hud .val { font-weight:700; }
+    .selpanel { position: fixed; right: 14px; top: 88px; z-index: 1000; background: rgba(12,18,32,.95); border: 1px solid rgba(148,163,184,.35); border-radius: 12px; padding: 12px 14px; min-width: 260px; box-shadow: 0 6px 16px rgba(0,0,0,.3); font-size: 13px; color: #e5e7eb; display:none; }
+    .selpanel .h { font-weight: 800; margin-bottom: 8px; }
+    .selpanel .row { display:flex; align-items:center; gap:8px; margin:6px 0; }
+    .input { background:#0b1220; border:1px solid rgba(148,163,184,.35); border-radius:10px; color:#e5e7eb; padding:8px 10px; }
 
-    /* Toast */
     .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:#0b1220; color:#e5e7eb; border:1px solid rgba(148,163,184,.35); padding:10px 14px; border-radius:12px; display:none; }
   </style>
 </head>
@@ -75,26 +58,26 @@
   <div class="shell">
     <header>
       <div class="logo"><span class="dot"></span> RustMalladoH3 - CAPILLAR IT</div>
+      <div class="spacer"></div>
+      <button id="btn-back" class="back">← Volver al selector</button>
     </header>
 
-    <!-- Selector de mallado -->
+    <!-- Choosers -->
     <main class="chooser" id="chooser">
       <div class="chooser-card">
-        <div class="chooser-h">
-        </div>
         <div class="grid">
           <div class="card">
             <span class="tag ok">Disponible</span>
-            <h3>MadridTrafico</h3>
-            <p>Malla H3 activa en la visualización actual.</p>
+            <h3>Madrid (normal)</h3>
+            <p>Fuente original /map/hex.</p>
             <div style="margin-top:auto; display:flex; gap:8px;">
-              <button class="btn primary" id="btn-madrid">Abrir</button>
+              <button class="btn primary" id="btn-madrid">Abrir Madrid</button>
             </div>
           </div>
           <div class="card">
             <span class="tag ok">Disponible</span> 
             <h3>ZaragozaClientes</h3>
-            <p>Centro ~3km, periferia ~8km.</p>
+            <p>Centro ~3km (seleccionables), periferia ~8km.</p>
             <div style="margin-top:auto; display:flex; gap:8px;">
               <button class="btn primary" id="btn-zaragoza">Abrir Zaragoza</button>
             </div>
@@ -102,21 +85,40 @@
           <div class="card">
             <span class="tag ok">Disponible</span>
             <h3>LogroñoMesh</h3>
-            <p>Malla H3 prevista.</p>
+            <p>Malla H3 de Logroño.</p>
             <div style="margin-top:auto; display:flex; gap:8px;">
-              <button class="btn" id="btn-logrono">Abrir</button>
+              <button class="btn" id="btn-logrono">Abrir Logroño</button>
             </div>
           </div>
+          <!-- NUEVOS -->
+          <div class="card">
+            <span class="tag ok">Disponible</span>
+            <h3>Madrid (madC)</h3>
+            <p>Malla H3 madC. Permite guardar zonas (hex pequeños).</p>
+            <div style="margin-top:auto; display:flex; gap:8px;">
+              <button class="btn" id="btn-madc">Abrir madC</button>
+            </div>
+          </div>
+          <div class="card">
+            <span class="tag ok">Disponible</span>
+            <h3>MadridCombinado</h3>
+            <p>Madrid normal + zonas guardadas (madC) translúcidas.</p>
+            <div style="margin-top:auto; display:flex; gap:8px;">
+              <button class="btn" id="btn-madridcombi">Abrir combinado</button>
+            </div>
+          </div>
+          <!-- /NUEVOS -->
         </div>
       </div>
     </main>
 
-    <!-- App (mapa) -->
+    <!-- App/mapa -->
     <div id="app">
       <div class="kpis">
         <div class="box"><div class="v" id="k_carga">–</div><div class="l">Zonas carga/descarga</div></div>
         <div class="box"><div class="v" id="k_inc">–</div><div class="l">Incidencias</div></div>
       </div>
+
       <div id="map"></div>
 
       <div class="legend">
@@ -125,14 +127,23 @@
         <div style="display:flex;justify-content:space-between;font-size:12px;color:#9ca3af"><span>Bajo</span><span>Alto</span></div>
       </div>
 
-      <!-- HUD de detalle -->
-      <div id="hud" class="hud" style="display:none">
+      <div id="hud" class="hud">
         <div class="h">Detalle hexágono</div>
-        <div class="row"><span class="key">Delay factor</span><span class="val" id="hud_df">–</span></div>
-        <div class="row"><span class="key">Incidencias</span><span class="val" id="hud_inc">–</span></div>
-        <div class="row"><span class="key">Zonas carga cerca</span><span class="val" id="hud_cz">–</span></div>
-        <div class="row"><span class="key">H3 id</span><span class="val" id="hud_h3">–</span></div>
-        <div class="row"><span class="key">Res H3</span><span class="val" id="hud_res">–</span></div>
+        <div class="row"><span>Delay</span><strong id="hud_df">–</strong></div>
+        <div class="row"><span>Incidencias</span><strong id="hud_inc">–</strong></div>
+        <div class="row"><span>H3</span><strong id="hud_h3">–</strong></div>
+        <div class="row"><span>Res</span><strong id="hud_res">–</strong></div>
+      </div>
+
+      <div id="selpanel" class="selpanel">
+        <div class="h" id="selTitle">Agrupar hexágonos</div>
+        <div class="row"><span>Seleccionados:</span> <strong id="selcount">0</strong></div>
+        <div class="row">
+          <input id="groupNumber" class="input" type="number" min="0" placeholder="Nº grupo" style="width:110px"/>
+          <button id="btnCreateGroup" class="btn">Guardar zonas</button>
+          <button id="btnClearSel" class="btn">Limpiar</button>
+        </div>
+        <div id="sendStatus" style="color:#9ca3af"></div>
       </div>
     </div>
 
@@ -142,140 +153,278 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js"></script>
   <script>
-  // --- util ---
-  const toast = (msg, ms=2200) => { const el = document.getElementById('toast'); el.textContent = msg; el.style.display='block'; setTimeout(()=> el.style.display='none', ms); };
-  const qsm = () => (new URLSearchParams(location.search).get('mesh')||'').toLowerCase();
-
-  // Endpoints por ciudad (extensible). Para Madrid (única disponible) se mantienen las rutas existentes.
-  const ENDPOINTS = {
-    madrid:   { center:[40.4168,-3.7038], kpis:'/kpis',           map:'/map/hex' },
-    zaragoza: { center:[41.6497,-0.8891], kpis:'/kpis?city=zgz',  map:'/map/hex?city=zgz' },
-    logrono:  { center:[42.4667,-2.45],   kpis:'/kpis?city=lg',   map:'/map/hex?city=lg' }
-  };
-
-  let map, layerHex, selectedLayer=null, REFRESH_TIMER=null, CURRENT=null;
-
-  function styleFromProperties(f) {
-    const s = (f && f.properties && f.properties.style) ? f.properties.style : {};
-    return {
-      color:       s.color ?? s.stroke ?? s['stroke'] ?? '#7dd3fc',
-      weight:      s.weight ?? s['stroke-width'] ?? 1,
-      opacity:     s.opacity ?? s['stroke-opacity'] ?? 1,
-      fill:        (typeof s.fill === 'boolean') ? s.fill : true,
-      fillColor:   s.fillColor ?? s['fill-color'] ?? s.color ?? '#38bdf8',
-      fillOpacity: s.fillOpacity ?? s['fill-opacity'] ?? 0.55,
+    // Endpoints
+    const ENDPOINTS = {
+      madrid:        { key:'madrid',        center:[40.4168,-3.7038], kpis:'/kpis',           map:'/map/hex' },
+      madc:          { key:'madc',          center:[40.4168,-3.7038], kpis:'/kpis?city=madC', map:'/map/hex?city=madC', groups:'/groups?city=madC' },
+      madridcombi:   { key:'madridcombi',   center:[40.4168,-3.7038], kpis:'/kpis',           map:'/map/hex?city=MadridCombinado' },
+      zaragoza:      { key:'zaragoza',      center:[41.6497,-0.8891], kpis:'/kpis?city=zgz',  map:'/map/hex?city=zgz', groups:'/groups?city=zgz' },
+      logrono:       { key:'logrono',       center:[42.4667,-2.45],   kpis:'/kpis?city=lg',   map:'/map/hex?city=lg' }
     };
-  }
 
-  function showHUD(p) {
-    document.getElementById('hud_df').textContent = (p.delay_factor ?? '–');
-    document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
-    document.getElementById('hud_cz').textContent = (p.carga_near_count ?? '–');
-    document.getElementById('hud_h3').textContent = (p.h3 ?? '–');
-    if (p.h3) {
-      try { document.getElementById('hud_res').textContent = h3.getResolution(p.h3); }
-      catch { document.getElementById('hud_res').textContent = '–'; }
+    // Estado
+    let map, layerBase, layerZonas, REFRESH_TIMER=null, CURRENT=null;
+    const SELECTED = new Map();
+    const visibleById = new Map();
+
+    // Helpers UI
+    const toast = (msg, ms=2200) => { const el = document.getElementById('toast'); el.textContent = msg; el.style.display='block'; setTimeout(()=> el.style.display='none', ms); };
+    const qsm = () => (new URLSearchParams(location.search).get('mesh')||'').toLowerCase();
+    const setMeshParam = (val)=>{ const url = new URL(location.href); url.searchParams.set('mesh', val); history.pushState({},'',url); };
+    const showChooser = ()=>{ document.getElementById('chooser').style.display='grid'; document.getElementById('app').style.display='none'; document.getElementById('btn-back').style.display='none'; };
+    const showApp = ()=>{ document.getElementById('chooser').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('btn-back').style.display='inline-block'; };
+
+    // ------- Geometría/H3 helpers (por si falta properties.h3) -------
+    function centroidOf(feature){
+      const g = feature.geometry || {};
+      if (!g || !g.coordinates) return null;
+      const ring = (g.type === 'Polygon')
+        ? g.coordinates[0]
+        : (g.type === 'MultiPolygon' ? g.coordinates[0][0] : null);
+      if (!Array.isArray(ring) || ring.length === 0) return null;
+      let sx = 0, sy = 0, n = 0;
+      for (const pt of ring){ if (Array.isArray(pt) && pt.length >= 2){ sx += pt[1]; sy += pt[0]; n++; } }
+      if (!n) return null;
+      return { lat: sx/n, lng: sy/n };
     }
-    document.getElementById('hud').style.display = 'block';
-  }
-
-  function initMap(city='madrid') {
-    if (map) return; // ya inicializado
-    CURRENT = ENDPOINTS[city] || ENDPOINTS.madrid;
-
-    // UI
-    document.getElementById('chooser').style.display='none';
-    document.getElementById('app').style.display='block';
-
-    // Mapa
-    map = L.map('map').setView(CURRENT.center, 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
-
-    layerHex = L.geoJSON({type:'FeatureCollection',features:[]}, {
-      style: styleFromProperties,
-      onEachFeature: (feature, layer) => {
-        const p = feature.properties || {};
-        layer.on('mouseover', () => {
-          showHUD(p);
-          const base = styleFromProperties(feature);
-          layer.setStyle({weight: (base.weight || 1) + 1});
-        });
-        layer.on('mouseout', () => {
-          if (selectedLayer !== layer) {
-            const base = styleFromProperties(feature);
-            layer.setStyle({weight: base.weight || 1});
-          }
-        });
-        layer.on('click', () => {
-          if (selectedLayer && selectedLayer !== layer) {
-            const prev = selectedLayer.feature;
-            selectedLayer.setStyle({weight: styleFromProperties(prev).weight || 1});
-          }
-          selectedLayer = layer;
-          showHUD(p);
-          const base = styleFromProperties(feature);
-          layer.setStyle({weight: (base.weight || 1) + 2});
-        });
+    function guessRes(p){
+      if (typeof p?.res === 'number') return p.res;
+      if (typeof p?.area_km2 === 'number'){
+        const a = p.area_km2;
+        if (a <= 0.11) return 9;
+        if (a <= 0.74) return 8;
+        if (a <= 5.16) return 7;
       }
-    }).addTo(map);
+      return 9;
+    }
+    function getFeatureH3(feature){
+      const p = feature?.properties || {};
+      if (p.h3) return p.h3;
+      const c = centroidOf(feature);
+      if (!c) return null;
+      const res = guessRes(p);
+      try { return h3.latLngToCell(c.lat, c.lng, res); } catch { return null; }
+    }
 
-    // Refresco
-    const refresh = async () => {
+    // ---- Estilos ----
+    // Madrid normal / Logroño: respetan properties.style
+    function baseStyleFromProperties(f){
+      const s = (f && f.properties && f.properties.style) ? f.properties.style : {};
+      return {
+        color:       s.color ?? s.stroke ?? '#7dd3fc',
+        weight:      s.weight ?? 1,
+        opacity:     s.opacity ?? 1,
+        fill:        (typeof s.fill === 'boolean') ? s.fill : true,
+        fillColor:   s.fillColor ?? s['fill-color'] ?? s.color ?? '#38bdf8',
+        fillOpacity: s.fillOpacity ?? s['fill-opacity'] ?? 0.55,
+      };
+    }
+    // ZGZ/madC: bordes negros finos (como antes), con un leve relleno para captar clics
+    function selectionBaseStyle(){
+      return { color:'#000000', weight:1.2, fill:true, fillColor:'#ffffff', fillOpacity:0.06 };
+    }
+    // Estilo cuando está seleccionado
+    function selectedStyle(){
+      return { color:'#000000', weight:3, fill:true, fillColor:'#ffd166', fillOpacity:0.35 };
+    }
+    // Zonas de madC en Combinado (encima)
+    function overlayZoneStyle(){ return { color:'#34d399', weight:2, fill:true, fillColor:'#34d399', fillOpacity:0.20 }; }
+
+    function styleFromFeature(f){
+      if (f?.properties?.layer === 'zonas') return overlayZoneStyle();
+      if (CURRENT?.key === 'zaragoza' || CURRENT?.key === 'madc') return selectionBaseStyle();
+      return baseStyleFromProperties(f);
+    }
+
+    function showHUD(p){
+      document.getElementById('hud').style.display = 'block';
+      document.getElementById('hud_df').textContent = (p.delay_factor ?? '–');
+      document.getElementById('hud_inc').textContent = (p.incidencias ?? '–');
+      document.getElementById('hud_h3').textContent = (p.h3 ?? '–');
+      try { document.getElementById('hud_res').textContent = h3.getResolution(p.h3); } catch { document.getElementById('hud_res').textContent = '–'; }
+    }
+
+    function applySelectionStyle(layer, selected){
+      if (!layer || !layer.setStyle) return;
+      layer.setStyle(selected ? selectedStyle() : styleFromFeature(layer.feature));
+    }
+
+    function pauseRefresh(){ if (REFRESH_TIMER){ clearInterval(REFRESH_TIMER); REFRESH_TIMER=null; } }
+    function resumeRefresh(){ if (!REFRESH_TIMER){ REFRESH_TIMER=setInterval(refresh, 15000); } }
+
+    async function refresh(){
       try {
-        const [kres, mres] = await Promise.all([
-          fetch(CURRENT.kpis),
-          fetch(CURRENT.map)
-        ]);
-        const k = await kres.json();
-        document.getElementById('k_carga').textContent = k.carga ?? 0;
-        document.getElementById('k_inc').textContent = k.inc ?? 0;
+        const [kres, mres] = await Promise.all([ fetch(CURRENT.kpis), fetch(CURRENT.map) ]);
+        const k = await kres.json().catch(()=>({}));
+        document.getElementById('k_carga').textContent = k.carga ?? '–';
+        document.getElementById('k_inc').textContent = k.inc ?? '–';
 
         const gj = await mres.json();
-        layerHex.clearLayers();
-        layerHex.addData(gj);
-      } catch (e) { console.error(e); }
-    };
 
-    refresh();
-    REFRESH_TIMER = setInterval(refresh, 15000);
-  }
+        if (CURRENT.key === 'madridcombi'){
+          const feats = Array.isArray(gj.features) ? gj.features : [];
+          const baseFeatures  = feats.filter(f => !(f?.properties && f.properties.layer === 'zonas'));
+          const zonasFeatures = feats.filter(f =>  (f?.properties && f.properties.layer === 'zonas'));
+          layerBase.clearLayers(); layerZonas.clearLayers();
+          layerBase.addData({ type:'FeatureCollection', features: baseFeatures });
+          layerZonas.addData({ type:'FeatureCollection', features: zonasFeatures });
 
-  // --- wiring ---
-  document.getElementById('btn-madrid').addEventListener('click', () => {
-    const url = new URL(location.href); url.searchParams.set('mesh','madrid'); history.pushState({}, '', url);
-    initMap('madrid');
-  });
-  document.getElementById('btn-zaragoza').addEventListener('click', () => {
-    toast('ZaragozaMesh estará disponible en breve.');
-  });
-  document.getElementById('btn-logrono').addEventListener('click', () => {
-   const url = new URL(location.href);
-   url.searchParams.set('mesh','logrono');  // O 'logrono' si quieres sin tilde
-   history.pushState({}, '', url);
-  initMap('logrono'); // o 'logrono' según la clave en ENDPOINTS
-  });
-    document.getElementById('btn-zaragoza').addEventListener('click', () => {
-    const url = new URL(location.href);
-    url.searchParams.set('mesh','zaragoza');
-    history.pushState({}, '', url);
-    initMap('zaragoza'); // ya apunta a /kpis?city=zgz y /map/hex?city=zgz
-  });
+        } else {
+          visibleById.clear();
+          layerBase.clearLayers();
+          layerBase.addData(gj);
 
-  // Permitir carga directa con ?mesh=zaragoza
-  window.addEventListener('DOMContentLoaded', () => {
-    const mesh = qsm();
-    if (mesh === 'madrid') initMap('madrid');
-    if (mesh === 'zaragoza') initMap('zaragoza');
-    if (mesh === 'logrono') initMap('logrono');
-  });
+          // Reaplica selección si la hay
+          if (SELECTED.size){
+            layerBase.eachLayer(l => {
+              const id = l?.feature?.properties?.h3 || getFeatureH3(l.feature);
+              if (!id) return;
+              visibleById.set(id, l);
+              if (SELECTED.has(id)) applySelectionStyle(l, true);
+            });
+          }
+        }
+      } catch(e){ console.error(e); }
+    }
 
+    function openCity(key){
+      CURRENT = ENDPOINTS[key] || ENDPOINTS.madrid;
+      setMeshParam(key);
+      showApp();
 
-  // Si viene directo con ?mesh=madrid, abrir mapa; en otro caso mostrar selector.
-  window.addEventListener('DOMContentLoaded', () => {
-    const mesh = qsm();
-    if (mesh === 'madrid') initMap('madrid');
-    // (cuando Zaragoza/Logroño existan, también podremos permitirlos)
-  });
+      const sel = (CURRENT.key === 'zaragoza' || CURRENT.key === 'madc');
+      document.getElementById('selpanel').style.display = sel ? 'block':'none';
+      document.getElementById('selTitle').textContent = sel ? `Agrupar hexágonos (${CURRENT.key==='zaragoza'?'ZGZ':'MAD-C'})` : 'Agrupar hexágonos';
+
+      if (!map){
+        map = L.map('map');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+      }
+      map.setView(CURRENT.center, 12);
+
+      // Reset selección
+      SELECTED.forEach(({layer})=> applySelectionStyle(layer, false));
+      SELECTED.clear();
+      document.getElementById('selcount').textContent = '0';
+      document.getElementById('sendStatus').textContent = '';
+
+      if (layerBase){ map.removeLayer(layerBase); layerBase=null; }
+      if (layerZonas){ map.removeLayer(layerZonas); layerZonas=null; }
+
+      // Capa base
+      layerBase = L.geoJSON({ type:'FeatureCollection', features:[] }, {
+        style: styleFromFeature,
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties || {};
+          const id = p.h3 || getFeatureH3(feature);
+          if (id) visibleById.set(id, layer);
+
+          if (p.h3){ layer.bindTooltip(`H3: ${p.h3}${p.grupo!==undefined?` · grupo ${p.grupo}`:''}`, {sticky:true}); }
+          layer.on('mouseover', () => { showHUD(p); });
+
+          // Click de selección solo en ZGZ y madC
+          if (CURRENT.key === 'zaragoza' || CURRENT.key === 'madc'){
+            layer.on('click', () => {
+              const hid = p.h3 || getFeatureH3(feature);
+              if (!hid) return;
+              if (SELECTED.has(hid)){
+                SELECTED.delete(hid);
+                applySelectionStyle(layer, false);
+              } else {
+                SELECTED.set(hid, { layer, feature });
+                applySelectionStyle(layer, true);
+                pauseRefresh();
+              }
+              document.getElementById('selcount').textContent = String(SELECTED.size);
+            });
+          }
+        }
+      }).addTo(map);
+
+      // Capa overlay para combinado
+      if (CURRENT.key === 'madridcombi'){
+        layerZonas = L.geoJSON({ type:'FeatureCollection', features:[] }, {
+          style: overlayZoneStyle,
+          onEachFeature: (feature, layer) => {
+            const p = feature.properties || {};
+            const id = p.h3 || getFeatureH3(feature);
+            if (id){ layer.bindTooltip(`Zona MAD-C · H3: ${id}${p.grupo!==undefined?` · grupo ${p.grupo}`:''}`, {sticky:true}); }
+          }
+        }).addTo(map);
+      }
+
+      // Carga inicial y refresco
+      refresh();
+      if (REFRESH_TIMER) clearInterval(REFRESH_TIMER);
+      REFRESH_TIMER = setInterval(refresh, 15000);
+    }
+
+    async function sendGroup(){
+      const status = document.getElementById('sendStatus');
+      if (!SELECTED.size){ toast('No hay hexágonos seleccionados.'); return; }
+      if (!(CURRENT && CURRENT.groups)){ toast('Esta vista no soporta guardado de zonas.'); return; }
+
+      const groupVal = Number(document.getElementById('groupNumber').value);
+      if (!Number.isFinite(groupVal)) { toast('Introduce un número de grupo.'); return; }
+
+      const features = Array.from(SELECTED.values()).map(({feature}) => {
+        const id = feature.properties.h3 || getFeatureH3(feature);
+        return { type:'Feature', properties: { h3: id, grupo: groupVal } };
+      });
+      const payload = { type:'FeatureCollection', features };
+
+      try{
+        status.textContent = 'Enviando…';
+        const res = await fetch(CURRENT.groups, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('HTTP '+res.status);
+        await res.json().catch(()=>({}));
+        status.textContent = 'Zonas guardadas ('+features.length+' hex).';
+        toast('Grupo '+groupVal+' guardado');
+        SELECTED.forEach(({layer})=> applySelectionStyle(layer, false));
+        SELECTED.clear();
+        document.getElementById('selcount').textContent = '0';
+        document.getElementById('groupNumber').value='';
+        resumeRefresh(); refresh();
+      }catch(e){ console.error(e); status.textContent='Error al guardar'; toast('Error al guardar'); }
+    }
+
+    function clearSelection(){
+      SELECTED.forEach(({layer})=> applySelectionStyle(layer, false));
+      SELECTED.clear();
+      document.getElementById('selcount').textContent = '0';
+      document.getElementById('sendStatus').textContent = '';
+      resumeRefresh();
+    }
+
+    // Choosers
+    document.getElementById('btn-madrid').addEventListener('click', ()=> openCity('madrid'));
+    document.getElementById('btn-zaragoza').addEventListener('click', ()=> openCity('zaragoza'));
+    document.getElementById('btn-logrono').addEventListener('click', ()=> openCity('logrono'));
+    document.getElementById('btn-madc').addEventListener('click', ()=> openCity('madc'));
+    document.getElementById('btn-madridcombi').addEventListener('click', ()=> openCity('madridcombi'));
+
+    // Panel selección
+    document.getElementById('btnCreateGroup').addEventListener('click', sendGroup);
+    document.getElementById('btnClearSel').addEventListener('click', clearSelection);
+
+    // Volver al selector
+    document.getElementById('btn-back').addEventListener('click', ()=>{
+      if (REFRESH_TIMER){ clearInterval(REFRESH_TIMER); REFRESH_TIMER=null; }
+      if (layerBase){ try{ layerBase.remove(); }catch{} layerBase=null; }
+      if (layerZonas){ try{ layerZonas.remove(); }catch{} layerZonas=null; }
+      visibleById.clear();
+      SELECTED.clear();
+      const url = new URL(location.href); url.searchParams.delete('mesh'); history.pushState({},'',url);
+      showChooser();
+    });
+
+    // Arranque: choosers salvo que venga ?mesh=
+    window.addEventListener('DOMContentLoaded', ()=>{
+      const mesh = qsm();
+      if (mesh) openCity(mesh); else showChooser();
+    });
   </script>
 </body>
 </html>

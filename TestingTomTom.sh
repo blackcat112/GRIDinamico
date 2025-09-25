@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ▼ Pega tu API key aquí (o export API_KEY=... antes de ejecutar)
+
 API_KEY="${API_KEY:-iHC6Mqg1RZQ7LNpJFm23dV4QKNRi28wl}"
 
 # ▼ Coordenadas de Logroño (centro). Puedes sobreescribir con: LAT=... LON=... ./script.sh
