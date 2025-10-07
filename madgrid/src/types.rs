@@ -136,3 +136,6 @@ pub struct DataState {
 
     pub snapshot_ts_utc: String,
 }
+
+#[derive(Deserialize)]
+pub struct PedidoPoints(pub Vec<[f64; 2]>);

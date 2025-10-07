@@ -11,6 +11,11 @@ use std::collections::{HashMap, HashSet};
 
 use crate::types::{DelayCfg, Incidencia, ParkingZone, RoutingCell, SensorTr};
 
+use axum::Json;
+use serde_json::Value;
+use crate::types::PedidoPoints;
+
+
 
 
 // -------------------------------
@@ -57,18 +62,11 @@ fn haversine_km(lat1: f64, lon1: f64, lat2: f64, lon2: f64) -> f64 {
 
 #[inline]
 fn cell_center_deg(c: CellIndex) -> (f64, f64) {
-    let verts: Vec<_> = c.boundary().to_vec();
-    let mut sx = 0.0;
-    let mut sy = 0.0;
-
-    for ll in &verts {
-        sx += ll.lng().to_degrees();
-        sy += ll.lat().to_degrees();
-    }
-
-    let n = verts.len().max(1) as f64;
-    (sx / n, sy / n) // (lon, lat)
+    let ll: h3o::LatLng = c.into();  // CellIndex -> LatLng
+    (ll.lng(), ll.lat())             // ¡ya en grados!
 }
+
+
 
 fn cell_polygon_coords(c: CellIndex) -> Vec<[f64; 2]> {
     let verts = c.boundary();
@@ -660,171 +658,106 @@ pub fn geojson_zaragoza_mesh() -> String {
 
 // MESH PARA LOGROÑO 
 pub fn geojson_logrono_mesh() -> String {
-    // Punto de referencia: Plaza del Pilar aprox.
-    let lat_c = 42.4663_f64;
-    let lon_c = -2.4487_f64;
+    let lat_c = 42.4627_f64;
+    let lon_c = -2.44498_f64;
     let center = LatLng::new(lat_c, lon_c).unwrap();
 
-    // resoluciones
-    let r5 = Resolution::try_from(6u8).unwrap(); // ~8 km
-    let r6 = Resolution::try_from(9u8).unwrap(); // ~3 km
+    let res6 = Resolution::try_from(6u8).unwrap(); 
+    let res7 = Resolution::try_from(7u8).unwrap(); 
+    let res8 = Resolution::try_from(8u8).unwrap(); 
+    let res9 = Resolution::try_from(9u8).unwrap(); 
 
-    // padre r5 que contiene el centro
-    let c5_center: CellIndex = center.to_cell(r5);
+    let c6_center: CellIndex = center.to_cell(res6);
 
-    // extensión r5 alrededor (solo para pintar periferia)
-    let k_outer: u32 = 8;
-    let mut r5_disk = std::collections::HashSet::new();
-    for k in 0..=k_outer {
-        for c in c5_center.grid_disk::<Vec<CellIndex>>(k) {
-            r5_disk.insert(c);
+    let hotspot_coords = vec![
+        (42.4627, -2.4449), // Ayuntamiento
+        (42.4590, -2.4455), // Estación
+        (42.4700, -2.4360), // Puente
+    ];
+
+    let mut cells_res6 = Vec::new();
+    let mut cells_res7 = Vec::new();
+    let mut cells_res8 = Vec::new();
+    let mut cells_res9 = Vec::new();
+
+    // Periferia res6
+    for c in c6_center.grid_disk::<Vec<CellIndex>>(3) {
+        if c != c6_center {
+            cells_res6.push(c);
         }
     }
 
-    // --- elegimos los 2 vecinos r5 que COMPARTEN el vértice más cercano al punto ---
-    // 1) vértice de c5_center más cercano a (lat_c, lon_c)
-    let mut best_lon = 0.0f64;
-    let mut best_lat = 0.0f64;
-    let mut best_d   = f64::MAX;
-    let verts = c5_center.boundary();
-    for ll in verts.iter() {
-        let lon = ll.lng(); // en grados
-        let lat = ll.lat();
-        let d = haversine_km(lat, lon, lat_c, lon_c);
-        if d < best_d {
-            best_d = d;
-            best_lon = lon;
-            best_lat = lat;
-        }
-    }
+    // Subdivisión
+    for c7 in c6_center.children(res7) {
+        let (lon7, lat7) = cell_center_deg(c7);
+        let d7 = haversine_km(lat7, lon7, lat_c, lon_c);
+        println!("res7 cell {} center=({:.5},{:.5}) dist_centro={:.2} km", c7, lat7, lon7, d7);
 
-    // 2) vecinos ring=1 (6 vecinos del r5 central)
-    let ring1: Vec<CellIndex> = c5_center
-        .grid_disk::<Vec<CellIndex>>(1)
-        .into_iter()
-        .filter(|c| *c != c5_center)
-        .collect();
+        let in_urban = d7 < 2.5;
+        if in_urban {
+            for c8 in c7.children(res8) {
+                let (lon8, lat8) = cell_center_deg(c8);
 
-    // 3) busca los DOS vecinos que comparten ese vértice (coincidencia por coordenada con tolerancia)
-    let eps = 1e-9_f64;
-    let mut neigh_at_vertex: Vec<CellIndex> = Vec::new();
-    for n in &ring1 {
-        let vb = n.boundary();
-        let shares = vb.iter().any(|ll| (ll.lng() - best_lon).abs() < eps && (ll.lat() - best_lat).abs() < eps);
-        if shares {
-            neigh_at_vertex.push(*n);
-        }
-    }
+                let d_hot = hotspot_coords.iter()
+                    .map(|(h_lat, h_lon)| haversine_km(lat8, lon8, *h_lat, *h_lon))
+                    .fold(f64::MAX, f64::min);
 
-    // fallback por si algo raro: si no se encuentran 2, cogemos los 2 más cercanos por centro
-    if neigh_at_vertex.len() < 2 {
-        let mut ring1_sorted = ring1.clone();
-        ring1_sorted.sort_by(|&a, &b| {
-            let (lon_a, lat_a) = cell_center_deg(a);
-            let (lon_b, lat_b) = cell_center_deg(b);
-            let da = haversine_km(lat_a, lon_a, lat_c, lon_c);
-            let db = haversine_km(lat_b, lon_b, lat_c, lon_c);
-            da.partial_cmp(&db).unwrap_or(std::cmp::Ordering::Equal)
-        });
-        neigh_at_vertex = ring1_sorted.into_iter().take(2).collect();
-    } else if neigh_at_vertex.len() > 2 {
-        // en teoría no debería pasar; si pasa, ordena por distancia al punto y quédate con 2
-        neigh_at_vertex.sort_by(|&a, &b| {
-            let (lon_a, lat_a) = cell_center_deg(a);
-            let (lon_b, lat_b) = cell_center_deg(b);
-            let da = haversine_km(lat_a, lon_a, lat_c, lon_c);
-            let db = haversine_km(lat_b, lon_b, lat_c, lon_c);
-            da.partial_cmp(&db).unwrap_or(std::cmp::Ordering::Equal)
-        });
-        neigh_at_vertex.truncate(2);
-    }
+                println!("  res8 cell {} center=({:.5},{:.5}) dist_hotspot={:.2} km", c8, lat8, lon8, d_hot);
 
-    // padres a expandir a r6: central + 2 vecinos que tocan el vértice más cercano
-    let mut expand_parents: std::collections::HashSet<CellIndex> = std::collections::HashSet::new();
-    expand_parents.insert(c5_center);
-    for n in neigh_at_vertex.iter() {
-        expand_parents.insert(*n);
-    }
-
-    // periferia r5 = todo el disco menos los 3 padres que expandimos
-    let mut outer_r5: Vec<CellIndex> = r5_disk
-        .into_iter()
-        .filter(|c| !expand_parents.contains(c))
-        .collect();
-
-    // hijas r6 de los 3 padres seleccionados
-    let mut inner_r6: Vec<CellIndex> = Vec::new();
-    for p in &expand_parents {
-        for ch in p.children(r6) {
-            inner_r6.push(ch);
+                if d_hot < 0.5 {
+                    for c9 in c8.children(res9) {
+                        cells_res9.push(c9);
+                    }
+                } else {
+                    cells_res8.push(c8);
+                }
+            }
+        } else {
+            cells_res7.push(c7);
         }
     }
 
     // estilos
-    let inner_style = json!({
-        "fill": true, "fill-color": "#3b82f6", // azul intenso
-        "fill-opacity": 0.55,
-        "stroke": "#000000",                   // borde negro
-        "stroke-width": 1.6,
-        "stroke-opacity": 1.0
-    });
-    
-    let outer_style = json!({
-        "fill": true, "fill-color": "#8b5cf6", "fill-opacity": 0.45,
-        "stroke": "#a78bfa", "stroke-width": 1.0, "stroke-opacity": 0.85
-    });
+    let style6 = json!({"fill-color":"#a78bfa","fill-opacity":0.3,"stroke":"#6d28d9"});
+    let style7 = json!({"fill-color":"#f472b6","fill-opacity":0.35,"stroke":"#be185d"});
+    let style8 = json!({"fill-color":"#34d399","fill-opacity":0.45,"stroke":"#047857"});
+    let style9 = json!({"fill-color":"#3b82f6","fill-opacity":0.55,"stroke":"#1e3a8a"});
 
-    // debug
-    let mut dbg_parents = Vec::new();
-    for p in &expand_parents {
-        let (lon, lat) = cell_center_deg(*p);
-        let d = haversine_km(lat, lon, lat_c, lon_c);
-        dbg_parents.push(format!("{} (d={:.2}km)", p, d));
-    }
-
-    // geojson
     let mut features = Vec::new();
-
-    // periferia r5
-    for c in outer_r5.drain(..) {
-        let exterior = cell_polygon_coords(c);
-        features.push(json!({
-            "type":"Feature",
-            "geometry": { "type":"Polygon", "coordinates":[exterior] },
-            "properties": {
-                "h3": c.to_string(),
-                "zona": "periphery_r5",
-                "delay_factor": 1.0,
-                "style": outer_style
-            }
-        }));
+    for c in &cells_res6 {
+        features.push(cell_to_feature(*c, "res6", &style6));
+    }
+    for c in &cells_res7 {
+        features.push(cell_to_feature(*c, "res7", &style7));
+    }
+    for c in &cells_res8 {
+        features.push(cell_to_feature(*c, "res8", &style8));
+    }
+    for c in &cells_res9 {
+        features.push(cell_to_feature(*c, "res9", &style9));
     }
 
-    // centro r6 (hijas de los 3 padres seleccionados)
-    for c in inner_r6.drain(..) {
-        let exterior = cell_polygon_coords(c);
-        features.push(json!({
-            "type":"Feature",
-            "geometry": { "type":"Polygon", "coordinates":[exterior] },
-            "properties": {
-                "h3": c.to_string(),
-                "zona": "center_r6",
-                "delay_factor": 1.0,
-                "style": inner_style
-            }
-        }));
-    }
+    println!("TOTAL -> res6: {}, res7: {}, res8: {}, res9: {}", 
+        cells_res6.len(), cells_res7.len(), cells_res8.len(), cells_res9.len());
 
     let gj = json!({
-        "type":"FeatureCollection",
-        "name":"zgz_mesh_center_r5_vertex_triplet_to_r6",
-        "crs": { "type":"name","properties":{"name":"EPSG:4326"} },
+        "type": "FeatureCollection",
         "features": features
     });
     GeoJson::from_json_value(gj).unwrap().to_string()
 }
+fn cell_to_feature(c: CellIndex, zona:&str, style:&serde_json::Value) -> serde_json::Value {
+    let exterior = cell_polygon_coords(c);
+    json!({
+        "type":"Feature",
+        "geometry": { "type":"Polygon", "coordinates":[exterior] },
+        "properties": { "h3": c.to_string(), "zona": zona, "style": style }
+    })
+}
 
 
+
+#[allow(non_snake_case)]
 pub fn geojson_madC_mesh() -> String {
     // Punto de referencia: Centro de logroño
     let lat_c = 40.4176527_f64;
@@ -990,3 +923,114 @@ pub fn geojson_madC_mesh() -> String {
     GeoJson::from_json_value(gj).unwrap().to_string()
 }
 
+
+
+
+
+
+// -------------------------------------------------------
+// 8) Agrupacion de pedidos (API)
+
+pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
+    let r6 = Resolution::try_from(6u8).unwrap();
+    let r7 = Resolution::try_from(7u8).unwrap();
+    let r8 = Resolution::try_from(8u8).unwrap();
+    let r9 = Resolution::try_from(9u8).unwrap();
+    
+    let mut counts: HashMap<CellIndex, usize> = HashMap::new();
+    
+    // Primer pase: contar todos los pedidos en r6
+    for [lon, lat] in &pedidos.0 {
+        if let Ok(ll) = LatLng::new(*lat, *lon) {
+            let cell = ll.to_cell(r6);
+            *counts.entry(cell).or_insert(0) += 1;
+        }
+    }
+    
+    // Segundo pase: subdividir celdas con muchos pedidos
+    let cells_to_subdivide: Vec<(CellIndex, usize)> = counts
+        .iter()
+        .filter(|(_, &count)| count > 20)
+        .map(|(&cell, &count)| (cell, count))
+        .collect();
+    
+    for (cell, _) in cells_to_subdivide {
+        counts.remove(&cell);
+        
+        // Recontar los pedidos en las celdas hijas de r7
+        for [lon, lat] in &pedidos.0 {
+            if let Ok(ll) = LatLng::new(*lat, *lon) {
+                let original_cell = ll.to_cell(r6);
+                if original_cell == cell {
+                    let child_cell = ll.to_cell(r7);
+                    *counts.entry(child_cell).or_insert(0) += 1;
+                }
+            }
+        }
+    }
+    
+    // Tercer pase: subdividir r7 a r8 si hay mas de 25
+    let cells_r7_to_subdivide: Vec<(CellIndex, usize)> = counts
+        .iter()
+        .filter(|(cell, &count)| cell.resolution() == r7 && count > 25)
+        .map(|(&cell, &count)| (cell, count))
+        .collect();
+    
+    for (cell, _) in cells_r7_to_subdivide {
+        counts.remove(&cell);
+        
+        for [lon, lat] in &pedidos.0 {
+            if let Ok(ll) = LatLng::new(*lat, *lon) {
+                let r7_cell = ll.to_cell(r7);
+                if r7_cell == cell {
+                    let child_cell = ll.to_cell(r8);
+                    *counts.entry(child_cell).or_insert(0) += 1;
+                }
+            }
+        }
+    }
+    
+    // Cuarto pase: subdividir r8 a r9 si hay mas de 25
+    let cells_r8_to_subdivide: Vec<(CellIndex, usize)> = counts
+        .iter()
+        .filter(|(cell, &count)| cell.resolution() == r8 && count > 25)
+        .map(|(&cell, &count)| (cell, count))
+        .collect();
+    
+    for (cell, _) in cells_r8_to_subdivide {
+        counts.remove(&cell);
+        
+        for [lon, lat] in &pedidos.0 {
+            if let Ok(ll) = LatLng::new(*lat, *lon) {
+                let r8_cell = ll.to_cell(r8);
+                if r8_cell == cell {
+                    let child_cell = ll.to_cell(r9);
+                    *counts.entry(child_cell).or_insert(0) += 1;
+                }
+            }
+        }
+    }
+    
+    // Crear GeoJSON
+    let mut features = Vec::new();
+    for (cell, n) in counts {
+        let exterior = cell_polygon_coords(cell);
+        features.push(json!({
+            "type": "Feature",
+            "geometry": { "type": "Polygon", "coordinates": [exterior] },
+            "properties": {
+                "h3": cell.to_string(),
+                "pedidos": n,
+            }
+        }));
+    }
+    
+    let gj = json!({
+        "type": "FeatureCollection",
+        "name": "orders_areas",
+        "crs": { "type": "name", "properties": { "name": "EPSG:4326" } },
+        "features": features
+    });
+    
+    Json(gj)
+}

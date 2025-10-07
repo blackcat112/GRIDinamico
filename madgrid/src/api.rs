@@ -1,7 +1,7 @@
 //! api.rs
 //! Rutas HTTP: /health, /kpis, /map/hex y /routing/cells (ligera para ruteo con H3)
 
-use axum::{extract::{Query, State}, response::IntoResponse, routing::get, Json, Router};
+use axum::{extract::{Query, State}, response::IntoResponse, routing::{get,post}, Json, Router};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use tower_http::{compression::CompressionLayer, services::ServeDir, cors::CorsLayer};
@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value, json};
 use h3o::CellIndex;
 use std::str::FromStr;
-
+use crate::h3grid::aragon_orders;
 
 
 static GROUPS: Lazy<RwLock<HashMap<String, i64>>> = Lazy::new(|| RwLock::new(HashMap::new()));
@@ -42,7 +42,7 @@ pub fn router(state: ApiState) -> Router {
         .route("/map/hex", get(map_hex))
         .route("/routing/cells", get(routing_cells))
         .route("/groups", get(get_groups).post(save_groups))
-
+        .route("/orders/aragon", post(aragon_orders))
 
         // .route("/groups", get(groups)) 
         .fallback_service(ServeDir::new("web"))
