@@ -930,87 +930,95 @@ pub fn geojson_madC_mesh() -> String {
 
 // -------------------------------------------------------
 // 8) Agrupacion de pedidos (API)
-
 pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
     let r6 = Resolution::try_from(6u8).unwrap();
     let r7 = Resolution::try_from(7u8).unwrap();
     let r8 = Resolution::try_from(8u8).unwrap();
     let r9 = Resolution::try_from(9u8).unwrap();
-    
+
+    let max_r6 = if pedidos.veh == "bike" { 20 } else if pedidos.veh == "car" { 25 } else { 20 };
+    let max_r7 = if pedidos.veh == "bike" { 25 } else if pedidos.veh == "car" { 25 } else { 25 };
+    let max_r8 = if pedidos.veh == "bike" { 25 } else if pedidos.veh == "car" { 25 } else { 25 };
+
     let mut counts: HashMap<CellIndex, usize> = HashMap::new();
-    
     // Primer pase: contar todos los pedidos en r6
-    for [lon, lat] in &pedidos.0 {
+    for (lon, lat) in &pedidos.points{
         if let Ok(ll) = LatLng::new(*lat, *lon) {
             let cell = ll.to_cell(r6);
             *counts.entry(cell).or_insert(0) += 1;
+            println!("{:?}", counts);
         }
     }
-    
+
     // Segundo pase: subdividir celdas con muchos pedidos
     let cells_to_subdivide: Vec<(CellIndex, usize)> = counts
         .iter()
-        .filter(|(_, &count)| count > 20)
+        .filter(|(_, &count)| count > max_r6)
         .map(|(&cell, &count)| (cell, count))
         .collect();
-    
+
     for (cell, _) in cells_to_subdivide {
         counts.remove(&cell);
         
         // Recontar los pedidos en las celdas hijas de r7
-        for [lon, lat] in &pedidos.0 {
+        for (lon, lat) in &pedidos.points {
             if let Ok(ll) = LatLng::new(*lat, *lon) {
                 let original_cell = ll.to_cell(r6);
                 if original_cell == cell {
                     let child_cell = ll.to_cell(r7);
                     *counts.entry(child_cell).or_insert(0) += 1;
+                    println!("{:?}", counts);
                 }
             }
         }
     }
-    
+
     // Tercer pase: subdividir r7 a r8 si hay mas de 25
     let cells_r7_to_subdivide: Vec<(CellIndex, usize)> = counts
         .iter()
-        .filter(|(cell, &count)| cell.resolution() == r7 && count > 25)
+        .filter(|(cell, &count)| cell.resolution() == r7 && count > max_r7)
         .map(|(&cell, &count)| (cell, count))
         .collect();
-    
+
     for (cell, _) in cells_r7_to_subdivide {
         counts.remove(&cell);
         
-        for [lon, lat] in &pedidos.0 {
+        for (lon, lat) in &pedidos.points{
             if let Ok(ll) = LatLng::new(*lat, *lon) {
                 let r7_cell = ll.to_cell(r7);
                 if r7_cell == cell {
                     let child_cell = ll.to_cell(r8);
                     *counts.entry(child_cell).or_insert(0) += 1;
+                    println!("{:?}", counts);
                 }
             }
         }
     }
-    
+
     // Cuarto pase: subdividir r8 a r9 si hay mas de 25
     let cells_r8_to_subdivide: Vec<(CellIndex, usize)> = counts
         .iter()
-        .filter(|(cell, &count)| cell.resolution() == r8 && count > 25)
+        .filter(|(cell, &count)| cell.resolution() == r8 && count > max_r8)
         .map(|(&cell, &count)| (cell, count))
         .collect();
-    
+
     for (cell, _) in cells_r8_to_subdivide {
         counts.remove(&cell);
         
-        for [lon, lat] in &pedidos.0 {
+        for (lon, lat) in &pedidos.points {
             if let Ok(ll) = LatLng::new(*lat, *lon) {
                 let r8_cell = ll.to_cell(r8);
                 if r8_cell == cell {
                     let child_cell = ll.to_cell(r9);
                     *counts.entry(child_cell).or_insert(0) += 1;
+                    println!("{:?}", counts);
                 }
             }
         }
     }
-    
+
+    println!("{:?}", counts);
+
     // Crear GeoJSON
     let mut features = Vec::new();
     for (cell, n) in counts {
@@ -1021,16 +1029,17 @@ pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
             "properties": {
                 "h3": cell.to_string(),
                 "pedidos": n,
+                "vehicle_type": pedidos.veh,
             }
         }));
     }
-    
+
     let gj = json!({
         "type": "FeatureCollection",
         "name": "orders_areas",
         "crs": { "type": "name", "properties": { "name": "EPSG:4326" } },
         "features": features
     });
-    
+
     Json(gj)
-}
+    }

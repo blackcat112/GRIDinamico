@@ -137,5 +137,8 @@ pub struct DataState {
     pub snapshot_ts_utc: String,
 }
 
-#[derive(Deserialize)]
-pub struct PedidoPoints(pub Vec<[f64; 2]>);
+#[derive(Deserialize)] 
+pub struct PedidoPoints {
+     pub points: Vec<(f64, f64)>, 
+     pub veh: String,
+ }
