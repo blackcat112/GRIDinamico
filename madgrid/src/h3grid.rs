@@ -930,7 +930,7 @@ pub fn geojson_madC_mesh() -> String {
 
 // -------------------------------------------------------
 // 8) Agrupacion de pedidos (API)
-pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
+pub async fn gloabl_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
     let r6 = Resolution::try_from(6u8).unwrap();
     let r7 = Resolution::try_from(7u8).unwrap();
     let r8 = Resolution::try_from(8u8).unwrap();
@@ -946,7 +946,7 @@ pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
         if let Ok(ll) = LatLng::new(*lat, *lon) {
             let cell = ll.to_cell(r6);
             *counts.entry(cell).or_insert(0) += 1;
-            println!("{:?}", counts);
+            
         }
     }
 
@@ -967,7 +967,7 @@ pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
                 if original_cell == cell {
                     let child_cell = ll.to_cell(r7);
                     *counts.entry(child_cell).or_insert(0) += 1;
-                    println!("{:?}", counts);
+                    
                 }
             }
         }
@@ -989,7 +989,7 @@ pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
                 if r7_cell == cell {
                     let child_cell = ll.to_cell(r8);
                     *counts.entry(child_cell).or_insert(0) += 1;
-                    println!("{:?}", counts);
+                    
                 }
             }
         }
@@ -1011,13 +1011,13 @@ pub async fn aragon_orders(Json(pedidos): Json<PedidoPoints>) -> Json<Value> {
                 if r8_cell == cell {
                     let child_cell = ll.to_cell(r9);
                     *counts.entry(child_cell).or_insert(0) += 1;
-                    println!("{:?}", counts);
+                    
                 }
             }
         }
     }
 
-    println!("{:?}", counts);
+
 
     // Crear GeoJSON
     let mut features = Vec::new();

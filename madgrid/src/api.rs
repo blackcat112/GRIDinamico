@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value, json};
 use h3o::CellIndex;
 use std::str::FromStr;
-use crate::h3grid::aragon_orders;
+use crate::h3grid::gloabl_orders;
 
 
 static GROUPS: Lazy<RwLock<HashMap<String, i64>>> = Lazy::new(|| RwLock::new(HashMap::new()));
@@ -42,7 +42,7 @@ pub fn router(state: ApiState) -> Router {
         .route("/map/hex", get(map_hex))
         .route("/routing/cells", get(routing_cells))
         .route("/groups", get(get_groups).post(save_groups))
-        .route("/orders/aragon", post(aragon_orders))
+        .route("/orders/filter", post(gloabl_orders))
 
         // .route("/groups", get(groups)) 
         .fallback_service(ServeDir::new("web"))
