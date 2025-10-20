@@ -9,8 +9,8 @@
 //! dentro de cada hexágono
 
 
-use crate::types::ParkingZone;
-use crate::utm::utm30_to_wgs84;
+use crate::models::types::ParkingZone;
+use crate::tools::utm::utm30_to_wgs84;
 
 pub fn parse_carga_csv(raw: &str) -> Vec<ParkingZone> {
 let mut out = Vec::new();

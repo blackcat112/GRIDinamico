@@ -10,7 +10,7 @@
 
 
 
-use crate::types::Incidencia;
+use crate::models::types::Incidencia;
 use quick_xml::events::Event;
 use quick_xml::Reader;
 

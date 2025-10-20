@@ -17,7 +17,7 @@ serde_repr = "0.1"
 bytes = "1"
 once_cell = "1"
 chrono = { version = "0.4", features = ["serde"] }
-s2 = "0.0.12"        
+ 
 
 
 
@@ -35,7 +35,8 @@ geo = { version = "0.28", default-features = false, features = ["use-serde"] }
 geojson = "0.24"
 rstar = "0.11"
 h3o = { version = "0.5", features = ["geo"] }
-
+s2 = "0.0.13" 
+ 
 
 # Parsing archivos
 csv = "1.3"

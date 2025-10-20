@@ -2,18 +2,16 @@
 //! Rutas HTTP: /health, /kpis, /map/hex y /routing/cells (ligera para ruteo con H3)
 
 use axum::{extract::{Query, State}, response::IntoResponse, routing::{get,post}, Json, Router};
-use std::sync::Arc;
+use std::{sync::Arc, collections::HashMap, str::FromStr};
 use tokio::sync::RwLock;
 use tower_http::{compression::CompressionLayer, services::ServeDir, cors::CorsLayer};
-use crate::types::{DataState, RoutingCell};
-use crate::types::Kpis;
 use once_cell::sync::Lazy;
-use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value, json};
 use h3o::CellIndex;
-use std::str::FromStr;
-use crate::h3grid::gloabl_orders;
+
+use crate::models::types::{DataState, RoutingCell,Kpis};
+use crate::clusterizador::global_orders;
 
 
 static GROUPS: Lazy<RwLock<HashMap<String, i64>>> = Lazy::new(|| RwLock::new(HashMap::new()));
@@ -42,7 +40,7 @@ pub fn router(state: ApiState) -> Router {
         .route("/map/hex", get(map_hex))
         .route("/routing/cells", get(routing_cells))
         .route("/groups", get(get_groups).post(save_groups))
-        .route("/orders/filter", post(gloabl_orders))
+        .route("/orders/filter", post(global_orders))
 
         // .route("/groups", get(groups)) 
         .fallback_service(ServeDir::new("web"))

@@ -9,7 +9,7 @@
 //!
 //! Este modulo conecta directamente con la red de sensores urbano
 
-use crate::types::SensorTr;
+use crate::models::types::SensorTr;
 use quick_xml::events::Event;
 use quick_xml::Reader;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -46,7 +46,7 @@ pub fn parse_trafico_xml(xml: &[u8]) -> Vec<SensorTr> {
                 if name == b"pm".as_slice() && in_pm {
                     if let (Some(id), Some(x), Some(y)) = (cur.idelem, cur.st_x, cur.st_y) {
                         if cur.error.as_deref() == Some("N") {
-                            let (lat, lon) = crate::utm::utm30_to_wgs84(x as f64, y as f64);
+                            let (lat, lon) = crate::tools::utm::utm30_to_wgs84(x as f64, y as f64);
                             out.push(SensorTr {
                                 id: id as u32,
                                 lat: lat as f32,
