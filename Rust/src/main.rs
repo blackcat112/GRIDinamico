@@ -1,10 +1,10 @@
 //! main.rs
 //! Arranque, loops de fetch, recompute H3, API y cache de salidas.
 
-mod models {pub mod types;}
-mod tools { pub mod utm; }       
-mod server { pub mod fetch; pub mod api; }
-mod data { pub mod carga; pub mod incid; pub mod trafico; }
+mod models;
+mod tools ;  
+mod server ;
+mod data ;
 mod h3grid;
 mod clusterizador;  
 

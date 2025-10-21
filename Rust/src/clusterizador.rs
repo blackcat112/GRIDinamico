@@ -43,10 +43,10 @@ fn cell_vertices(cell: &CellID) -> Vec<[f64; 2]> {
 
 /// API: agrupacion de pedidos usando S2 (sin overlapping)
 pub async fn global_orders(Json(pedidos): Json<PedidoPoints>) -> Json<serde_json::Value> {
-    let l6 = 10u8;  // ~1 km^2
-    let l7 = 12u8;  // ~250 m
-    let l8 = 14u8;  // ~60 m
-    let l9 = 16u8;  // ~15 m
+    let l6 = 10u8;  // ~4 km 
+    let l7 = 12u8;  // ~1 km
+    let l8 = 14u8;  // ~250 m
+    let l9 = 16u8;  // ~60 m
 
     let max_l6 = if pedidos.veh == "bike" { 19 } else if pedidos.veh == "car" { 24 } else { 19 };
     let max_l7 = 24;
