@@ -98,7 +98,7 @@ impl TrafficProvider for TomTomClient {
             &self.base_url_absolute,
             &[
                 ("point", format!("{lat},{lon}")),
-                ("unit", "KPH".to_string()),
+                ("unit", "kmph".to_string()),
                 ("key", self.api_key.clone()),
             ],
         )?;
@@ -211,7 +211,7 @@ impl OrionLdSink {
                   "conf": { "type":"Property", "value": r.conf_cell },
                   "delayOrange": { "type":"Property", "value": r.delay_orange },
                   "delayTomTom": { "type":"Property", "value": r.delay_tomtom },
-                  "delayFinal": { "type":"Property", "value": r.delay_final }
+                  "delayFinal": { "type":"Property", "value": r.delay_final },
                 })
             })
             .collect();
