@@ -181,7 +181,7 @@ async fn map_hex(State(st): State<ApiState>, Query(q): Query<CityQ>) -> impl Int
 #[derive(Debug, Deserialize)]
 #[allow(dead_code)]
 pub struct RoutingQuery {
-    /// Resolución deseada 
+    
     pub res: Option<u8>,
     /// Umbral  de delay para incluir celda (default 1.03)
     pub min_delay: Option<f32>,

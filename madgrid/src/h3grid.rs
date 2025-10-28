@@ -637,15 +637,21 @@ pub fn geojson_zaragoza_mesh() -> String {
 
 
 // MESH PARA LOGROÑO 
+
 pub fn geojson_logrono_mesh() -> String {
+    use h3o::{LatLng, CellIndex, Resolution};
+    use serde_json::json;
+    use geojson::GeoJson;
+    use std::collections::HashSet;
+
     let lat_c = 42.4627_f64;
     let lon_c = -2.44498_f64;
     let center = LatLng::new(lat_c, lon_c).unwrap();
 
-    let res6 = Resolution::try_from(6u8).unwrap(); 
-    let res7 = Resolution::try_from(7u8).unwrap(); 
-    let res8 = Resolution::try_from(8u8).unwrap(); 
-    let res9 = Resolution::try_from(9u8).unwrap(); 
+    let res6 = Resolution::try_from(6u8).unwrap();
+    let res7 = Resolution::try_from(7u8).unwrap();
+    let res8 = Resolution::try_from(8u8).unwrap();
+    let res9 = Resolution::try_from(9u8).unwrap();
 
     let c6_center: CellIndex = center.to_cell(res6);
 
@@ -655,54 +661,72 @@ pub fn geojson_logrono_mesh() -> String {
         (42.4700, -2.4360), // Puente
     ];
 
-    let mut cells_res6 = Vec::new();
-    let mut cells_res7 = Vec::new();
-    let mut cells_res8 = Vec::new();
-    let mut cells_res9 = Vec::new();
+    let mut cells_res6 = HashSet::new();
+    let mut cells_res7 = HashSet::new();
+    let mut cells_res8 = HashSet::new();
+    let mut cells_res9 = HashSet::new();
 
-    // Periferia res6
+    // Periferia base res6
     for c in c6_center.grid_disk::<Vec<CellIndex>>(3) {
-        if c != c6_center {
-            cells_res6.push(c);
-        }
+        cells_res6.insert(c);
     }
 
-    // Subdivisión
+    // Subdivisión y refinamiento por distancia a hotspots
     for c7 in c6_center.children(res7) {
         let (lon7, lat7) = cell_center_deg(c7);
         let d7 = haversine_km(lat7, lon7, lat_c, lon_c);
-        println!("res7 cell {} center=({:.5},{:.5}) dist_centro={:.2} km", c7, lat7, lon7, d7);
 
-        let in_urban = d7 < 2.5;
-        if in_urban {
+        if d7 < 2.5 {
             for c8 in c7.children(res8) {
                 let (lon8, lat8) = cell_center_deg(c8);
-
-                let d_hot = hotspot_coords.iter()
+                let d_hot = hotspot_coords
+                    .iter()
                     .map(|(h_lat, h_lon)| haversine_km(lat8, lon8, *h_lat, *h_lon))
                     .fold(f64::MAX, f64::min);
 
-                println!("  res8 cell {} center=({:.5},{:.5}) dist_hotspot={:.2} km", c8, lat8, lon8, d_hot);
-
                 if d_hot < 0.5 {
                     for c9 in c8.children(res9) {
-                        cells_res9.push(c9);
+                        cells_res9.insert(c9);
                     }
                 } else {
-                    cells_res8.push(c8);
+                    cells_res8.insert(c8);
                 }
             }
         } else {
-            cells_res7.push(c7);
+            cells_res7.insert(c7);
         }
     }
 
-    // estilos
-    let style6 = json!({"fill-color":"#a78bfa","fill-opacity":0.3,"stroke":"#6d28d9"});
-    let style7 = json!({"fill-color":"#f472b6","fill-opacity":0.35,"stroke":"#be185d"});
-    let style8 = json!({"fill-color":"#34d399","fill-opacity":0.45,"stroke":"#047857"});
-    let style9 = json!({"fill-color":"#3b82f6","fill-opacity":0.55,"stroke":"#1e3a8a"});
+        // === CORRECCIÓN DE DEATH ZONES ===
+        let mut filled = HashSet::new();
 
+        // Recorremos vecinos de las celdas más pequeñas
+        for c in cells_res8.union(&cells_res9) {
+            for n in c.grid_disk::<Vec<CellIndex>>(1).into_iter().filter(|x| *x != *c) {
+                if !cells_res6.contains(&n)
+                    && !cells_res7.contains(&n)
+                    && !cells_res8.contains(&n)
+                    && !cells_res9.contains(&n)
+                {
+                    // Zona muerta detectada → se rellena con el padre de menor resolución
+                    if let Some(parent) = n.parent(res7) {
+                        filled.insert(parent);
+                    }
+                }
+            }
+        }
+
+
+    // Añadimos los rellenos (solo res7)
+    cells_res7.extend(filled.iter());
+
+    // === Estilos ===
+    let style6 = json!({"fill":true,"fill-color":"#a78bfa","fill-opacity":0.3,"stroke":"#6d28d9"});
+    let style7 = json!({"fill":true,"fill-color":"#f472b6","fill-opacity":0.35,"stroke":"#be185d"});
+    let style8 = json!({"fill":true,"fill-color":"#34d399","fill-opacity":0.45,"stroke":"#047857"});
+    let style9 = json!({"fill":true,"fill-color":"#3b82f6","fill-opacity":0.55,"stroke":"#1e3a8a"});
+
+    // === GeoJSON ===
     let mut features = Vec::new();
     for c in &cells_res6 {
         features.push(cell_to_feature(*c, "res6", &style6));
@@ -717,15 +741,26 @@ pub fn geojson_logrono_mesh() -> String {
         features.push(cell_to_feature(*c, "res9", &style9));
     }
 
-    println!("TOTAL -> res6: {}, res7: {}, res8: {}, res9: {}", 
-        cells_res6.len(), cells_res7.len(), cells_res8.len(), cells_res9.len());
+    println!(
+        "TOTAL → res6: {}, res7: {}, res8: {}, res9: {} (rellenos: {})",
+        cells_res6.len(),
+        cells_res7.len(),
+        cells_res8.len(),
+        cells_res9.len(),
+        filled.len()
+    );
 
     let gj = json!({
         "type": "FeatureCollection",
+        "name": "logrono_mesh_with_deathzone_fix",
+        "crs": { "type": "name", "properties": { "name": "EPSG:4326" } },
         "features": features
     });
     GeoJson::from_json_value(gj).unwrap().to_string()
 }
+
+
+//funcion 
 fn cell_to_feature(c: CellIndex, zona:&str, style:&serde_json::Value) -> serde_json::Value {
     let exterior = cell_polygon_coords(c);
     json!({
