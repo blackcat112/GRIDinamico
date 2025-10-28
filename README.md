@@ -274,3 +274,133 @@ Este script visualiza los resultados de las pruebas HTTP a partir de un archivo 
 > **En otras palabras:**  
 > El refinamiento es una estrategia para escalar a mayor detalle sin perder rendimiento.  
 > Si queremos mapas urbanos muy precisos, **debemos usarlo**.
+
+
+# 📈 Cálculo de *Delay Factor* (TTI) en la malla H3
+
+Este módulo estima, por hexágono H3, un **delay factor** (≈ *Travel Time Index, TTI*) que refleja cuánto se alarga el viaje respecto al *free-flow*. Trabaja con dos fuentes:
+
+- **Telco O/D** (base “Orange”): volumen relativo y mezcla de vehículos (turismos/camiones).
+- **Proveedor de tráfico** (p. ej., **TomTom**): velocidades observadas vs. *free-flow* y un `confidence`.
+
+La salida principal por celda es `delay_final`, junto con métricas de apoyo (volumen normalizado, cuota de camiones, etc.).
+
+---
+
+## 🧠 Conceptos clave
+
+- **Travel Time Index (TTI)**  
+  \( \text{TTI} = \dfrac{t_{\text{obs}}}{t_{\text{free}}} \;\equiv\; \dfrac{V_{\text{free}}}{V_{\text{obs}}} \).  
+  Es el índice operativo estándar: compara el tiempo (o velocidad) observado con el de flujo libre.
+
+- **Funciones volumen-retardo (BPR)** para planificación  
+  \( \text{delay} = 1 + a\,(v/c)^b \),  
+  donde \(v\) es el volumen y \(c\) la capacidad. Capturan la **no linealidad** de la congestión cerca de saturación.
+
+- **Fiabilidad (opcional)**  
+  Con series intradía pueden derivarse *Buffer Index* y *Planning Time Index* a partir de percentiles del tiempo de viaje.
+
+---
+
+## 🔢 Fórmulas que usamos
+
+### 1) Delay del proveedor (cuando hay velocidades)
+A partir de *Traffic Flow* del proveedor:
+\[
+\boxed{\text{delay\_tt} = \dfrac{V_{\text{free}}}{V_{\text{obs}}}}
+\]
+- `currentSpeed` y `freeFlowSpeed` → cálculo directo de TTI.
+- Se acompaña de `confidence` por segmento/celda.
+
+### 2) Delay “Orange” (fallback robusto cuando **no** hay proveedor)
+Usamos una variante **BPR-like** basada **solo** en O/D:
+
+1) **Capacidad aproximada por ciudad/día**  
+   \(c = P\)-ésimo **percentil** de `trips_total` por celda (p. ej. \(P=0.90\)), con un suelo mínimo configurable.  
+   Motivo: robusto a *outliers*, independiente de cartografía detallada y aproxima la “saturación típica”.
+
+2) **Fórmula por celda**
+\[
+\boxed{\text{delay\_orange} = 1 + a \cdot (v/c)^b \cdot \bigl(1+\gamma \cdot \text{truck\_share}\bigr)}
+\]
+- \(v\) = `trips_total` (pondera camiones vía `truck_factor`).
+- \(\text{truck\_share}\) = `trips_trucks / trips_total`.  
+- Parámetros por defecto típicos: \(a=0.15,\; b=4\), \(\gamma \in [0.2,0.6]\).  
+- Se **clampa** a `[delay_min, delay_max]`.
+
+> **Por qué no lineal:** cerca de capacidad, pequeñas subidas de volumen generan grandes retardos; la BPR lo captura, una forma lineal no.
+
+### 3) Blending (si hay proveedor **y** confianza válida)
+Si la celda tiene confianza telco baja y hay dato del proveedor, combinamos:
+\[
+\boxed{\text{delay\_final} = (1-\lambda)\cdot \text{delay\_orange} \;+\; \lambda \cdot \text{delay\_tt}}
+\]
+- \(\lambda\) crece cuando **baja la confianza telco** y/o **sube** la `confidence` del proveedor.  
+- **Objetivo:** dar más peso a la fuente más fiable en cada celda.
+
+> Si no hay proveedor o no aplica el blending, entonces `delay_final = delay_orange`.
+
+---
+
+## ⚙️ Parámetros (resumen práctico)
+
+- `bpr_a` (≈ 0.15) y `bpr_b` (≈ 4.0): intensidad/curvatura de congestión (estándar BPR/HCM).  
+- `capacity_percentile` (0.85–0.95): percentil para estimar \(c\).  
+- `capacity_floor`: suelo mínimo para \(c\).  
+- `truck_gamma` (0.2–0.6): sensibilidad a camiones (eleva retardo en celdas con alto tráfico pesado).  
+- `vc_cap`: tope para \(v/c\) por estabilidad numérica.  
+- `delay_min`, `delay_max`: acotan el rango del delay.
+
+**Calibración recomendada:** en días con buena cobertura del proveedor, ajusta \((a, b, \gamma)\) minimizando el error entre `delay_orange` y `delay_tt` **solo** en celdas con `confidence` alta. Así el fallback Orange queda alineado con la “verdad terreno” cuando falte proveedor.
+
+---
+
+## 🧩 Señales exportadas por celda
+
+- `delay_orange`, `delay_tomtom`, `delay_final`  
+- `vol_norm`, `truck_share`, `conf` (telco)  
+- `used_tomtom` y/o `used_external` (booleanos) para auditar si entró una fuente externa.
+
+---
+
+## 📦 Pipeline (pseudocódigo)
+
+```text
+1) Aggregate O/D to H3:
+   trips_total, trips_trucks, trips_cars, conf (ponderado)
+
+2) Orange (BPR-like):
+   c = percentile(trips_total, P=0.90) with floor
+   truck_share = trips_trucks / trips_total
+   vc = clamp(trips_total / c, 0, vc_cap)
+   delay_orange = clamp(1 + a * vc^b * (1 + gamma * truck_share), delay_min, delay_max)
+
+3) Provider (si conf_telco < umbral):
+   delay_tt = freeFlowSpeed / currentSpeed
+   λ = f(conf_telco, confidence_provider)
+
+4) Blending:
+   delay_final = (1-λ)*delay_orange + λ*delay_tt
+   used_tomtom = (delay_tt disponible)
+
+5) Export:
+   GeoJSON / Orion-LD con métricas y flags
+
+
+## 📚 Referencias
+
+### Índices de fiabilidad (FHWA)
+- FHWA — *Travel Time Reliability: Making It There On Time, All The Time* (definiciones de **Planning Time Index**, **Buffer Index**).  
+  https://ops.fhwa.dot.gov/publications/tt_reliability/ttr_report.htm
+- FHWA — *Travel Time Reliability Reference Guide* (resumen de métricas de fiabilidad, definiciones operativas).  
+  https://ops.fhwa.dot.gov/publications/fhwahop21015/fhwahop21015.pdf
+- FHWA — *Travel Time Reliability Brochure* (explicación didáctica del **Buffer Index**).  
+  https://ops.fhwa.dot.gov/publications/tt_reliability/brochure/ttr_brochure.pdf
+
+### Funciones volumen–retardo (BPR/HCM)
+- Bureau of Public Roads (1964) — *Traffic Assignment Manual for Application with a Large, High Speed Computer* (origen clásico de \(1 + a(v/c)^b\)).  
+  https://libraryarchives.metro.net/dpgtl/us-department-of-commerce/1964-traffic-assignment-manual-for-application-with-a-large-high-speed-computer.pdf
+- (Contexto histórico) BPR Manual (vista en Google Books).  
+  https://books.google.com/books/about/Traffic_Assignment_Manual_for_Applicatio.html?id=AvNUR_O_JEcC
+- (Lectura moderna) *Modified Bureau of Public Roads (MBPR) Link Function* — discusión y extensiones a la BPR.  
+  https://mediatum.ub.tum.de/doc/1714671/document.pdf
