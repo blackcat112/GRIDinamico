@@ -340,11 +340,11 @@ $$
 $$
 \boxed{\mathrm{delay}_{\mathrm{orange}}=1+a\cdot(v/c)^b\cdot\bigl(1+\gamma\cdot\mathrm{truck\_share}\bigr)}
 $$
-
-- \(v=\texttt{trips\_total}\) (pondera camiones vía `truck_factor`).  
-- \(\mathrm{truck\_share}=\texttt{trips\_trucks}/\texttt{trips\_total}\).  
-- Parámetros por defecto típicos: \(a=0.15,\; b=4,\; \gamma\in[0.2,0.6]\).  
+- v = `trips_total` (pondera camiones vía `truck_factor`).  
+- truck_share = `trips_trucks / trips_total`.  
+- Parámetros por defecto típicos: a = 0.15, b = 4, γ ∈ [0.2, 0.6].  
 - Se **clampa** a `[delay_min, delay_max]`.
+
 
 > **Por qué no lineal:** cerca de capacidad, pequeñas subidas de volumen generan grandes retardos; la BPR lo captura, una forma lineal no.
 
