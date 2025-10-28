@@ -317,7 +317,7 @@ Con series intradía pueden derivarse *Buffer Index* y *Planning Time Index* a p
 A partir de *Traffic Flow* del proveedor:
 
 $$
-\boxed{\text{delay\_tt}=\frac{V_{\mathrm{free}}}{V_{\mathrm{obs}}}}
+\boxed{\mathrm{delay}_{\mathrm{tt}}=\frac{V_{\mathrm{free}}}{V_{\mathrm{obs}}}}
 $$
 
 - `currentSpeed` y `freeFlowSpeed` → cálculo directo de TTI.
@@ -330,7 +330,7 @@ Usamos una variante **BPR-like** basada **solo** en O/D:
 **Capacidad aproximada por ciudad/día**
 
 $$
-c=\mathrm{Perc}_P\big(\texttt{trips\_total}\big)\quad\text{con }P\in[0.85,\,0.95]
+c=\operatorname{Perc}_P\!\big(\texttt{trips\_total}\big)\quad\text{con }P\in[0.85,\,0.95]
 $$
 
 (y un suelo mínimo configurable). Motivo: robusto a *outliers*, independiente de cartografía detallada y aproxima la “saturación típica”.
@@ -338,11 +338,11 @@ $$
 **Fórmula por celda**
 
 $$
-\boxed{\text{delay\_orange}=1+a\cdot(v/c)^b\cdot\bigl(1+\gamma\cdot\text{truck\_share}\bigr)}
+\boxed{\mathrm{delay}_{\mathrm{orange}}=1+a\cdot(v/c)^b\cdot\bigl(1+\gamma\cdot\mathrm{truck\_share}\bigr)}
 $$
 
 - \(v=\texttt{trips\_total}\) (pondera camiones vía `truck_factor`).  
-- \(\text{truck\_share}=\texttt{trips\_trucks}/\texttt{trips\_total}\).  
+- \(\mathrm{truck\_share}=\texttt{trips\_trucks}/\texttt{trips\_total}\).  
 - Parámetros por defecto típicos: \(a=0.15,\; b=4,\; \gamma\in[0.2,0.6]\).  
 - Se **clampa** a `[delay_min, delay_max]`.
 
@@ -353,7 +353,7 @@ $$
 Si la celda tiene confianza telco baja y hay dato del proveedor, combinamos:
 
 $$
-\boxed{\text{delay\_final}=(1-\lambda)\cdot\text{delay\_orange}+\lambda\cdot\text{delay\_tt}}
+\boxed{\mathrm{delay}_{\mathrm{final}}=(1-\lambda)\cdot\mathrm{delay}_{\mathrm{orange}}+\lambda\cdot\mathrm{delay}_{\mathrm{tt}}}
 $$
 
 - \(\lambda\) crece cuando **baja la confianza telco** y/o **sube** la `confidence` del proveedor.  
@@ -362,9 +362,6 @@ $$
 > Si no hay proveedor o no aplica el blending, entonces `delay_final = delay_orange`.
 
 ---
-
----
-
 ## ⚙️ Parámetros (resumen práctico)
 
 - `bpr_a` (≈ 0.15) y `bpr_b` (≈ 4.0): intensidad/curvatura de congestión (estándar BPR/HCM).  
