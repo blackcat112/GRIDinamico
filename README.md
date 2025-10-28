@@ -28,8 +28,7 @@ madgrid/
 │   ├─ carga.rs       # parser CSV zonas carga/descarga
 │   ├─ incid.rs       # parser XML incidencias
 │   └─ trafico.rs     # parser XML tráfico (pm.xml)
-└─ web/
-    └─ index.html     # UI Leaflet con HUD de detalle
+
 
 ```
 
