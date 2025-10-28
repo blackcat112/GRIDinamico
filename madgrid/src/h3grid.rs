@@ -31,6 +31,13 @@ impl Default for DelayCfg {
             truck_factor: 1.4,
             car_factor: 1.0,
             show_eps: 0.02,
+        // --- NUEVO: parámetros BPR-like ---
+            bpr_a: 0.15,              // intensidad de congestión
+            bpr_b: 4.0,               // curvatura
+            truck_gamma: 0.4,         // sensibilidad a camiones (0.2–0.6 típico)
+            capacity_percentile: 0.9, // percentil para estimar c (0.85–0.95 habitual)
+            capacity_floor: 10.0,     // suelo para evitar c muy bajo (ajústalo a tu escala)
+            vc_cap: 2.0,              // tope para (v/c) antes de elevar a b (numericamente estable)
         }
     }
 }
@@ -322,27 +329,66 @@ pub fn aggregate_od_to_h3(records: &[ODRecord], cfg: &DelayCfg) -> Result<HashMa
     Ok(map)
 }
 
+
+// ===============================
+// Calculo delay orange
+// ===============================
+
 pub fn compute_delay_orange(metrics: &mut HashMap<CellIndex, H3Metrics>, cfg: &DelayCfg) {
     let eps = 1e-6_f32;
+
+    // --- 1) Estadísticos base por ciudad/día ---
+    //   a) vector de volúmenes por celda (trips_total ya pondera trucks según cfg.*_factor)
+    let mut vols: Vec<f32> = metrics.values().map(|m| m.trips_total.max(0.0)).collect();
+    let n = vols.len().max(1) as f32;
+
+    // media para vol_norm (puro display/colores como ya usabas)
     let mean_vol = {
-        let sum: f32 = metrics.values().map(|m| m.trips_total).sum();
-        let n = metrics.len().max(1) as f32;
+        let sum: f32 = vols.iter().copied().sum();
         (sum / n).max(eps)
     };
 
+    //   b) capacidad c ≈ percentil P de la distribución de volúmenes
+    //      (mantiene robustez frente a outliers y evita depender de red vial)
+    let c = {
+        vols.sort_by(|a,b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+        let p = cfg.capacity_percentile.clamp(0.5, 0.999); // no dejes <0.5 para no subestimar capacidad
+        let idx = ((vols.len().saturating_sub(1) as f32) * p).round() as usize;
+        let perc = vols.get(idx).copied().unwrap_or(mean_vol);
+        perc.max(cfg.capacity_floor).max(eps)
+    };
+
+    // --- 2) Cálculo por celda ---
     for m in metrics.values_mut() {
-        let total = m.trips_total.max(eps);
+        // señales descriptivas que ya usabas (útiles para inspección/estilo)
+        let total  = m.trips_total.max(eps);
         let trucks = m.trips_trucks.max(0.0);
 
         m.truck_share = (trucks / total).clamp(0.0, 1.0);
-        m.vol_norm = (total / mean_vol).clamp(0.0, 20.0);
+        m.vol_norm    = (total / mean_vol).clamp(0.0, 20.0);
 
-        let base = 1.0;
-        let delay = base + cfg.alpha_vol * m.vol_norm + cfg.beta_truck_mix * m.truck_share;
+        // --- 3) BPR-like ---
+        // v/c acotado para estabilidad numérica
+        let vc = (total / c).clamp(0.0, cfg.vc_cap);
+
+        // factor de mezcla por camiones (penaliza capacidad efectiva)
+        let hv_factor = 1.0 + cfg.truck_gamma * m.truck_share;
+
+        // delay = 1 + a * (v/c)^b * (1 + γ * truck_share)
+        let bpr_term = if vc > 0.0 { cfg.bpr_a * vc.powf(cfg.bpr_b) } else { 0.0 };
+        let delay = 1.0 + bpr_term * hv_factor;
+
         m.delay_orange = clamp(delay, cfg.delay_min, cfg.delay_max);
+
+        // inicializa delay_final con Orange; luego blending/override lo ajustará si hay TomTom
         m.delay_final = m.delay_orange;
     }
 }
+
+// ===============================
+// Calculo delay mixto con proveedor externo
+// ===============================
+
 
 pub async fn enrich_with_traffic_provider(
     metrics: &mut HashMap<CellIndex, H3Metrics>,
@@ -422,6 +468,7 @@ pub fn to_geojson(metrics: &HashMap<CellIndex, H3Metrics>, cfg: &DelayCfg) -> St
                 "delay_tomtom": ((m.delay_tomtom*100.0).round()/100.0),
                 "vol_norm": ((m.vol_norm*100.0).round()/100.0),
                 "truck_share": ((m.truck_share*100.0).round()/100.0),
+                "used_tomtom": (m.delay_tomtom > 0.0),
                 "conf": ((m.conf_cell()*100.0).round()/100.0),
                 "style": {
                     "fill": true, "fill-color": col, "fill-opacity": 0.75,

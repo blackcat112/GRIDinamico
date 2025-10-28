@@ -1,7 +1,6 @@
 //! main.rs — Pipeline O/D + TomTom + históricos (sin ENV)
 
 mod models;
-mod tools;
 mod server;
 mod h3grid;
 mod clusterizador;

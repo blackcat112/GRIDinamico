@@ -30,6 +30,14 @@ pub struct DelayCfg {
 
     /// Mostrar solo delays > 1 + eps en GeoJSON
     pub show_eps: f32,
+
+     // --- nuevo ---
+     pub bpr_a: f32,
+     pub bpr_b: f32,
+     pub truck_gamma: f32,
+     pub capacity_percentile: f32,
+     pub capacity_floor: f32,
+     pub vc_cap: f32,
 }
 
 /// Registro de O/D para un día (csv/parquet)
