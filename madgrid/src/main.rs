@@ -1,50 +1,59 @@
-//! main.rs
-//! Arranque, loops de fetch, recompute H3, API y cache de salidas.
+//! main.rs — Pipeline O/D + TomTom + históricos (sin ENV)
 
 mod models;
-mod tools ;  
-mod server ;
-mod data ;
+mod tools;
+mod server;
 mod h3grid;
-mod clusterizador;  
+mod clusterizador;
 
 
-use anyhow::Result;
-use reqwest::Client;
-use std::{env, sync::Arc, time::Duration};
-use tokio::{signal, sync::RwLock, time::sleep};
-use tracing::{info, Level};
+use anyhow::{Context, Result};
 use once_cell::sync::Lazy;
+use reqwest::Client;
+use std::{sync::Arc, time::Duration};
+use tokio::{signal, sync::RwLock, time::sleep};
+use tracing::{info, warn, Level};
 
+use chrono::NaiveDate;
 use models::types::{AppCfg, DataState, DelayCfg};
+use models::h3types::{ DelayCfg as ODDelayCfg,ODRecord,TomTomClient};
+use h3grid::{
+    compute_day, HistorySink, JsonlSink, OrionLdSink,
+    TrafficProvider,
+};
+
 #[allow(dead_code)]
 static CFG: Lazy<DelayCfg> = Lazy::new(|| DelayCfg::default());
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    tracing_subscriber::fmt().with_env_filter("info").with_max_level(Level::INFO).init();
+    tracing_subscriber::fmt()
+        .with_env_filter("info")
+        .with_max_level(Level::INFO)
+        .init();
 
-    let cfg = app_cfg_from_env();
+    // Carga config por defecto desde tu models::types::AppCfg::default()
+    let cfg = AppCfg::default();
+
+    // Estado compartido para la API
     let data = Arc::new(RwLock::new(DataState {
-        delay_cfg: DelayCfg::default(),
+        delay_cfg: DelayCfg::default(), // si tu DataState lo sigue usando para algo
         ..Default::default()
     }));
 
     // HTTP client con compresión
     let client = Client::builder().brotli(true).gzip(true).deflate(true).build()?;
 
-    // Lanzar fetchers
-    let data_c = data.clone(); let client_c = client.clone(); let cfg_c = cfg.clone();
-    tokio::spawn(async move { fetch_loop_carga(client_c, data_c, cfg_c).await; });
-
-    let data_i = data.clone(); let client_i = client.clone(); let cfg_i = cfg.clone();
-    tokio::spawn(async move { fetch_loop_incid(client_i, data_i, cfg_i).await; });
-
-    let data_t = data.clone(); let client_t = client.clone(); let cfg_t = cfg.clone();
-    tokio::spawn(async move { fetch_loop_trafico(client_t, data_t, cfg_t).await; });
+    // Lanza el loop de O/D -> compute_day -> actualizar estado
+    {
+        let data_c = data.clone();
+        let client_c = client.clone();
+        let cfg_c = cfg.clone();
+        tokio::spawn(async move { fetch_loop_od(client_c, data_c, cfg_c).await; });
+    }
 
     // API
-    let app =  server::api::router(server::api::ApiState { data: data.clone() });
+    let app = server::api::router(server::api::ApiState { data: data.clone() });
     info!("Escuchando en http://{}", cfg.bind);
     let listener = tokio::net::TcpListener::bind(&cfg.bind).await?;
     let serve = axum::serve(listener, app);
@@ -56,87 +65,88 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-fn app_cfg_from_env() -> AppCfg {
-    let mut c = AppCfg::default();
-    if let Ok(v) = env::var("BIND") { c.bind = v; }
-    if let Ok(v) = env::var("URL_CARGA") { c.url_carga = v; }
-    if let Ok(v) = env::var("URL_INCID") { c.url_incid = v; }
-    if let Ok(v) = env::var("URL_TRAFICO") { c.url_trafico = v; }
-    if let Ok(v) = env::var("T_CARGA_S") { c.t_carga_s = v.parse().unwrap_or(c.t_carga_s); }
-    if let Ok(v) = env::var("T_INCID_S") { c.t_incid_s = v.parse().unwrap_or(c.t_incid_s); }
-    if let Ok(v) = env::var("T_TRAFICO_S") { c.t_trafico_s = v.parse().unwrap_or(c.t_trafico_s); }
-    c
-}
-
-// ------------------------
-// Fetch loops + recompute
-// ------------------------
-async fn fetch_loop_carga(client: Client, data: Arc<RwLock<DataState>>, cfg: AppCfg) {
+// --------------------------------------
+// Loop OD: descarga -> parse -> compute_day -> estado
+// --------------------------------------
+async fn fetch_loop_od(client: Client, data: Arc<RwLock<DataState>>, cfg: AppCfg) {
     let mut cache = server::fetch::CacheCtl::default();
+
+    // Mapear AppCfg -> DelayCfg del h3grid
+    let mut od_cfg = ODDelayCfg::default();
+    od_cfg.res = cfg.h3_res;
+    od_cfg.min_conf_for_pure_orange = cfg.min_conf_orange;
+    od_cfg.max_concurrent_calls = cfg.max_concurrent;
+
+    // Provider TomTom (opcional)
+    let tomtom: Option<TomTomClient> = cfg.tomtom_key.clone().map(TomTomClient::new);
+
+    // Sinks (opcional): prioriza Orion si está, si no JSONL
+    let orion = cfg
+        .orion_url
+        .as_ref()
+        .map(|url| OrionLdSink::new(url.clone(), cfg.orion_tenant.clone(), None));
+    let jsonl = cfg.jsonl_out.as_ref().map(|p| JsonlSink::new(p));
+
     loop {
         if let Err(e) = async {
-            if let Some(bytes) = server::fetch::get_with_cache(&client, &cfg.url_carga, &mut cache).await? {
-                let txt = String::from_utf8_lossy(&bytes);
-                let zonas = data::carga::parse_carga_csv(&txt);
-                {
-                    let mut d = data.write().await; d.cargas = zonas; d.kpis.carga = d.cargas.len();
+            // 1) DESCARGA O/D (CSV)
+            let od_url = &cfg.od_url;
+            if let Some(bytes) =
+                server::fetch::get_with_cache(&client, od_url, &mut cache).await?
+            {
+                // 2) PARSE CSV -> Vec<ODRecord>
+                let mut rdr =
+                    csv::ReaderBuilder::new().has_headers(true).from_reader(&*bytes);
+                let mut od_rows: Vec<ODRecord> = Vec::new();
+
+                for rec in rdr.deserialize::<ODRecord>() {
+                    let mut r = rec.context("OD CSV parse")?;
+                    if !valid_date(&r.date) {
+                        r.date = chrono::Utc::now().date_naive();
+                    }
+                    od_rows.push(r);
                 }
-                recompute_all(&data).await;
+
+                // 3) EXEC COMPUTE-DAY
+                let date: NaiveDate = od_rows
+                    .get(0)
+                    .map(|r| r.date)
+                    .unwrap_or_else(|| chrono::Utc::now().date_naive());
+
+                let provider_ref: Option<&dyn TrafficProvider> =
+                    tomtom.as_ref().map(|t| t as &dyn TrafficProvider);
+                let sink_orion: Option<&dyn HistorySink> =
+                    orion.as_ref().map(|o| o as &dyn HistorySink);
+                let sink_jsonl: Option<&dyn HistorySink> =
+                    jsonl.as_ref().map(|j| j as &dyn HistorySink);
+                let sink = sink_orion.or(sink_jsonl);
+
+                let (_map, geojson) =
+                    compute_day(date, &od_rows, &od_cfg, provider_ref, sink)
+                        .await
+                        .context("compute_day failed")?;
+
+                // 4) ACTUALIZA ESTADO COMPARTIDO PARA LA API
+                {
+                    let mut d = data.write().await;
+                    d.hex_geojson = geojson;
+                    d.snapshot_ts_utc = chrono::Utc::now().to_rfc3339();
+                }
+                info!("OD recompute OK: date={date}, cells actualizadas");
             }
             Ok::<_, anyhow::Error>(())
-        }.await { tracing::warn!("carga: {e:?}"); }
-        sleep(Duration::from_secs(cfg.t_carga_s)).await;
+        }
+        .await
+        {
+            warn!("od_loop: {e:?}");
+        }
+
+        // 5) ESPERA
+        sleep(Duration::from_secs(cfg.t_od_s)).await;
     }
 }
 
-async fn fetch_loop_incid(client: Client, data: Arc<RwLock<DataState>>, cfg: AppCfg) {
-    let mut cache = server::fetch::CacheCtl::default();
-    loop {
-        if let Err(e) = async {
-            if let Some(bytes) = server::fetch::get_with_cache(&client, &cfg.url_incid, &mut cache).await? {
-                let incs = data::incid::parse_incidencias_xml(&bytes);
-                {
-                    let mut d = data.write().await; d.incs = incs; d.kpis.inc = d.incs.len();
-                }
-                recompute_all(&data).await;
-            }
-            Ok::<_, anyhow::Error>(())
-        }.await { tracing::warn!("incid: {e:?}"); }
-        sleep(Duration::from_secs(cfg.t_incid_s)).await;
-    }
-}
-
-async fn fetch_loop_trafico(client: Client, data: Arc<RwLock<DataState>>, cfg: AppCfg) {
-    let mut cache = server::fetch::CacheCtl::default();
-    loop {
-        if let Err(e) = async {
-            if let Some(bytes) = server::fetch::get_with_cache(&client, &cfg.url_trafico, &mut cache).await? {
-                let sensores = data::trafico::parse_trafico_xml(&bytes);
-                {
-                    let mut d = data.write().await; d.traf = sensores;
-                }
-                recompute_all(&data).await;
-            }
-            Ok::<_, anyhow::Error>(())
-        }.await { tracing::warn!("trafico: {e:?}"); }
-        sleep(Duration::from_secs(cfg.t_trafico_s)).await;
-    }
-}
-
-async fn recompute_all(data: &Arc<RwLock<DataState>>) {
-    let (cargas, incs, traf, cfg) = {
-        let d = data.read().await;
-        (d.cargas.clone(), d.incs.clone(), d.traf.clone(), d.delay_cfg.clone())
-    };
-    let base_res: u8 = 9;
-    let refine = Some((7, 1.15));   // parent res=7 y refinamos hijos cuando delay>1.15 o blocked
-    let k_smooth = 1;               
-    let min_delay_export = 1.03;    
-
-    let out = h3grid::recompute_h3(&cargas, &incs, &traf, &cfg, base_res, refine, k_smooth, min_delay_export);
-
-    let mut d = data.write().await;
-    d.hex_geojson = out.geojson;
-    d.routing_cells = out.routing;
-    d.snapshot_ts_utc = out.ts_utc;
+#[inline]
+fn valid_date(d: &NaiveDate) -> bool {
+    d >= &NaiveDate::from_ymd_opt(1971, 1, 1).unwrap()
 }

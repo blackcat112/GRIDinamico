@@ -63,18 +63,7 @@ pub struct DelayCfg {
     pub park_gain: f32,
 }
 
-#[derive(Clone, Debug, Default)]
-pub struct Metrics {
-    pub n_traf: usize,
-    pub carga_avg: f32,
-    pub nivel_avg: f32,
-    pub vel_med: f32,
-    pub ocup_avg: f32,
-    pub incidencias: usize,
-    pub blocked: bool,
-    pub delay_prom: f32,   // media del delay válido
-    pub n_delay_ok: usize, // cuenta para la media
-}
+
 
 impl Default for DelayCfg {
     fn default() -> Self {
@@ -103,28 +92,53 @@ impl Default for DelayCfg {
 
 #[derive(Clone, Debug)]
 pub struct AppCfg {
-    pub bind: String, 
-    pub url_carga: String,
-    pub url_incid: String,
-    pub url_trafico: String,
-    pub t_carga_s: u64,
-    pub t_incid_s: u64,
-    pub t_trafico_s: u64,
+    /// Dirección/puerto del servidor HTTP (Axum)
+    pub bind: String,
+
+    /// Fuente diaria O/D (CSV o CSV-proxy de Parquet)
+    pub od_url: String,
+
+    /// Periodicidad de refresco del O/D (segundos)
+    pub t_od_s: u64,
+
+    /// Resolución H3 de trabajo (p.ej. 7 ~ 1 km²)
+    pub h3_res: u8,
+
+    /// Umbral de confianza por debajo del cual se usa fallback TomTom
+    pub min_conf_orange: f32,
+
+    /// Concurrencia máxima para llamadas a proveedores externos (TomTom)
+    pub max_concurrent: usize,
+
+    /// Clave API TomTom (opcional). Si está ausente, no se consulta TomTom.
+    pub tomtom_key: Option<String>,
+
+    /// Persistencia histórica Orion-LD (opcional)
+    pub orion_url: Option<String>,
+    pub orion_tenant: Option<String>,
+
+    /// Persistencia histórica JSONL local (opcional). Si se define junto a Orion, prima Orion.
+    pub jsonl_out: Option<String>,
 }
 
 impl Default for AppCfg {
     fn default() -> Self {
         Self {
             bind: "0.0.0.0:8080".into(),
-            url_carga: "https://datos.madrid.es/egobfiles/MANUAL/208072/carga_descarga_2025.csv".into(),
-            url_incid: "https://informo.madrid.es/informo/tmadrid/incid_aytomadrid.xml".into(),
-            url_trafico: "https://informo.madrid.es/informo/tmadrid/pm.xml".into(),
-            t_carga_s: 3600,
-            t_incid_s: 300,
-            t_trafico_s: 300,
+            od_url: "http://localhost:8081/od_today.csv".into(), // ejemplo local
+            t_od_s: 900,                // 15 min por defecto
+            h3_res: 7,                  // ~1 km²
+            min_conf_orange: 0.65,      // conf telco mínima para no usar TomTom
+            max_concurrent: 16,         // paralelismo para TomTom
+            tomtom_key: Some("iHC6Mqg1RZQ7LNpJFm23dV4QKNRi28wl".to_string()),
+            orion_url: None,
+            orion_tenant: None,
+            jsonl_out: None,
         }
     }
 }
+
+
 
 
 #[derive(Clone, Debug, Serialize)]
