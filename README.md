@@ -330,7 +330,7 @@ Usamos una variante **BPR-like** basada **solo** en O/D:
 **Capacidad aproximada por ciudad/día**
 
 $$
-c=\mathrm{Perc}_{P}\!\left(\texttt{trips\_total}\right)\quad\text{con }P\in[0.85,\,0.95]
+c=\mathrm{Perc}_{P}\big(\mathrm{trips\_total}\big)\quad P\in[0.85,\,0.95]
 $$
 
 (y un suelo mínimo configurable). Motivo: robusto a *outliers*, independiente de cartografía detallada y aproxima la “saturación típica”.
