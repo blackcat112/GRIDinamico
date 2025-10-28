@@ -290,11 +290,15 @@ La salida principal por celda es `delay_final`, junto con métricas de apoyo (vo
 ## 🧠 Conceptos clave
 
 - **Travel Time Index (TTI)**  
-  \( \text{TTI} = \dfrac{t_{\text{obs}}}{t_{\text{free}}} \;\equiv\; \dfrac{V_{\text{free}}}{V_{\text{obs}}} \).  
+  $$
+  \mathrm{TTI}=\frac{t_{\mathrm{obs}}}{t_{\mathrm{free}}}\;\equiv\;\frac{V_{\mathrm{free}}}{V_{\mathrm{obs}}}
+  $$
   Es el índice operativo estándar: compara el tiempo (o velocidad) observado con el de flujo libre.
 
-- **Funciones volumen-retardo (BPR)** para planificación  
-  \( \text{delay} = 1 + a\,(v/c)^b \),  
+- **Funciones volumen–retardo (BPR)** para planificación  
+  $$
+  \text{delay} \;=\; 1 + a\,(v/c)^b
+  $$
   donde \(v\) es el volumen y \(c\) la capacidad. Capturan la **no linealidad** de la congestión cerca de saturación.
 
 - **Fiabilidad (opcional)**  
@@ -306,9 +310,9 @@ La salida principal por celda es `delay_final`, junto con métricas de apoyo (vo
 
 ### 1) Delay del proveedor (cuando hay velocidades)
 A partir de *Traffic Flow* del proveedor:
-\[
-\boxed{\text{delay\_tt} = \dfrac{V_{\text{free}}}{V_{\text{obs}}}}
-\]
+$$
+\boxed{\text{delay\_tt} \;=\; \frac{V_{\mathrm{free}}}{V_{\mathrm{obs}}}}
+$$
 - `currentSpeed` y `freeFlowSpeed` → cálculo directo de TTI.
 - Se acompaña de `confidence` por segmento/celda.
 
@@ -316,25 +320,28 @@ A partir de *Traffic Flow* del proveedor:
 Usamos una variante **BPR-like** basada **solo** en O/D:
 
 1) **Capacidad aproximada por ciudad/día**  
-   \(c = P\)-ésimo **percentil** de `trips_total` por celda (p. ej. \(P=0.90\)), con un suelo mínimo configurable.  
+   $$
+   c \;=\; \mathrm{Perc}_P\big(\texttt{trips\_total}\big) \quad \text{con } P\in[0.85,\,0.95]
+   $$
+   (y un suelo mínimo configurable).  
    Motivo: robusto a *outliers*, independiente de cartografía detallada y aproxima la “saturación típica”.
 
 2) **Fórmula por celda**
-\[
-\boxed{\text{delay\_orange} = 1 + a \cdot (v/c)^b \cdot \bigl(1+\gamma \cdot \text{truck\_share}\bigr)}
-\]
-- \(v\) = `trips_total` (pondera camiones vía `truck_factor`).
-- \(\text{truck\_share}\) = `trips_trucks / trips_total`.  
-- Parámetros por defecto típicos: \(a=0.15,\; b=4\), \(\gamma \in [0.2,0.6]\).  
+$$
+\boxed{\text{delay\_orange} \;=\; 1 + a \cdot (v/c)^b \cdot \bigl(1+\gamma \cdot \text{truck\_share}\bigr)}
+$$
+- \(v=\texttt{trips\_total}\) (pondera camiones vía `truck_factor`).  
+- \(\text{truck\_share}=\texttt{trips\_trucks}/\texttt{trips\_total}\).  
+- Parámetros por defecto típicos: \(a=0.15,\; b=4\), \(\gamma\in[0.2,0.6]\).  
 - Se **clampa** a `[delay_min, delay_max]`.
 
 > **Por qué no lineal:** cerca de capacidad, pequeñas subidas de volumen generan grandes retardos; la BPR lo captura, una forma lineal no.
 
 ### 3) Blending (si hay proveedor **y** confianza válida)
 Si la celda tiene confianza telco baja y hay dato del proveedor, combinamos:
-\[
-\boxed{\text{delay\_final} = (1-\lambda)\cdot \text{delay\_orange} \;+\; \lambda \cdot \text{delay\_tt}}
-\]
+$$
+\boxed{\text{delay\_final} \;=\; (1-\lambda)\cdot \text{delay\_orange} \;+\; \lambda \cdot \text{delay\_tt}}
+$$
 - \(\lambda\) crece cuando **baja la confianza telco** y/o **sube** la `confidence` del proveedor.  
 - **Objetivo:** dar más peso a la fuente más fiable en cada celda.
 
@@ -351,7 +358,7 @@ Si la celda tiene confianza telco baja y hay dato del proveedor, combinamos:
 - `vc_cap`: tope para \(v/c\) por estabilidad numérica.  
 - `delay_min`, `delay_max`: acotan el rango del delay.
 
-**Calibración recomendada:** en días con buena cobertura del proveedor, ajusta \((a, b, \gamma)\) minimizando el error entre `delay_orange` y `delay_tt` **solo** en celdas con `confidence` alta. Así el fallback Orange queda alineado con la “verdad terreno” cuando falte proveedor.
+**Calibración recomendada:** en días con buena cobertura del proveedor, ajusta \((a,b,\gamma)\) minimizando el error entre `delay\_orange` y `delay\_tt` **solo** en celdas con `confidence` alta. Así el fallback Orange queda alineado con la “verdad terreno” cuando falte proveedor.
 
 ---
 
@@ -361,7 +368,6 @@ Si la celda tiene confianza telco baja y hay dato del proveedor, combinamos:
 - `vol_norm`, `truck_share`, `conf` (telco)  
 - `used_tomtom` y/o `used_external` (booleanos) para auditar si entró una fuente externa.
 
----
 
 ## 📦 Pipeline (pseudocódigo)
 
