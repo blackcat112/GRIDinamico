@@ -34,7 +34,7 @@ tower-http = { version = "0.5", features = ["trace", "compression-br", "compress
 geo = { version = "0.28", default-features = false, features = ["use-serde"] }
 geojson = "0.24"
 rstar = "0.11"
-h3o = { version = "0.5", features = ["geo"] }
+h3o = { version = "0.5", features = ["geo","serde"]  }
 s2 = "0.0.13" 
  
 

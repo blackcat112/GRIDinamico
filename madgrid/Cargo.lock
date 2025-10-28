@@ -763,6 +763,8 @@ dependencies = [
  "h3o-bit",
  "konst",
  "libm",
+ "serde",
+ "serde_repr",
 ]
 
 [[package]]

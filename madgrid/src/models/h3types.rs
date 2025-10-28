@@ -109,4 +109,3 @@ pub struct TomTomClient {
     /// Timeout para cada request
     pub timeout: Duration,
 }
-

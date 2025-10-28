@@ -452,7 +452,7 @@ pub fn to_geojson(metrics: &HashMap<CellIndex, H3Metrics>, cfg: &DelayCfg) -> St
     let mut features = Vec::new();
     for (c, m) in metrics {
         let d = m.delay_final;
-        if d <= 1.0 + cfg.show_eps { continue; }
+        //if d <= 1.0 + cfg.show_eps { continue; }
 
         let norm = ((d - 1.0) / (cfg.delay_max - 1.0)).clamp(0.0, 1.0);
         let col = color_from_norm(norm);
