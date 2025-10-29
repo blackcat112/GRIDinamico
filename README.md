@@ -226,9 +226,11 @@ El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y
 
 ### 🔹 2. Modelo BPR-like (delay teórico)
 - Aplica una versión suavizada del modelo **BPR (Bureau of Public Roads)**:
-  $$
-  delay = 1 + a \cdot (v/c)^b \cdot (1 + \gamma \cdot truck\_share)
-  $$
+  
+ $$
+\text{delay} = 1 + a \cdot \left(\frac{v}{c}\right)^b \cdot \left(1 + \gamma \cdot \text{truck\_share}\right)
+$$
+  
 - Donde:
   - `a, b`: controlan la intensidad de congestión.
   - `c`: capacidad estimada por percentil de tráfico (`capacity_percentile`).
@@ -278,20 +280,21 @@ El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y
 
 ## 🧩 Flujo de datos completo
 
-```mermaid
-flowchart TD
-  A[OD CSV / Parquet] --> B[aggregate_od_to_h3()]
-  B --> C[compute_delay_orange()]
-  C --> D{conf < threshold?}
-  D -- Sí --> E[TomTomClient::delay_for_cell()]
-  D -- No --> F[Delay Orange puro]
-  E --> G[enrich_with_traffic_provider()]
-  F --> G
-  G --> H[to_geojson()]
-  G --> I[JsonlSink / OrionLdSink]
-  H --> J[GeoJSON visualizable]
-  I --> K[Históricos]
 ```
+flowchart TD
+A[OD CSV / Parquet] --> B[aggregate_od_to_h3]
+B --> C[compute_delay_orange]
+C --> D{Confianza < threshold?}
+D -->|Sí| E[TomTomClient.delay_for_cell]
+D -->|No| F[Delay Orange puro]
+E --> G[enrich_with_traffic_provider]
+F --> G
+G --> H[to_geojson]
+G --> I[JsonlSink / OrionLdSink]
+H --> J[GeoJSON visualizable]
+I --> K[Históricos]
+```
+
 
 ---
 
