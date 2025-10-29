@@ -18,14 +18,6 @@
    - [ ] ???????? 
 - [ ] Escribir documentación inicial
 
-Motor **ultra-ligero** en Rust que:
-
-- descarga datos públicos del Ayuntamiento de Madrid (zonas de carga/descarga, incidencias y tráfico),
-- agrega por celdas hexagonales,
-- calcula un **delay factor** por hexágono,
-- expone una APIs
-- clusteriza en base a json de pedidios 
-
 ---
 
 ## 🧭 Estructura del proyecto
