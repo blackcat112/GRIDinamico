@@ -1,5 +1,22 @@
 # HERRAMIENTA QUE GENERA MALLADOS DINAMICOS  EN BASE A DATOS
 
+## Checklist de tareas
+
+- [ ] Mallado S2 para clusterizacion 
+   - [x] Creacion mallado S2
+   - [x] Api recibe pedidos y tipo de vehiculo y devuelve geojson S2 inteligente
+   - [ ] Testing 
+- [ ] Mallado H3
+   - [x] Creacion mallado H3
+   - [x] H3 se nutre de csv de Telco (Orange)
+   - [x] H3 se nutre de FCD llamada api externa en caso de que confianza Telco baja (C<0.65)
+   - [x] Llamada de FCD con sentido 
+   - [ ] Funcionamiento de dividir en hijas 
+   - [ ] Score de HotSpot
+   - [ ] Calculo Delay Factor
+   - [ ] Testear para reducir death zones
+   - [ ] ???????? 
+- [ ] Escribir documentación inicial
 
 Motor **ultra-ligero** en Rust que:
 
@@ -203,7 +220,7 @@ curl http://localhost:1616/health
 
 ### 📦 Parte del proyecto **RustMalladoH3**
 Versión: `v2.0 – O/D + TomTom + Históricos (Orion-LD / JSONL)`  
-Autor: *Desarrollo Rust para Smart Cities y movilidad urbana*
+Autor: *Capillar IT || Nicolas BEcas *
 
 ---
 
@@ -226,11 +243,9 @@ El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y
 
 ### 🔹 2. Modelo BPR-like (delay teórico)
 - Aplica una versión suavizada del modelo **BPR (Bureau of Public Roads)**:
-  
-$$
-\mathrm{delay} = 1 + a \cdot \left(\frac{v}{c}\right)^{b} \cdot \left(1 + \gamma \cdot \mathrm{truck\_share}\right)
-$$
-  
+ $$
+  \mathrm{delay} = 1 + a \cdot \left(\frac{v}{c}\right)^{b} \cdot \left(1 + \gamma \cdot \mathrm{truck\_share}\right)
+ $$
 - Donde:
   - `a, b`: controlan la intensidad de congestión.
   - `c`: capacidad estimada por percentil de tráfico (`capacity_percentile`).
@@ -282,20 +297,19 @@ $$
 
 ```
 flowchart TD
-A[OD CSV / Parquet] --> B[aggregate_od_to_h3]
-B --> C[compute_delay_orange]
-C --> D{Confianza < threshold?}
-D -->|Sí| E[TomTomClient.delay_for_cell]
-D -->|No| F[Delay Orange puro]
-E --> G[enrich_with_traffic_provider]
-F --> G
-G --> H[to_geojson]
-G --> I[JsonlSink / OrionLdSink]
-H --> J[GeoJSON visualizable]
-I --> K[Históricos]
+  A[OD CSV / Parquet] --> B[aggregate_od_to_h3()]
+  B --> C[compute_delay_orange()]
+  C --> D{conf < threshold?}
+  D -- Sí --> E[TomTomClient::delay_for_cell()]
+  D -- No --> F[Delay Orange puro]
+  E --> G[enrich_with_traffic_provider()]
+  F --> G
+  G --> H[to_geojson()]
+  G --> I[JsonlSink / OrionLdSink]
+  H --> J[GeoJSON visualizable]
+  I --> K[Históricos]
+
 ```
-
-
 ---
 
 # 📈 Cálculo de *Delay Factor* (TTI) en la malla H3
