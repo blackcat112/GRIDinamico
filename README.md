@@ -4,7 +4,6 @@
 Motor **ultra-ligero** en Rust que:
 
 - descarga datos públicos del Ayuntamiento de Madrid (zonas de carga/descarga, incidencias y tráfico),
-- transforma UTM 30N → WGS84,
 - agrega por celdas hexagonales,
 - calcula un **delay factor** por hexágono,
 - expone una APIs
@@ -199,82 +198,102 @@ Verifica que el servicio está activo
 curl http://localhost:1616/health
 ```
 
-### 2. KPIs
-Devuelve indicadores básicos de una ciudad
-Parámetros
-city (opcional, string):
-zgz → Zaragoza
-lg → Logroño
-madC → Madrid Combinado
-(otro valor → KPIs del estado en memoria)
+---
+# 🧭 Módulo `h3grid.rs`
 
-```bash
-curl "http://localhost:1616/kpis?city=zgz"   
-```
-
-### 3. H3 mallado 
-Exporta una malla de hexágonos en formato GeoJSON.
-Parámetros
-city (opcional, string):
-zgz → Zaragoza
-lg → Logroño
-madC → Madrid Combinado
-(sin parámetro → Madrid por defecto)
-```bash
-curl "http://localhost:1616/map/hex?city=madC" 
-```
-
-### 4. Zonas/grupos
-POST 
-```bash
-curl -X POST "http://localhost:1616/groups?city=zgz" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "features": [
-      { "properties": { "h3": "8928308280fffff", "grupo": 1 } },
-      { "properties": { "h3": "8928308280bffff", "grupo": 2 } }
-    ]
-  }'
- 
-```
-
-GET 
-```bash
-curl "http://localhost:1616/groups?city=zgz"
-```
-
-
-
+### 📦 Parte del proyecto **RustMalladoH3**
+Versión: `v2.0 – O/D + TomTom + Históricos (Orion-LD / JSONL)`  
+Autor: *Desarrollo Rust para Smart Cities y movilidad urbana*
 
 ---
 
-## 📊 Testing
+## 🧠 Descripción general
 
-### Explicación del script `bench.sh`
+El módulo `h3grid.rs` implementa la **malla dinámica de tráfico urbano** basada en celdas hexagonales H3.  
+Integra múltiples fuentes de datos —telco (Orange), tráfico en tiempo real (TomTom) y red vial (OpenStreetMap)— para generar un mapa de **delays normalizados y confiables** por zona.
 
-Este script automatiza las pruebas de rendimiento para la aplicación `madgrid`, centrándose en el tamaño del binario, el uso de recursos y el desempeño de los endpoints HTTP.
+El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y también se persiste en `Orion-LD` o `JSONL` para históricos.
 
-### Explicación del script `bench_summary.sh`
+---
 
-Este script resume los resultados de las pruebas HTTP realizadas con la herramienta `hey` para la aplicación `madgrid`. Recoge estadísticas de rendimiento y latencia (solicitudes/segundo, p50, p95, p99) de múltiples archivos de salida y genera un resumen consolidado en formato CSV.
+## ⚙️ Funcionalidades principales
 
-### Explicación del script `plot_bench.py`
+### 🔹 1. Agregación O/D
+- Lee registros `ODRecord` (Origen–Destino) con volúmenes y confianza.
+- Asigna cada punto a celdas H3 (`CellIndex`).
+- Combina datos de origen y destino ponderando por volumen y tipo de vehículo.
+- Calcula confianza media (`conf_cell`) y volumen normalizado (`vol_norm`).
 
-Este script visualiza los resultados de las pruebas HTTP a partir de un archivo CSV de resumen. Lee los datos resumidos, extrae la resolución y los ajustes de refinamiento desde los nombres de archivo, y grafica las solicitudes por segundo (`Requests/sec`) según los niveles de resolución H3. El gráfico resultante compara el rendimiento con y sin refinamiento, guardando la visualización.
+### 🔹 2. Modelo BPR-like (delay teórico)
+- Aplica una versión suavizada del modelo **BPR (Bureau of Public Roads)**:
+  \[
+  delay = 1 + a \cdot (v/c)^b \cdot (1 + \gamma \cdot truck\_share)
+  \]
+- Donde:
+  - `a, b`: controlan la intensidad de congestión.
+  - `c`: capacidad estimada por percentil de tráfico (`capacity_percentile`).
+  - `γ`: sensibilidad a camiones.
+- Resulta en `delay_orange` (delay teórico base).
 
-![Comparación de benchmarks](testing/bench_comparison.png)
+### 🔹 3. Integración con TomTom (API Flow Segment Data)
+- Llama a la API: https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json
 
-### Observaciones sobre el gráfico
+- Usa coordenadas **viales reales** en lugar del centro geométrico H3.
+- Obtiene `currentSpeed`, `freeFlowSpeed` y `confidence`.
+- Calcula `delay_tomtom = freeFlowSpeed / currentSpeed`.
 
-> **Interpretación del gráfico:**
->
-> - Cuando usamos hexágonos grandes (`res7`), **es más rápido no refinar** porque el mapa ya está simplificado.
-> - Pero en resoluciones más finas (`res9–res10`), **refinar multiplica el rendimiento** porque evitamos calcular todas las celdas, sólo las que importan.
->
-> **En otras palabras:**  
-> El refinamiento es una estrategia para escalar a mayor detalle sin perder rendimiento.  
-> Si queremos mapas urbanos muy precisos, **debemos usarlo**.
+### 🔹 4. Mapa vial (road_map)
+- Cargado desde CSV con `load_roadmap_csv(path)`.
+- Contiene, por cada celda H3:
+- `road_count`: nº de segmentos viales.
+- `total_len_m`: longitud total de vías.
+- `avg_lat`, `avg_lon`: punto vial representativo.
+- `primary_ratio`: proporción de vías principales.
+- Mejora la precisión al seleccionar el punto vial más relevante por celda.
 
+### 🔹 5. Blending inteligente (Orange + TomTom)
+- Se aplica solo a celdas con baja confianza (`conf_cell < min_conf_for_pure_orange`).
+- Combina ambos delays según:
+- La confianza del dato Orange.
+- La confianza del dato TomTom (`confidence`).
+- Resultado final: `delay_final`.
+
+### 🔹 6. Export a GeoJSON
+- Crea un `FeatureCollection` con cada celda H3 como polígono.
+- Incluye propiedades:
+- `delay_final`, `delay_orange`, `delay_tomtom`
+- `truck_share`, `vol_norm`, `conf`
+- `used_tomtom` (booleano)
+- Colores normalizados (`color_from_norm`) para visualización inmediata en Leaflet o Kepler.gl.
+
+### 🔹 7. Persistencia histórica
+- **JsonlSink:** guarda cada fila en formato JSONL (historial local).
+- **OrionLdSink:** inserta o actualiza entidades NGSI-LD (`H3Delay`) en FIWARE Orion-LD.
+
+### 🔹 8. Concurrencia optimizada
+- Llamadas a TomTom en paralelo mediante `tokio::Semaphore` con `max_concurrent_calls`.
+- Gestión robusta de errores y `timeout` por solicitud (8 s).
+
+---
+
+## 🧩 Flujo de datos completo
+
+```mermaid
+flowchart TD
+  A[OD CSV / Parquet] --> B[aggregate_od_to_h3()]
+  B --> C[compute_delay_orange()]
+  C --> D{conf < threshold?}
+  D -- Sí --> E[TomTomClient::delay_for_cell()]
+  D -- No --> F[Delay Orange puro]
+  E --> G[enrich_with_traffic_provider()]
+  F --> G
+  G --> H[to_geojson()]
+  G --> I[JsonlSink / OrionLdSink]
+  H --> J[GeoJSON visualizable]
+  I --> K[Históricos]
+
+
+---
 
 # 📈 Cálculo de *Delay Factor* (TTI) en la malla H3
 
@@ -405,7 +424,7 @@ $$
 5) Export:
    GeoJSON / Orion-LD con métricas y flags
 
-
+```
 ## 📚 Referencias
 
 ### Índices de fiabilidad (FHWA)
@@ -423,3 +442,4 @@ $$
   https://books.google.com/books/about/Traffic_Assignment_Manual_for_Applicatio.html?id=AvNUR_O_JEcC
 - (Lectura moderna) *Modified Bureau of Public Roads (MBPR) Link Function* — discusión y extensiones a la BPR.  
   https://mediatum.ub.tum.de/doc/1714671/document.pdf
+
