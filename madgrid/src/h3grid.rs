@@ -12,6 +12,9 @@ use std::collections::HashMap;
 use std::str::FromStr;
 use std::time::Duration;
 use tracing::{debug, info, warn};
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+
 
 use crate::models::h3types::*;
 
@@ -78,7 +81,7 @@ pub trait TrafficProvider: Send + Sync {
 }
 
 impl TomTomClient {
-    pub fn new(api_key: impl Into<String>) -> Self {
+    pub fn new(api_key: impl Into<String>, road_map: Option<HashMap<CellIndex, RoadCell>>) -> Self {
         Self {
             http: reqwest::Client::builder()
                 .gzip(true)
@@ -90,6 +93,7 @@ impl TomTomClient {
             api_key: api_key.into(),
             base_url_absolute: "https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json".to_string(),
             timeout: Duration::from_secs(8),
+            road_map, // ✅ nuevo
         }
     }
 }
@@ -97,10 +101,27 @@ impl TomTomClient {
 #[async_trait]
 impl TrafficProvider for TomTomClient {
     async fn delay_for_cell(&self, cell: CellIndex) -> anyhow::Result<Option<(f32, f32)>> {
-        let ll: LatLng = cell.into();
-        let lat = ll.lat();
-        let lon = ll.lng();
+        //  Elegir el punto vial mas representativo
+        let (lat, lon) = if let Some(ref map) = self.road_map {
+            if let Some(rc) = map.get(&cell) {
+                // Si tiene vias, usamos su punto medio vial
+                if rc.road_count > 0 {
+                    (rc.avg_lat, rc.avg_lon)
+                } else {
+                    // fallback al centro del hexagono
+                    let ll: LatLng = cell.into();
+                    (ll.lat(), ll.lng())
+                }
+            } else {
+                let ll: LatLng = cell.into();
+                (ll.lat(), ll.lng())
+            }
+        } else {
+            let ll: LatLng = cell.into();
+            (ll.lat(), ll.lng())
+        };
 
+       
         let url = reqwest::Url::parse_with_params(
             &self.base_url_absolute,
             &[
@@ -284,6 +305,45 @@ pub fn cell_polygon_coords(c: CellIndex) -> Vec<[f64; 2]> {
         }
     }
     coords
+}
+
+pub fn load_roadmap_csv(path: &str) -> Result<HashMap<CellIndex, RoadCell>> {
+    let file = File::open(path).context("No se pudo abrir el CSV de roadmap")?;
+    let reader = BufReader::new(file);
+    let mut map = HashMap::new();
+
+    for (i, line) in reader.lines().enumerate() {
+        let l = line?;
+        if i == 0 || l.trim().is_empty() {
+            continue; // saltar cabecera
+        }
+        let parts: Vec<&str> = l.split(',').collect();
+        if parts.len() < 6 {
+            continue;
+        }
+
+        let h3 = CellIndex::from_str(parts[0])?;
+        let rc = parts[1].parse::<usize>().unwrap_or(0);
+        let len = parts[2].parse::<f64>().unwrap_or(0.0);
+        let lat = parts[3].parse::<f64>().unwrap_or(0.0);
+        let lon = parts[4].parse::<f64>().unwrap_or(0.0);
+        let pr = parts[5].parse::<f64>().unwrap_or(0.0);
+
+        map.insert(
+            h3,
+            RoadCell {
+                h3,
+                road_count: rc,
+                total_len_m: len,
+                avg_lat: lat,
+                avg_lon: lon,
+                primary_ratio: pr,
+            },
+        );
+    }
+
+    info!("📄 Road map cargado: {} celdas con vías", map.len());
+    Ok(map)
 }
 
 // ===============================

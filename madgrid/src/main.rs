@@ -18,7 +18,7 @@ use models::types::{AppCfg, DataState, DelayCfg};
 use models::h3types::{ DelayCfg as ODDelayCfg,ODRecord,TomTomClient};
 use h3grid::{
     compute_day, HistorySink, JsonlSink, OrionLdSink,
-    TrafficProvider,
+    TrafficProvider,load_roadmap_csv
 };
 
 #[allow(dead_code)]
@@ -76,8 +76,13 @@ async fn fetch_loop_od(client: Client, data: Arc<RwLock<DataState>>, cfg: AppCfg
     od_cfg.min_conf_for_pure_orange = cfg.min_conf_orange;
     od_cfg.max_concurrent_calls = cfg.max_concurrent;
 
+    // 1) Cargar roadmap CSV (una vez)
+    let road_map = load_roadmap_csv("data/hex_road_map_logrono.csv").ok();
     // Provider TomTom (opcional)
-    let tomtom: Option<TomTomClient> = cfg.tomtom_key.clone().map(TomTomClient::new);
+    let tomtom: Option<TomTomClient> = cfg
+    .tomtom_key
+    .clone()
+    .map(|key| TomTomClient::new(key, road_map.clone()));
 
     // Sinks (opcional): prioriza Orion si está, si no JSONL
     let orion = cfg

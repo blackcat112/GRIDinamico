@@ -3,6 +3,7 @@ use serde_with::{serde_as, DisplayFromStr};
 use chrono::NaiveDate;
 use h3o::CellIndex;
 use std::time::Duration;
+use std::collections::HashMap;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct DelayCfg {
@@ -108,4 +109,16 @@ pub struct TomTomClient {
     pub base_url_absolute: String,
     /// Timeout para cada request
     pub timeout: Duration,
+    pub road_map: Option<HashMap<CellIndex, RoadCell>>,
+}
+
+#[allow(dead_code)]
+#[derive(Debug, Clone)]
+pub struct RoadCell {
+    pub h3: CellIndex,
+    pub road_count: usize,
+    pub total_len_m: f64,
+    pub avg_lat: f64,
+    pub avg_lon: f64,
+    pub primary_ratio: f64,
 }
