@@ -226,9 +226,9 @@ El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y
 
 ### 🔹 2. Modelo BPR-like (delay teórico)
 - Aplica una versión suavizada del modelo **BPR (Bureau of Public Roads)**:
-  \[
+  $$
   delay = 1 + a \cdot (v/c)^b \cdot (1 + \gamma \cdot truck\_share)
-  \]
+  $$
 - Donde:
   - `a, b`: controlan la intensidad de congestión.
   - `c`: capacidad estimada por percentil de tráfico (`capacity_percentile`).
@@ -291,7 +291,7 @@ flowchart TD
   G --> I[JsonlSink / OrionLdSink]
   H --> J[GeoJSON visualizable]
   I --> K[Históricos]
-
+```
 
 ---
 
