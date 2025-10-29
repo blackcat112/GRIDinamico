@@ -227,8 +227,8 @@ El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y
 ### 🔹 2. Modelo BPR-like (delay teórico)
 - Aplica una versión suavizada del modelo **BPR (Bureau of Public Roads)**:
   
- $$
-\text{delay} = 1 + a \cdot \left(\frac{v}{c}\right)^b \cdot \left(1 + \gamma \cdot \text{truck\_share}\right)
+$$
+\mathrm{delay} = 1 + a \cdot \left(\frac{v}{c}\right)^{b} \cdot \left(1 + \gamma \cdot \mathrm{truck\_share}\right)
 $$
   
 - Donde:
