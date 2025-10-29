@@ -40,7 +40,7 @@ async fn main() -> Result<()> {
         ..Default::default()
     }));
 
-    // HTTP client con compresión
+    // HTTP client con compresion
     let client = Client::builder().brotli(true).gzip(true).deflate(true).build()?;
 
     // Lanza el loop de O/D -> compute_day -> actualizar estado

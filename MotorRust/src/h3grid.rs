@@ -1,5 +1,5 @@
 //! h3grid.rs — O/D + fallback TomTom + históricos (Orion-LD / JSONL)
-//! Versión corregida (serde_with, Default de CellIndex, Result alias, FromStr)
+//! Version corregida (serde_with, Default de CellIndex, Result alias, FromStr)
 
 use anyhow::{anyhow, Context, Result};
 use async_trait::async_trait;
@@ -19,7 +19,7 @@ use std::io::{BufRead, BufReader};
 use crate::models::h3types::*;
 
 // ===============================
-// Configuración y tipos de dominio
+// Configuracion y tipos de dominio
 
 impl Default for DelayCfg {
     fn default() -> Self {
@@ -34,7 +34,6 @@ impl Default for DelayCfg {
             truck_factor: 1.4,
             car_factor: 1.0,
             show_eps: 0.02,
-        // --- NUEVO: parámetros BPR-like ---
             bpr_a: 0.15,              // intensidad de congestión
             bpr_b: 4.0,               // curvatura
             truck_gamma: 0.4,         // sensibilidad a camiones (0.2–0.6 típico)
@@ -72,7 +71,7 @@ impl H3Metrics {
 
 
 // ===============================
-// Proveedor de tráfico (TomTom, etc.)
+// Proveedor de trafico (TomTom, etc.)
 // ===============================
 
 #[async_trait]
@@ -93,7 +92,7 @@ impl TomTomClient {
             api_key: api_key.into(),
             base_url_absolute: "https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json".to_string(),
             timeout: Duration::from_secs(8),
-            road_map, // ✅ nuevo
+            road_map, 
         }
     }
 }
@@ -104,7 +103,7 @@ impl TrafficProvider for TomTomClient {
         //  Elegir el punto vial mas representativo
         let (lat, lon) = if let Some(ref map) = self.road_map {
             if let Some(rc) = map.get(&cell) {
-                // Si tiene vias, usamos su punto medio vial
+                // Si tiene vias -> usamos su punto medio vial
                 if rc.road_count > 0 {
                     (rc.avg_lat, rc.avg_lon)
                 } else {
@@ -290,11 +289,7 @@ fn color_from_norm(x: f32) -> &'static str {
     R[i]
 }
 
-#[inline]
-// fn cell_center_deg(c: CellIndex) -> (f64, f64) {
-//     let ll: LatLng = c.into();
-//     (ll.lng(), ll.lat())
-// }
+
 
 pub fn cell_polygon_coords(c: CellIndex) -> Vec<[f64; 2]> {
     let verts = c.boundary();
@@ -347,7 +342,7 @@ pub fn load_roadmap_csv(path: &str) -> Result<HashMap<CellIndex, RoadCell>> {
 }
 
 // ===============================
-// Núcleo: agregación O/D y delay
+// Núcleo: agregacion O/D y delay
 // ===============================
 
 pub fn aggregate_od_to_h3(records: &[ODRecord], cfg: &DelayCfg) -> Result<HashMap<CellIndex, H3Metrics>> {
@@ -397,12 +392,12 @@ pub fn aggregate_od_to_h3(records: &[ODRecord], cfg: &DelayCfg) -> Result<HashMa
 pub fn compute_delay_orange(metrics: &mut HashMap<CellIndex, H3Metrics>, cfg: &DelayCfg) {
     let eps = 1e-6_f32;
 
-    // --- 1) Estadísticos base por ciudad/día ---
+    // --- 1) Estadisticos base por ciudad/diia ---
     //   a) vector de volúmenes por celda (trips_total ya pondera trucks según cfg.*_factor)
     let mut vols: Vec<f32> = metrics.values().map(|m| m.trips_total.max(0.0)).collect();
     let n = vols.len().max(1) as f32;
 
-    // media para vol_norm (puro display/colores como ya usabas)
+    // media para vol_norm (puro display/colores no afecta delay)
     let mean_vol = {
         let sum: f32 = vols.iter().copied().sum();
         (sum / n).max(eps)
@@ -418,9 +413,9 @@ pub fn compute_delay_orange(metrics: &mut HashMap<CellIndex, H3Metrics>, cfg: &D
         perc.max(cfg.capacity_floor).max(eps)
     };
 
-    // --- 2) Cálculo por celda ---
+    // --- 2) Calculo por celda ---
     for m in metrics.values_mut() {
-        // señales descriptivas que ya usabas (útiles para inspección/estilo)
+        // señales descriptivas
         let total  = m.trips_total.max(eps);
         let trucks = m.trips_trucks.max(0.0);
 
@@ -428,7 +423,7 @@ pub fn compute_delay_orange(metrics: &mut HashMap<CellIndex, H3Metrics>, cfg: &D
         m.vol_norm    = (total / mean_vol).clamp(0.0, 20.0);
 
         // --- 3) BPR-like ---
-        // v/c acotado para estabilidad numérica
+        // v/c acotado para estabilidad numerica
         let vc = (total / c).clamp(0.0, cfg.vc_cap);
 
         // factor de mezcla por camiones (penaliza capacidad efectiva)
@@ -440,7 +435,7 @@ pub fn compute_delay_orange(metrics: &mut HashMap<CellIndex, H3Metrics>, cfg: &D
 
         m.delay_orange = clamp(delay, cfg.delay_min, cfg.delay_max);
 
-        // inicializa delay_final con Orange; luego blending/override lo ajustará si hay TomTom
+        // inicializa delay_final con Orange; luego blending/override lo ajustara si hay TomTom
         m.delay_final = m.delay_orange;
     }
 }
@@ -505,7 +500,7 @@ pub async fn enrich_with_traffic_provider(
 }
 
 // ===============================
-// Export: GeoJSON y rutina principal
+// Export:: GeojSON y rutina principal
 // ===============================
 
 pub fn to_geojson(metrics: &HashMap<CellIndex, H3Metrics>, cfg: &DelayCfg) -> String {
@@ -556,7 +551,7 @@ pub async fn compute_day(
     traffic: Option<&dyn TrafficProvider>,
     sink: Option<&dyn HistorySink>,
 ) -> Result<(HashMap<CellIndex, H3Metrics>, String)> {
-    // 1) Agregación
+    // 1) Agregacion
     let mut map = aggregate_od_to_h3(od, cfg)?;
 
     // 2) Delay Orange
@@ -595,7 +590,7 @@ pub async fn compute_day(
 }
 
 // ===============================
-// Tests rápidos
+// Tests rapidos
 // ===============================
 
 #[cfg(test)]

@@ -1,5 +1,5 @@
 
-//! Agrupación de pedidos sobre celdas S2 (sin overlapping), versión compatible con s2 = 0.0.13
+//! Agrupacion de pedidos sobre celdas S2 (sin overlapping), version compatible con s2 = 0.0.13
 
 use axum::Json;
 use serde_json::json;
