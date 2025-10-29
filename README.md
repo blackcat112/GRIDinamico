@@ -11,9 +11,9 @@
    - [x] H3 se nutre de csv de Telco (Orange)
    - [x] H3 se nutre de FCD llamada api externa en caso de que confianza Telco baja (C<0.65)
    - [x] Llamada de FCD con sentido 
-   - [ ] Funcionamiento de dividir en hijas 
+   - [ ] Funcionamiento de dividir en hijas correcto
    - [ ] Score de HotSpot
-   - [ ] Calculo Delay Factor
+   - [ ] Hacer mas preciso Delay Factor 
    - [ ] Testear para reducir death zones
    - [ ] ???????? 
 - [ ] Escribir documentación inicial
