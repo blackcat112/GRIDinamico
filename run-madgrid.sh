@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-APP_DIR="/data/MallaInteligente/motorRust"
+APP_DIR="/data/MallaInteligente/MotorRust"
 PID_FILE="$APP_DIR/madgrid.pid"
 LOG_FILE="$APP_DIR/madgrid.log"
 
