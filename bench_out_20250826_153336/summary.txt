@@ -1,7 +1,0 @@
-File,Requests/sec,p50,p95,p99
-hey_res10.txt,416.9106,in,in,in
-hey_res10_refine.txt,475.1684,in,in,in
-hey_res7.txt,436.7001,in,in,in
-hey_res7_refine.txt,401.3225,in,in,in
-hey_res9.txt,389.7711,in,in,in
-hey_res9_refine.txt,438.7653,in,in,in

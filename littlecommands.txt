@@ -1,0 +1,12 @@
+
+nohup ./run-madgrid.sh > madgrid.log 2>&1 & // arrancar 
+
+tail -f madgrid.log // lgs
+
+pkill -f run-madgrid.sh // parar parar 
+
+ps -p $(cat /data/GridDinamicoMadrid/madgrid.pid) -o pid,cmd,%cpu,%mem
+
+ps -p 2410618 -o pid,ppid,cmd,%cpu,%mem,rss,vsz,etime
+    PID    PPID CMD                         %CPU %MEM   RSS    VSZ     ELAPSED
+2410618       1 target/debug/madgrid         1.7  0.1 42860 1043048      01:21

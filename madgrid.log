@@ -1,0 +1,2354 @@
+/home/admincapit/.profile: line 28: /data/rust/cargo/env: No such file or directory
+   Compiling madgrid v0.1.0 (/data/MallaInteligente/motorRust)
+    Finished `release` profile [optimized] target(s) in 1m 21s
+     Running `target/release/madgrid`
+[2m2025-10-21T09:39:09.086547Z[0m [32m INFO[0m [2mmadgrid[0m[2m:[0m Escuchando en http://0.0.0.0:1616
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
+res7 cell 873929a48ffffff center=(42.47265,-2.43075) dist_centro=1.61 km
+  res8 cell 883929a481fffff center=(42.47265,-2.43075) dist_hotspot=0.52 km
+  res8 cell 883929a483fffff center=(42.47113,-2.41990) dist_hotspot=1.33 km
+  res8 cell 883929a485fffff center=(42.46615,-2.43757) dist_hotspot=0.45 km
+  res8 cell 883929a487fffff center=(42.46462,-2.42671) dist_hotspot=0.97 km
+  res8 cell 883929a489fffff center=(42.48068,-2.43480) dist_hotspot=1.19 km
+  res8 cell 883929a48bfffff center=(42.47916,-2.42394) dist_hotspot=1.42 km
+  res8 cell 883929a48dfffff center=(42.47418,-2.44161) dist_hotspot=0.65 km
+res7 cell 873929a49ffffff center=(42.47611,-2.40222) dist_centro=3.81 km
+res7 cell 873929a4affffff center=(42.45161,-2.44034) dist_centro=1.29 km
+  res8 cell 883929a4a1fffff center=(42.45161,-2.44034) dist_hotspot=0.92 km
+  res8 cell 883929a4a3fffff center=(42.45009,-2.42948) dist_hotspot=1.65 km
+  res8 cell 883929a4a5fffff center=(42.44510,-2.44715) dist_hotspot=1.55 km
+  res8 cell 883929a4a7fffff center=(42.44358,-2.43630) dist_hotspot=1.87 km
+  res8 cell 883929a4a9fffff center=(42.45964,-2.44438) dist_hotspot=0.12 km
+  res8 cell 883929a4abfffff center=(42.45812,-2.43353) dist_hotspot=0.99 km
+  res8 cell 883929a4adfffff center=(42.45313,-2.45120) dist_hotspot=0.80 km
+res7 cell 873929a4bffffff center=(42.45507,-2.41182) dist_centro=2.85 km
+res7 cell 873929a4cffffff center=(42.49024,-2.44970) dist_centro=3.09 km
+res7 cell 873929a4dffffff center=(42.49370,-2.42116) dist_centro=3.96 km
+res7 cell 873929a4effffff center=(42.46919,-2.45929) dist_centro=1.38 km
+  res8 cell 883929a4e1fffff center=(42.46919,-2.45929) dist_hotspot=1.38 km
+  res8 cell 883929a4e3fffff center=(42.46767,-2.44843) dist_hotspot=0.62 km
+  res8 cell 883929a4e5fffff center=(42.46268,-2.46610) dist_hotspot=1.74 km
+  res8 cell 883929a4e7fffff center=(42.46116,-2.45524) dist_hotspot=0.83 km
+  res8 cell 883929a4e9fffff center=(42.47722,-2.46334) dist_hotspot=2.21 km
+  res8 cell 883929a4ebfffff center=(42.47570,-2.45247) dist_hotspot=1.49 km
+  res8 cell 883929a4edfffff center=(42.47071,-2.47015) dist_hotspot=2.25 km
+TOTAL -> res6: 36, res7: 4, res8: 19, res9: 14
