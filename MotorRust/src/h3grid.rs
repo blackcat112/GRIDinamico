@@ -534,63 +534,78 @@ pub fn detect_hotspots(
 // ===============================
 // Division de hexagonos en hexagonos de R-1
 // ===============================
-pub fn subdivide_hotspots(
+pub async fn subdivide_hotspots_with_provider(
     metrics: &mut HashMap<CellIndex, H3Metrics>,
-    cfg: &mut DelayCfg,
+    cfg: &DelayCfg,
     hotspots: &[CellIndex],
+    provider: &dyn TrafficProvider,
 ) -> anyhow::Result<()> {
+    use futures::{stream, StreamExt};
     if hotspots.is_empty() {
         return Ok(());
     }
 
-    // resoluciones válidas: 0..=15 en H3
     let next_res = (cfg.res + 1).min(15);
-    let res_enum = Resolution::try_from(next_res)
-        .context("Resolución H3 inválida al subdividir")?;
-
+    let res_enum = Resolution::try_from(next_res)?;
     let mut new_entries = HashMap::new();
 
+    // Crear hijas vacías (sin repartir métricas)
+    let mut all_children = Vec::new();
     for parent in hotspots {
-        if let Some(parent_metrics) = metrics.get(parent).cloned() {
-            // Hijas
-            let children: Vec<CellIndex> = parent.children(res_enum).collect();
-            let n_child = children.len().max(1) as f32;
-
-            for child in children {
-                let mut m = H3Metrics::new(child);
-                m.trips_total  = parent_metrics.trips_total / n_child;
-                m.trips_trucks = parent_metrics.trips_trucks / n_child;
-                m.trips_cars   = parent_metrics.trips_cars / n_child;
-                m.truck_share  = parent_metrics.truck_share;
-                m.conf_sum     = parent_metrics.conf_sum / n_child;
-                m.conf_weight  = parent_metrics.conf_weight / n_child;
-                m.delay_orange = parent_metrics.delay_orange;
-                m.delay_tomtom = parent_metrics.delay_tomtom;
-                m.delay_final  = parent_metrics.delay_final;
-                m.vol_norm     = parent_metrics.vol_norm;
-
-                new_entries.insert(child, m);
-            }
-        }
+        let children: Vec<CellIndex> = parent.children(res_enum).collect();
+        all_children.extend(children);
     }
 
-    // Remover los padres y añadir hijas
+    // Consultar TomTom para cada hija en paralelo (igual que enrich_with_traffic_provider)
+    let sem = std::sync::Arc::new(tokio::sync::Semaphore::new(cfg.max_concurrent_calls.max(1)));
+    let provider = std::sync::Arc::new(provider);
+    let results = stream::iter(all_children.into_iter().map(|cell| {
+        let sem = sem.clone();
+        let provider = provider.clone();
+        async move {
+            let _permit = sem.acquire().await.unwrap();
+            let r = provider.delay_for_cell(cell).await;
+            (cell, r)
+        }
+    }))
+    .buffer_unordered(cfg.max_concurrent_calls.max(1))
+    .collect::<Vec<_>>()
+    .await;
+
+    // Crear métricas hijas con delays reales
+    for (cell, result) in results {
+        let mut m = H3Metrics::new(cell);
+        match result {
+            Ok(Some((delay_tt, conf_tt))) => {
+                m.delay_tomtom = delay_tt.clamp(1.0, cfg.delay_max * 2.0);
+                m.delay_orange = 1.0; // opcional: usar 1.0 o el delay padre medio si quieres base
+                m.delay_final = clamp(delay_tt, cfg.delay_min, cfg.delay_max);
+                m.conf_sum = conf_tt;
+                m.conf_weight = 1.0;
+            }
+            _ => {
+                m.delay_orange = 1.0;
+                m.delay_tomtom = 0.0;
+                m.delay_final = 1.0;
+            }
+        }
+        new_entries.insert(cell, m);
+    }
+
+    // Reemplazar los padres por las hijas
     for p in hotspots {
         metrics.remove(p);
     }
     metrics.extend(new_entries);
 
-    // Actualizamos resolución base si queremos que persista
-    cfg.res = next_res;
-
     info!(
-        "Subdivididas {} celdas hotspot → nueva resolución: {}",
-        hotspots.len(),
-        cfg.res
+        "Subdivididas {} celdas hotspot → recalculadas con proveedor externo",
+        hotspots.len()
     );
 
     Ok(())
 }
+
 // ===============================
 // Export:: GeojSON y rutina principal
 // ===============================
@@ -657,7 +672,11 @@ pub async fn compute_day(
     let hotspots = detect_hotspots(&map, cfg);
     if !hotspots.is_empty() {
         info!("Detectadas {} celdas hotspot", hotspots.len());
-        subdivide_hotspots(&mut map, &mut cfg.clone(), &hotspots)?;
+        if let Some(tp) = traffic {
+            subdivide_hotspots_with_provider(&mut map, cfg, &hotspots, tp).await?;
+        } else {
+            warn!("No se puede recalcular subdivisiones sin proveedor externo");
+        }
     }
 
     // 4) Persistencia histórica
