@@ -337,7 +337,7 @@ pub fn load_roadmap_csv(path: &str) -> Result<HashMap<CellIndex, RoadCell>> {
         );
     }
 
-    info!("📄 Road map cargado: {} celdas con vías", map.len());
+    info!("Road map cargado: {} celdas con vías", map.len());
     Ok(map)
 }
 
@@ -407,7 +407,7 @@ pub fn compute_delay_orange(metrics: &mut HashMap<CellIndex, H3Metrics>, cfg: &D
     //      (mantiene robustez frente a outliers y evita depender de red vial)
     let c = {
         vols.sort_by(|a,b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
-        let p = cfg.capacity_percentile.clamp(0.5, 0.999); // no dejes <0.5 para no subestimar capacidad
+        let p = cfg.capacity_percentile.clamp(0.5, 0.999); 
         let idx = ((vols.len().saturating_sub(1) as f32) * p).round() as usize;
         let perc = vols.get(idx).copied().unwrap_or(mean_vol);
         perc.max(cfg.capacity_floor).max(eps)
@@ -499,6 +499,98 @@ pub async fn enrich_with_traffic_provider(
     Ok(())
 }
 
+
+// ===============================
+// Detector de HotSpot version prueba 
+// ===============================
+
+
+pub fn detect_hotspots(
+    metrics: &HashMap<CellIndex, H3Metrics>,
+    _cfg: &DelayCfg,
+) -> Vec<CellIndex> {
+    if metrics.is_empty() {
+        return Vec::new();
+    }
+
+    let mut vols: Vec<f32> = metrics.values().map(|m| m.vol_norm).collect();
+    let mut delays: Vec<f32> = metrics.values().map(|m| m.delay_final).collect();
+    vols.sort_by(|a,b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+    delays.sort_by(|a,b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+
+    let idx_v = ((vols.len().saturating_sub(1) as f32) * 0.90).round() as usize;
+    let idx_d = ((delays.len().saturating_sub(1) as f32) * 0.90).round() as usize;
+    let vol_thr = vols.get(idx_v).copied().unwrap_or(0.0);
+    let delay_thr = delays.get(idx_d).copied().unwrap_or(1.0);
+
+    metrics
+        .values()
+        .filter(|m| m.vol_norm >= vol_thr && m.delay_final >= delay_thr)
+        .map(|m| m.cell)
+        .collect()
+}
+
+
+// ===============================
+// Division de hexagonos en hexagonos de R-1
+// ===============================
+pub fn subdivide_hotspots(
+    metrics: &mut HashMap<CellIndex, H3Metrics>,
+    cfg: &mut DelayCfg,
+    hotspots: &[CellIndex],
+) -> anyhow::Result<()> {
+    if hotspots.is_empty() {
+        return Ok(());
+    }
+
+    // resoluciones válidas: 0..=15 en H3
+    let next_res = (cfg.res + 1).min(15);
+    let res_enum = Resolution::try_from(next_res)
+        .context("Resolución H3 inválida al subdividir")?;
+
+    let mut new_entries = HashMap::new();
+
+    for parent in hotspots {
+        if let Some(parent_metrics) = metrics.get(parent).cloned() {
+            // Hijas
+            let children: Vec<CellIndex> = parent.children(res_enum).collect();
+            let n_child = children.len().max(1) as f32;
+
+            for child in children {
+                let mut m = H3Metrics::new(child);
+                m.trips_total  = parent_metrics.trips_total / n_child;
+                m.trips_trucks = parent_metrics.trips_trucks / n_child;
+                m.trips_cars   = parent_metrics.trips_cars / n_child;
+                m.truck_share  = parent_metrics.truck_share;
+                m.conf_sum     = parent_metrics.conf_sum / n_child;
+                m.conf_weight  = parent_metrics.conf_weight / n_child;
+                m.delay_orange = parent_metrics.delay_orange;
+                m.delay_tomtom = parent_metrics.delay_tomtom;
+                m.delay_final  = parent_metrics.delay_final;
+                m.vol_norm     = parent_metrics.vol_norm;
+
+                new_entries.insert(child, m);
+            }
+        }
+    }
+
+    // Remover los padres y añadir hijas
+    for p in hotspots {
+        metrics.remove(p);
+    }
+    metrics.extend(new_entries);
+
+    // Actualizamos resolución base si queremos que persista
+    cfg.res = next_res;
+
+    info!(
+        "Subdivididas {} celdas hotspot → nueva resolución: {}",
+        hotspots.len(),
+        cfg.res
+    );
+
+    Ok(())
+}
 // ===============================
 // Export:: GeojSON y rutina principal
 // ===============================
@@ -560,6 +652,12 @@ pub async fn compute_day(
     // 3) Enriquecimiento Traffic Provider
     if let Some(tp) = traffic {
         enrich_with_traffic_provider(&mut map, cfg, tp).await?;
+    }
+
+    let hotspots = detect_hotspots(&map, cfg);
+    if !hotspots.is_empty() {
+        info!("Detectadas {} celdas hotspot", hotspots.len());
+        subdivide_hotspots(&mut map, &mut cfg.clone(), &hotspots)?;
     }
 
     // 4) Persistencia histórica

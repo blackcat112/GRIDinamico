@@ -11,12 +11,13 @@
    - [x] H3 se nutre de csv de Telco (Orange)
    - [x] H3 se nutre de FCD llamada api externa en caso de que confianza Telco baja (C<0.65)
    - [x] Llamada de FCD con sentido usando OSM para calcular el punto mas optimo de llamda a a la API TomTom 
-   - [ ] Funcionamiento de dividir en hijas correcto
-   - [ ] Score de HotSpot
+   - [ ] HotSpots
+      - [ ] Funcionamiento de dividir en hijas correcto [Si es HotSpot se activa]
+      - [ ] Formula de HotSpot
    - [ ] Hacer mas preciso Delay Factor 
    - [ ] Testear para reducir death zones
    - [ ] ???????? 
-- [ ] Escribir documentación inicial
+- [ ] Escribir documentación final
 
 ---
 
