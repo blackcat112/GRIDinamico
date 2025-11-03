@@ -1,0 +1,302 @@
+{
+  "repo_notes": [
+    {
+      "content": ""
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "Introduce RustMadridGRID, explaining the dual-purpose system (S2 order clustering and H3 traffic analysis), its goals, and high-level capabilities",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "H3 Grid Traffic Analysis System",
+      "purpose": "Comprehensive documentation of the primary system: H3-based dynamic urban traffic mesh with delay calculation and multi-source data integration",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Data Sources and Integration",
+      "purpose": "Document the three primary data sources (Telco O/D, TomTom API, OpenStreetMap) and how they are ingested and integrated",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Processing Pipeline",
+      "purpose": "Detailed explanation of the four-stage processing pipeline: aggregation, delay calculation, external enrichment, and hotspot subdivision",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Stage 1: O/D Aggregation",
+      "purpose": "Explain how origin-destination records are aggregated into H3 cells with confidence weighting and vehicle type separation",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Stage 2: BPR Delay Model",
+      "purpose": "Document the Bureau of Public Roads (BPR) formula implementation for theoretical delay calculation, including capacity estimation and truck sensitivity",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Stage 3: External Enrichment",
+      "purpose": "Explain the intelligent blending mechanism that conditionally queries TomTom API for low-confidence cells and merges results",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Stage 4: Hotspot Detection and Subdivision",
+      "purpose": "Document the adaptive mesh refinement algorithm that subdivides high-traffic, high-delay cells to finer H3 resolution",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Output and Persistence",
+      "purpose": "Explain the three output formats: GeoJSON for visualization, JSONL for local history, and NGSI-LD for Orion-LD context broker",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Extension Points: TrafficProvider and HistorySink",
+      "purpose": "Document the trait-based architecture for pluggable traffic data sources and persistence backends, with implementation examples",
+      "parent": "H3 Grid Traffic Analysis System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "S2 Order Clustering API",
+      "purpose": "Document the independent REST API for real-time order clustering using S2 cells with hierarchical subdivision",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "API Endpoints",
+      "purpose": "Detailed reference for the /orders/filter and /health endpoints, including request/response schemas and examples",
+      "parent": "S2 Order Clustering API",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Hierarchical Clustering Algorithm",
+      "purpose": "Explain the adaptive S2 cell subdivision algorithm based on point density thresholds across levels l6-l9",
+      "parent": "S2 Order Clustering API",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Architecture and Design",
+      "purpose": "High-level architectural patterns: component relationships, data flow, concurrency model, and design decisions",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Component Architecture",
+      "purpose": "Document the modular structure: main orchestrator, processing modules, data models, and external integrations",
+      "parent": "Architecture and Design",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Shared State and Concurrency",
+      "purpose": "Explain the Arc<RwLock<DataState>> pattern, tokio task spawning, and Semaphore-based concurrency control for external APIs",
+      "parent": "Architecture and Design",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Data Flow",
+      "purpose": "Trace data movement from external sources through processing stages to final outputs and API consumption",
+      "parent": "Architecture and Design",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Configuration",
+      "purpose": "Complete reference for all configuration parameters: network, H3 grid, BPR model, external services, and AMR settings",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Application Configuration (AppCfg)",
+      "purpose": "Document core application settings: bind address, H3 resolution, confidence thresholds, and concurrency limits",
+      "parent": "Configuration",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "BPR Model Parameters",
+      "purpose": "Detailed explanation of BPR coefficients (a, b), truck gamma, capacity percentile, and their impact on delay calculations",
+      "parent": "Configuration",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "External Service Integration",
+      "purpose": "Configuration for TomTom API key, Orion-LD URL, O/D data source URL, and update intervals",
+      "parent": "Configuration",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "AMR Inteligente Settings",
+      "purpose": "Document Adaptive Mesh Refinement configuration: resolution levels, thresholds, priority bounding boxes, and confidence requirements",
+      "parent": "Configuration",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Deployment",
+      "purpose": "Practical guide for deploying, running, and monitoring the madgrid application in production",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Running the Application",
+      "purpose": "Step-by-step instructions using run-madgrid.sh, cargo run, and understanding the startup sequence",
+      "parent": "Deployment",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Monitoring and Logs",
+      "purpose": "Explain logging configuration, madgrid.log output, PID file management, and health check endpoint usage",
+      "parent": "Deployment",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Development Guide",
+      "purpose": "Resources for developers: project structure, building utilities, and extending the system",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Project Structure and Dependencies",
+      "purpose": "Overview of the Rust project layout, key dependencies (tokio, axum, h3o, s2, geo), and their roles",
+      "parent": "Development Guide",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Utility: build_hex_road",
+      "purpose": "Document the utility for querying OpenStreetMap via Overpass API and generating roadmap CSV for H3 cells",
+      "parent": "Development Guide",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Utility: gen_od",
+      "purpose": "Document the synthetic O/D data generator for testing and development purposes",
+      "parent": "Development Guide",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Testing",
+      "purpose": "Testing infrastructure, stress testing scripts, and example outputs for validation",
+      "parent": "Development Guide",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
