@@ -145,10 +145,9 @@ El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y
 - Aplica una versión suavizada del modelo **BPR (Bureau of Public Roads)**:
   
 $$
-\text{delay_orange} = 1 + a \cdot \left(\frac{v}{c}\right)^b \cdot \left(1 + \gamma \cdot \text{truck_share}\right)
+delay\_orange = 1 + a \cdot \left(\frac{v}{c}\right)^b \cdot \left(1 + \gamma \cdot truck\_share\right)
 $$
 
- 
 - Donde:
   - `a, b`: controlan la intensidad de congestión.
   - `c`: capacidad estimada por percentil de tráfico (`capacity_percentile`).
