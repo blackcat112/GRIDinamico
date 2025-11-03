@@ -143,9 +143,12 @@ El resultado se exporta como `GeoJSON`, listo para visualización y análisis, y
 
 ### 🔹 2. Modelo BPR-like (delay teórico)
 - Aplica una versión suavizada del modelo **BPR (Bureau of Public Roads)**:
- $$
-  \mathrm{delay} = 1 + a \cdot \left(\frac{v}{c}\right)^{b} \cdot \left(1 + \gamma \cdot \mathrm{truck\_share}\right)
- $$
+  
+$$
+\text{delay_orange} = 1 + a \cdot \left(\frac{v}{c}\right)^b \cdot \left(1 + \gamma \cdot \text{truck_share}\right)
+$$
+
+ 
 - Donde:
   - `a, b`: controlan la intensidad de congestión.
   - `c`: capacidad estimada por percentil de tráfico (`capacity_percentile`).
